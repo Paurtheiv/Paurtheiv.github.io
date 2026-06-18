@@ -1196,20 +1196,6 @@ section { scroll-margin-top: 70px; }
         </div>
       </div>
   
-      <div class="proj-card fade-up">
-        <div class="proj-emoji">🔐</div>
-        <div class="proj-year">Atelier JPO · BTS CIEL A · Janvier 2026</div>
-        <h3>Escape Game — Coffre Caméra</h3>
-        <p>Jeu d'évasion web créé pour la JPO du lycée. Déchiffrement César, accès à une vraie caméra IP HIKVISION sur le réseau interne, système de jetons-récompenses. Faux documents leurres inclus pour corser l'énigme.</p>
-        <div class="proj-techs">
-          <span class="pt">HTML/JS</span><span class="pt">Bootstrap</span><span class="pt">Chiffrement César</span><span class="pt">Caméra IP</span>
-        </div>
-        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
-          <a href="https://github.com/Paurtheiv/escape-game" target="_blank" style="font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">⬛ GitHub →</a>
-          <a href="https://paurtheiv.github.io/escape-game/" target="_blank" style="font-size:12px;color:var(--green);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">▶ Démo →</a>
-        </div>
-      </div>
-
   </div>
   </div>
 </section>
@@ -1226,11 +1212,7 @@ section { scroll-margin-top: 70px; }
       <button class="sft" data-filter="used">Utilisé</button>
       <button class="sft" data-filter="notion">Notions</button>
     </div>
-    <div class="skill-legend">
-      <div class="skill-legend-item"><div class="skill-legend-dot sld-master"></div>Maîtrisé</div>
-      <div class="skill-legend-item"><div class="skill-legend-dot sld-used"></div>Utilisé</div>
-      <div class="skill-legend-item"><div class="skill-legend-dot sld-notion"></div>Notions</div>
-    </div>
+
     <div class="skills-wrapper">
 
       <div class="skill-cat fade-up">
@@ -1328,9 +1310,17 @@ section { scroll-margin-top: 70px; }
           <span class="sp lvl-master">Autonomie</span>
           <span class="sp lvl-master">Travail en équipe</span>
           <span class="sp lvl-master">Rédaction technique</span>
-          <span class="sp lvl-used">Support IT N1/N2</span>
+        </div>
+      </div>
+
+      <div class="skill-cat fade-up">
+        <h3>🖥️ Support IT</h3>
+        <div class="skill-pills">
+          <span class="sp lvl-used">Support N1/N2</span>
           <span class="sp lvl-used">Ticketing</span>
+          <span class="sp lvl-used">Déploiement postes</span>
           <span class="sp lvl-notion">Active Directory</span>
+          <span class="sp lvl-notion">GLPI / ITSM</span>
         </div>
       </div>
 
@@ -1356,7 +1346,7 @@ section { scroll-margin-top: 70px; }
         <div class="pf-meta">
           <div class="pf-tag">Janv. → Juin 2026</div>
           <div class="pf-tag">Zone 1 : Entrée principale</div>
-          <div class="pf-tag">Version finale V5</div>
+          
         </div>
       </div>
 
@@ -1373,7 +1363,7 @@ section { scroll-margin-top: 70px; }
 
       <div class="pf-stats">
         <div class="pf-stat"><span class="n">2</span><span class="l">ESP32 déployés<br>(CPE + Porte)</span></div>
-        <div class="pf-stat"><span class="n">5</span><span class="l">Versions itérées<br>V1 → V5</span></div>
+        
         <div class="pf-stat"><span class="n">9</span><span class="l">Tables MySQL<br>+ vues SQL</span></div>
         <div class="pf-stat"><span class="n">AES</span><span class="l">256 bits<br>empreintes chiffrées</span></div>
         <div class="pf-stat"><span class="n">5</span><span class="l">Zones lycée<br>unifiées</span></div>
@@ -1383,12 +1373,12 @@ section { scroll-margin-top: 70px; }
       <div class="sg-gallery">
         <div class="sg-preview">
           <iframe src="img/sg_dashboard.html" loading="lazy" scrolling="no" title="Dashboard SmartGate"></iframe>
-          <div class="sg-preview-label">🖥️ Dashboard PHP · Temps réel</div>
+          <div class="sg-preview-label">🖥️ Dashboard PHP</div>
           <a href="img/sg_dashboard.html" target="_blank" class="sg-open">↗</a>
         </div>
         <div class="sg-preview">
           <iframe src="img/sg_bdd.html" loading="lazy" scrolling="no" title="Schéma BDD SmartGate"></iframe>
-          <div class="sg-preview-label">🗄️ Schéma BDD MySQL · 9 tables</div>
+          <div class="sg-preview-label">🗄️ Schéma BDD MySQL</div>
           <a href="img/sg_bdd.html" target="_blank" class="sg-open">↗</a>
         </div>
         <div class="sg-preview">
@@ -1424,7 +1414,7 @@ section { scroll-margin-top: 70px; }
     <div class="projects-grid">
 
       <div class="proj-card fade-up">
-        <div class="proj-emoji">🥎</div>
+        <div class="proj-thumb pt-softball"><span>🥎</span><span class="proj-thumb-label">SOFTBALL STATS</span></div>
         <div class="proj-year">BTS CIEL A · 2ème année · 2026</div>
         <h3>Tableau de Score Softball</h3>
         <p>Interface web temps réel pour arbitres de softball. Backend PHP avec authentification par session, API JSON pour sauvegarder les matchs en MySQL. Affichage spectateurs synchronisé en temps réel via polling JS.</p>
@@ -1435,7 +1425,7 @@ section { scroll-margin-top: 70px; }
       </div>
 
       <div class="proj-card fade-up">
-        <div class="proj-emoji">📄</div>
+        <div class="proj-thumb pt-pdf"><span>📄</span><span class="proj-thumb-label">COMPARATEUR PDF</span></div>
         <div class="proj-year">Stage Bilfinger · 2025</div>
         <h3>Comparateur de PDF</h3>
         <p>Outil Python/Streamlit développé en autonomie lors de mon stage chez Bilfinger Peters Engineering. Comparaison pixel par pixel de PDFs techniques, diff textuel page par page, génération automatique d'un rapport PDF annoté avec zones surlignées.</p>
@@ -1446,7 +1436,7 @@ section { scroll-margin-top: 70px; }
       </div>
 
       <div class="proj-card fade-up">
-        <div class="proj-emoji">🎮</div>
+        <div class="proj-thumb pt-jpo"><span>🎮</span><span class="proj-thumb-label">JEU JPO LJJ</span></div>
         <div class="proj-year">JPO Lycée Jean Jaurès · Janvier 2026</div>
         <h3>Jeu de Visite JPO — Lycée Jean Jaurès</h3>
         <p>Jeu de visite guidée web pour la JPO du lycée. Choix du guide étudiant, QCM adaptatif (collégien / lycéen / étudiant), visite virtuelle des labos BTS CIEL. Voix clonées par IA (TopMedia), synchronisées scène par scène. HTML/JS vanilla — machine à états, Web Audio API.</p>
@@ -1459,6 +1449,20 @@ section { scroll-margin-top: 70px; }
         </div>
       </div>
 
+
+      <div class="proj-card fade-up">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#0a1a0a 0%,#1a3d1a 100%);color:#4ade80;"><span>🔐</span><span class="proj-thumb-label">ESCAPE GAME</span></div>
+        <div class="proj-year">Atelier JPO · BTS CIEL A · Janvier 2026</div>
+        <h3>Escape Game — Coffre Caméra</h3>
+        <p>Jeu d'évasion web créé pour la JPO du lycée. Déchiffrement César, accès à une vraie caméra IP HIKVISION sur le réseau interne, système de jetons-récompenses. Faux documents leurres inclus.</p>
+        <div class="proj-techs">
+          <span class="pt">HTML/JS</span><span class="pt">Bootstrap</span><span class="pt">Chiffrement César</span><span class="pt">Caméra IP</span>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
+          <a href="https://github.com/Paurtheiv/escape-game" target="_blank" style="font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">⬛ GitHub →</a>
+          <a href="https://paurtheiv.github.io/escape-game/" target="_blank" style="font-size:12px;color:var(--green);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">▶ Démo →</a>
+        </div>
+      </div>
 
       <div class="proj-card fade-up">
         <div class="proj-thumb pt-coiffure">
@@ -1727,7 +1731,7 @@ section { scroll-margin-top: 70px; }
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
   <div id="footer-l">© 2026 <strong>Paurtheiv Krishna Laxman</strong> · BTS CIEL A · Lycée Jean Jaurès · Argenteuil</div>
-  <div id="footer-r">Projet <a href="#projects">Smart Gate Jaurès</a> — Système IoT de contrôle d'accès biométrique</div>
+  
 </footer>
 
 
@@ -1940,7 +1944,7 @@ var T = {
     "crv-avail": "Available for apprenticeship — Sept. 2026",
     "contact-p": "Future apprentice engineer at ESEO Paris-Vélizy (starting Sept. 2026), looking for a company in systems, networks or cybersecurity. Feel free to reach out!",
     "footer-l": "© 2026 <strong>Paurtheiv Krishna Laxman</strong> · BTS CIEL A · Lycée Jean Jaurès · Argenteuil",
-    "footer-r": "Project <a href=\"#projects\">Smart Gate Jaurès</a> — IoT biometric access control system"
+    "footer-r": ""
   }
 };
 
