@@ -1079,6 +1079,75 @@ section { scroll-margin-top: 70px; }
 .exp-block-desc { font-size: 11px; color: var(--muted2); line-height: 1.5; font-family: 'JetBrains Mono', monospace; }
 @media (max-width: 600px) { .expertise-grid { grid-template-columns: 1fr; } }
 
+
+/* ═══ PLANET ANIMATION ═══ */
+.planet-scene {
+  display: flex; align-items: center; justify-content: center;
+  height: 280px; position: relative; margin-bottom: 24px;
+}
+.planet-wrap { position: relative; width: 160px; height: 160px; }
+.planet {
+  width: 160px; height: 160px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%,
+    #1e4d6b 0%, #0d2d45 40%, #050f18 100%);
+  box-shadow:
+    inset -20px -20px 40px rgba(0,0,0,.6),
+    inset 10px 10px 30px rgba(6,182,212,.08),
+    0 0 60px rgba(6,182,212,.12),
+    0 0 120px rgba(6,182,212,.05);
+  position: relative; z-index: 2;
+  animation: planet-pulse 4s ease-in-out infinite;
+}
+.planet::after {
+  content: '';
+  position: absolute; top: 15%; left: 10%; right: 30%; bottom: 55%;
+  background: radial-gradient(ellipse, rgba(6,182,212,.15) 0%, transparent 70%);
+  border-radius: 50%; transform: rotate(-30deg);
+}
+@keyframes planet-pulse {
+  0%,100% { box-shadow: inset -20px -20px 40px rgba(0,0,0,.6), 0 0 60px rgba(6,182,212,.12), 0 0 120px rgba(6,182,212,.05); }
+  50%      { box-shadow: inset -20px -20px 40px rgba(0,0,0,.6), 0 0 80px rgba(6,182,212,.2),  0 0 160px rgba(6,182,212,.08); }
+}
+.orbit {
+  position: absolute; top: 50%; left: 50%;
+  border-radius: 50%; border: 1px solid rgba(6,182,212,.25);
+  transform-style: preserve-3d;
+}
+.orbit-1 {
+  width: 220px; height: 70px;
+  margin: -35px 0 0 -110px;
+  animation: orbit-spin 6s linear infinite;
+  transform: rotateX(75deg);
+}
+.orbit-2 {
+  width: 270px; height: 86px;
+  margin: -43px 0 0 -135px;
+  animation: orbit-spin 10s linear infinite reverse;
+  transform: rotateX(75deg) rotateY(20deg);
+  border-color: rgba(124,58,237,.2);
+}
+.orbit-3 {
+  width: 320px; height: 100px;
+  margin: -50px 0 0 -160px;
+  animation: orbit-spin 15s linear infinite;
+  transform: rotateX(75deg) rotateY(-15deg);
+  border-color: rgba(6,182,212,.12);
+}
+@keyframes orbit-spin { from { transform: rotateX(75deg) rotateZ(0deg); } to { transform: rotateX(75deg) rotateZ(360deg); } }
+.orbit-dot {
+  position: absolute; width: 7px; height: 7px;
+  background: var(--accent); border-radius: 50%;
+  top: -3.5px; left: 50%; margin-left: -3.5px;
+  box-shadow: 0 0 8px var(--accent);
+}
+.orbit-2 .orbit-dot { background: #a78bfa; box-shadow: 0 0 8px #a78bfa; width: 5px; height: 5px; top: -2.5px; margin-left: -2.5px; }
+.orbit-3 .orbit-dot { background: rgba(6,182,212,.6); width: 4px; height: 4px; top: -2px; margin-left: -2px; }
+.planet-label {
+  position: absolute; bottom: -32px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; color: var(--muted); font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 2px; white-space: nowrap;
+}
+
 </style>
 </head>
 <body>
@@ -1697,18 +1766,57 @@ section { scroll-margin-top: 70px; }
 <!-- ══════════ CONTACT ══════════ -->
 <section id="contact">
   <div class="container">
-    <div style="text-align:center;margin-bottom:40px;">
+    <div class="contact-inner">
+
+      <!-- LEFT: Form -->
+      <div class="contact-left">
         <div class="section-eyebrow" id="contact-eyebrow">Disponible dès sept. 2026</div>
         <h2 class="section-h" style="margin-bottom:8px;" id="contact-h">Travaillons ensemble 🤝</h2>
-        <p id="contact-p" style="color:var(--muted2);font-size:15px;line-height:1.7;margin-bottom:0;max-width:480px;margin:0 auto;">
+        <p id="contact-p" style="color:var(--muted2);font-size:15px;line-height:1.7;margin-bottom:24px;max-width:420px;">
           Étudiant ingénieur en alternance à l'ESEO Paris-Vélizy dès septembre 2026, je recherche
           une entreprise dans les domaines des systèmes embarqués, réseaux ou cybersécurité.
+          N'hésitez pas à me contacter !
         </p>
+
+        <form id="contact-form" class="contact-form-wrap"
+              action="https://formsubmit.co/paurtheiv.laxman.fr@gmail.com" method="POST">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://paurtheiv.github.io/#contact">
+          <input type="hidden" name="_autoresponse" value="Merci pour votre message ! Je vous répondrai rapidement. / Thank you for your message! I'll get back to you soon.">
+
+          <div class="form-group">
+            <label class="form-lbl" id="fl-name">Votre nom</label>
+            <input class="form-inp" type="text" name="name" placeholder="Comment vous appelez-vous ?" required>
+          </div>
+          <div class="form-group">
+            <label class="form-lbl" id="fl-email">Votre email</label>
+            <input class="form-inp" type="email" name="email" placeholder="votre@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-lbl" id="fl-msg">Votre message</label>
+            <textarea class="form-ta" name="message" placeholder="Votre message..." required></textarea>
+          </div>
+          <button type="submit" class="btn-send" id="btn-send">
+            <span>📨</span> <span id="btn-send-txt">Envoyer le message</span>
+          </button>
+          <div class="form-success" id="form-success">✓ Message envoyé ! Je vous réponds rapidement.</div>
+        </form>
       </div>
-    <div class="contact-inner" style="justify-content:center;">
-      <div class="contact-right" style="width:100%;max-width:480px;">
+
+      <!-- RIGHT: Info cards -->
+      <div class="contact-right">
         <div class="contact-right-visual">
-          <div class="crv-title">Contactez-moi</div>
+
+          <!-- PLANET -->
+          <div class="planet-scene">
+            <div class="planet-wrap">
+              <div class="planet"></div>
+              <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
+              <div class="orbit orbit-2"><div class="orbit-dot"></div></div>
+              <div class="orbit orbit-3"><div class="orbit-dot"></div></div>
+              <div class="planet-label">ARGENTEUIL · 95</div>
+            </div>
+          </div>
 
           <div class="crv-avail" id="crv-avail">
             Disponible pour alternance — sept. 2026
