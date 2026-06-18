@@ -1013,6 +1013,31 @@ section { scroll-margin-top: 70px; }
 .sg-preview:hover a.sg-open { opacity: 1; }
 @media (max-width: 700px) { .sg-gallery { grid-template-columns: 1fr; } }
 
+
+/* PROJ CARD THUMBNAILS */
+.proj-thumb {
+  width: 100%; aspect-ratio: 16/9; border-radius: 8px; margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  gap: 8px; font-size: 36px; position: relative; overflow: hidden;
+}
+.proj-thumb-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; opacity: .7; font-family: 'JetBrains Mono', monospace; }
+.pt-softball  { background: linear-gradient(135deg, #0f2027 0%, #1a3a2a 100%); color: #4ade80; }
+.pt-pdf       { background: linear-gradient(135deg, #1a0533 0%, #2d1b69 100%); color: #a78bfa; }
+.pt-jpo       { background: linear-gradient(135deg, #0c1a2e 0%, #1e3a5f 100%); color: #60a5fa; }
+.pt-coiffure  { background: linear-gradient(135deg, #1a0a0a 0%, #3d1515 100%); color: #f87171; }
+
+
+/* SKILL FILTER TABS */
+.skill-filter-tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.sft {
+  padding:6px 16px; border-radius:20px; border:1px solid var(--border2);
+  background:transparent; color:var(--muted2); font-size:12px; cursor:pointer;
+  font-family:'JetBrains Mono',monospace; transition:.2s;
+}
+.sft:hover { border-color:var(--accent); color:var(--accent); }
+.sft.active { background:var(--accent); border-color:var(--accent); color:#000; font-weight:700; }
+.sp.hidden { display:none !important; }
+
 </style>
 </head>
 <body>
@@ -1073,7 +1098,7 @@ section { scroll-margin-top: 70px; }
         </div>
         <div class="hero-stats-strip">
           <div class="hstat"><span class="hstat-val">2</span><span class="hstat-lbl">ESP32 + 1 Raspberry Pi</span></div>
-          <div class="hstat"><span class="hstat-val">3</span><span class="hstat-lbl">Projets GitHub</span></div>
+          <div class="hstat"><span class="hstat-val">5</span><span class="hstat-lbl">Projets GitHub</span></div>
           <div class="hstat"><span class="hstat-val">1an</span><span class="hstat-lbl">Expérience IT</span></div>
           <div class="hstat"><span class="hstat-val">7+</span><span class="hstat-lbl">Langages</span></div>
         </div>
@@ -1084,30 +1109,6 @@ section { scroll-margin-top: 70px; }
         </div>
       </div>
 
-      <div class="hero-card">
-        <div class="hc-avatar">🧑‍💻</div>
-        <div class="hc-name">Paurtheiv K.L.</div>
-        <div class="hc-sub" id="hc-sub">BTS CIEL A · Session 2026</div>
-        <div class="hc-stats">
-          <div class="hc-stat">
-            <span class="n">2</span>
-            <span class="l">ESP32 + 1 Raspberry Pi déployés</span>
-          </div>
-          <div class="hc-stat">
-            <span class="n">V5</span>
-            <span class="l">Versions du projet Smart Gate</span>
-          </div>
-          <div class="hc-stat">
-            <span class="n">9</span>
-            <span class="l">Tables MySQL conçues</span>
-          </div>
-          <div class="hc-stat">
-            <span class="n">7+</span>
-            <span class="l">Langages & frameworks maîtrisés</span>
-          </div>
-        </div>
-        <div class="hc-location" id="hc-location">Argenteuil, 95 — Île-de-France</div>
-      </div>
     </div>
   </div>
   <div class="scroll-hint"><div class="scroll-mouse"><div class="scroll-ball"></div></div><span class="scroll-hint-txt">Scroll</span></div>
@@ -1219,6 +1220,12 @@ section { scroll-margin-top: 70px; }
   <div class="container">
     <div class="section-eyebrow" id="skills-eyebrow">Expertise</div>
     <h2 class="section-h" id="skills-h">Compétences techniques</h2>
+    <div class="skill-filter-tabs">
+      <button class="sft active" data-filter="all">Tous</button>
+      <button class="sft" data-filter="master">Maîtrisé</button>
+      <button class="sft" data-filter="used">Utilisé</button>
+      <button class="sft" data-filter="notion">Notions</button>
+    </div>
     <div class="skill-legend">
       <div class="skill-legend-item"><div class="skill-legend-dot sld-master"></div>Maîtrisé</div>
       <div class="skill-legend-item"><div class="skill-legend-dot sld-used"></div>Utilisé</div>
@@ -1454,7 +1461,10 @@ section { scroll-margin-top: 70px; }
 
 
       <div class="proj-card fade-up">
-        <div class="proj-emoji">✂️</div>
+        <div class="proj-thumb pt-coiffure">
+          <span>✂️</span>
+          <span class="proj-thumb-label">FILE D'ATTENTE</span>
+        </div>
         <div class="proj-year">Projet personnel · 2026</div>
         <h3>File d'attente — Salon de Coiffure</h3>
         <p>Système de file d'attente temps réel. Écran réception (saisie client + choix coiffeur) et écran salle d'attente avec compte à rebours par coiffeur. Communication via localStorage, refresh toutes les 5 secondes.</p>
@@ -1585,13 +1595,7 @@ section { scroll-margin-top: 70px; }
       <div class="section-eyebrow" style="margin-bottom:12px;" id="mini-eyebrow">Travaux scolaires notables</div>
       <div class="mini-grid">
 
-        <div class="mini-card fade-up">
-          <div class="mini-icon">🔌</div>
-          <div class="mini-ctx">TP Réseaux · BTS 1ère année</div>
-          <h4>Infrastructure réseau Cisco</h4>
-          <p>Configuration de réseaux LAN/WAN, adressage IP, VLAN, protocoles TCP/IP, DNS/DHCP. Tests et diagnostics avec Wireshark.</p>
-          <div class="mini-pills"><span class="mini-pill">Cisco PT</span><span class="mini-pill">TCP/IP</span><span class="mini-pill">Wireshark</span></div>
-        </div>
+
 
 
 
@@ -1972,6 +1976,21 @@ if (contactForm) {
 document.addEventListener('DOMContentLoaded', function() {
   if (lang === 'en') applyLang('en');
 });
+
+  // ── Skill level filter ──
+  document.querySelectorAll('.sft').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.sft').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.sp').forEach(sp => {
+        if (f === 'all') { sp.classList.remove('hidden'); return; }
+        const has = sp.classList.contains('lvl-' + (f === 'master' ? 'master' : f === 'used' ? 'used' : 'notion'));
+        sp.classList.toggle('hidden', !has);
+      });
+    });
+  });
+
 </script>
 
 </body>
