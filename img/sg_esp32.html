@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SmartGate – Montage ESP32</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family: Arial, sans-serif; background:#0a0f1e; color:#e2e8f0; padding:32px; min-height:100vh; }
+h1 { font-size:18px; color:#06b6d4; margin-bottom:4px; }
+.sub { font-size:12px; color:#64748b; margin-bottom:28px; }
+.diagram { display:grid; grid-template-columns:1fr auto 1fr; gap:24px; align-items:center; }
+.devices { display:flex; flex-direction:column; gap:16px; }
+.device { background:#0f172a; border:1px solid #1e293b; border-radius:10px; padding:16px; }
+.device-title { font-size:13px; font-weight:bold; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.pin { display:flex; justify-content:space-between; font-size:11px; padding:4px 0; border-bottom:1px solid #1e293b; font-family:'Courier New',monospace; }
+.pin:last-child { border:none; }
+.pin-name { color:#94a3b8; }
+.pin-val  { color:#06b6d4; }
+.esp-box { background:#0f172a; border:2px solid #06b6d4; border-radius:12px; padding:20px 16px; text-align:center; min-width:140px; }
+.esp-title { font-size:14px; font-weight:bold; color:#06b6d4; margin-bottom:12px; }
+.esp-pin { font-size:10px; color:#64748b; font-family:'Courier New',monospace; padding:3px 0; }
+.esp-pin.used { color:#e2e8f0; }
+.arrow { color:#334155; font-size:20px; text-align:center; }
+.legend { display:flex; gap:16px; margin-top:24px; flex-wrap:wrap; }
+.leg { font-size:11px; color:#64748b; display:flex; align-items:center; gap:6px; }
+.leg-color { width:10px; height:10px; border-radius:2px; }
+</style>
+</head>
+<body>
+<h1>⬛ SmartGate V4 — Schéma Montage ESP32 (Zone CPE)</h1>
+<div class="sub">ESP32 DevKit · RFID MFRC522 · Capteur Biométrique FPS · WS2812B · Buzzer · Serrure électromagnétique</div>
+
+<div class="diagram">
+  <!-- Gauche : modules entrée -->
+  <div class="devices">
+    <div class="device">
+      <div class="device-title">🆔 RFID MFRC522</div>
+      <div class="pin"><span class="pin-name">SDA (SS)</span><span class="pin-val">GPIO 5</span></div>
+      <div class="pin"><span class="pin-name">SCK</span><span class="pin-val">GPIO 18</span></div>
+      <div class="pin"><span class="pin-name">MOSI</span><span class="pin-val">GPIO 23</span></div>
+      <div class="pin"><span class="pin-name">MISO</span><span class="pin-val">GPIO 19</span></div>
+      <div class="pin"><span class="pin-name">RST</span><span class="pin-val">GPIO 4</span></div>
+      <div class="pin"><span class="pin-name">VCC / GND</span><span class="pin-val">3.3V</span></div>
+    </div>
+    <div class="device">
+      <div class="device-title">🖐 Capteur Biométrique<br><small style="color:#64748b;font-size:10px">Adafruit FPS (UART)</small></div>
+      <div class="pin"><span class="pin-name">TX → RX ESP</span><span class="pin-val">GPIO 16</span></div>
+      <div class="pin"><span class="pin-name">RX → TX ESP</span><span class="pin-val">GPIO 17</span></div>
+      <div class="pin"><span class="pin-name">VCC / GND</span><span class="pin-val">5V</span></div>
+    </div>
+  </div>
+
+  <!-- Centre : ESP32 -->
+  <div class="esp-box">
+    <div class="esp-title">ESP32<br>DevKit v1</div>
+    <div class="esp-pin used">GPIO 4  – RFID RST</div>
+    <div class="esp-pin used">GPIO 5  – RFID SS</div>
+    <div class="esp-pin used">GPIO 16 – FPS RX</div>
+    <div class="esp-pin used">GPIO 17 – FPS TX</div>
+    <div class="esp-pin used">GPIO 18 – SPI SCK</div>
+    <div class="esp-pin used">GPIO 19 – SPI MISO</div>
+    <div class="esp-pin used">GPIO 22 – Buzzer</div>
+    <div class="esp-pin used">GPIO 23 – SPI MOSI</div>
+    <div class="esp-pin used">GPIO 25 – WS2812B</div>
+    <div class="esp-pin used">GPIO 26 – Serrure</div>
+    <div class="esp-pin" style="margin-top:6px;color:#1e293b">WiFi → Raspberry Pi</div>
+  </div>
+
+  <!-- Droite : modules sortie -->
+  <div class="devices">
+    <div class="device">
+      <div class="device-title">💡 WS2812B NeoPixel</div>
+      <div class="pin"><span class="pin-name">DIN</span><span class="pin-val">GPIO 25</span></div>
+      <div class="pin"><span class="pin-name">VCC / GND</span><span class="pin-val">5V</span></div>
+      <div class="pin"><span class="pin-name">Couleurs</span><span class="pin-val">Vert/Rouge/Bleu</span></div>
+    </div>
+    <div class="device">
+      <div class="device-title">🔔 Buzzer KY-006</div>
+      <div class="pin"><span class="pin-name">Signal</span><span class="pin-val">GPIO 22</span></div>
+      <div class="pin"><span class="pin-name">Tons</span><span class="pin-val">OK / Refus / Temp</span></div>
+    </div>
+    <div class="device">
+      <div class="device-title">🔒 Serrure Électromag.</div>
+      <div class="pin"><span class="pin-name">Relais</span><span class="pin-val">GPIO 26</span></div>
+      <div class="pin"><span class="pin-name">Délai ouverture</span><span class="pin-val">3 secondes</span></div>
+      <div class="pin"><span class="pin-name">Alimentation</span><span class="pin-val">12V (ext.)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="leg"><div class="leg-color" style="background:#06b6d4"></div>SPI Bus (RFID)</div>
+  <div class="leg"><div class="leg-color" style="background:#a78bfa"></div>UART (Biométrie)</div>
+  <div class="leg"><div class="leg-color" style="background:#22c55e"></div>Sortie digitale</div>
+  <div class="leg"><div class="leg-color" style="background:#f97316"></div>WiFi → API Raspberry Pi</div>
+</div>
+</body>
+</html>

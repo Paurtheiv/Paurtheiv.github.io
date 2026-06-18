@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SmartGate – Schéma BDD</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family: 'Courier New', monospace; background:#0d1117; color:#e6edf3; padding:32px; min-height:100vh; }
+h1 { font-size:18px; color:#58a6ff; margin-bottom:4px; font-family: Arial, sans-serif; }
+.sub { font-size:12px; color:#8b949e; margin-bottom:28px; font-family: Arial, sans-serif; }
+.schema { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.table-box { background:#161b22; border:1px solid #30363d; border-radius:8px; overflow:hidden; }
+.table-box.primary { border-color:#1f6feb; }
+.table-head { background:#1f2937; padding:10px 14px; font-size:13px; font-weight:bold; color:#58a6ff; border-bottom:1px solid #30363d; }
+.table-head.pk { background:#1e3a5f; }
+.field { padding:6px 14px; font-size:11px; border-bottom:1px solid #21262d; display:flex; justify-content:space-between; gap:8px; }
+.field:last-child { border:none; }
+.field-name { color:#e6edf3; }
+.field-type { color:#8b949e; }
+.field-pk { color:#ffd700; font-size:10px; }
+.field-fk { color:#a78bfa; font-size:10px; }
+.legend { display:flex; gap:20px; margin-top:20px; flex-wrap:wrap; }
+.leg { display:flex; align-items:center; gap:6px; font-size:11px; color:#8b949e; font-family: Arial, sans-serif; }
+.leg-dot { width:10px; height:10px; border-radius:2px; }
+</style>
+</head>
+<body>
+<h1>⬛ SmartGate V4 — Schéma Base de Données MySQL</h1>
+<div class="sub">9 tables · MariaDB · Lycée Jean Jaurès, Argenteuil</div>
+<div class="schema">
+  <div class="table-box primary">
+    <div class="table-head pk">👤 UTILISATEURS</div>
+    <div class="field"><span class="field-name">id_utilisateur</span><span class="field-pk">PK</span><span class="field-type">INT AUTO</span></div>
+    <div class="field"><span class="field-name">nom</span><span class="field-type">VARCHAR(50)</span></div>
+    <div class="field"><span class="field-name">prenom</span><span class="field-type">VARCHAR(50)</span></div>
+    <div class="field"><span class="field-name">classe</span><span class="field-type">VARCHAR(20)</span></div>
+    <div class="field"><span class="field-name">rfid_uid</span><span class="field-type">VARCHAR(20) UNQ</span></div>
+    <div class="field"><span class="field-name">fingerprint_id</span><span class="field-type">INT</span></div>
+    <div class="field"><span class="field-name">in_lycee</span><span class="field-type">TINYINT(1)</span></div>
+    <div class="field"><span class="field-name">needs_temp_card</span><span class="field-type">TINYINT(1)</span></div>
+  </div>
+  <div class="table-box">
+    <div class="table-head">📋 SG_ACCESS_LOGS</div>
+    <div class="field"><span class="field-name">id_log</span><span class="field-pk">PK</span><span class="field-type">INT AUTO</span></div>
+    <div class="field"><span class="field-name">id_utilisateur</span><span class="field-fk">FK</span><span class="field-type">INT</span></div>
+    <div class="field"><span class="field-name">timestamp</span><span class="field-type">DATETIME</span></div>
+    <div class="field"><span class="field-name">access_method</span><span class="field-type">ENUM(RFID,FP)</span></div>
+    <div class="field"><span class="field-name">access_status</span><span class="field-type">ENUM(AUTH,DENIED)</span></div>
+    <div class="field"><span class="field-name">zone</span><span class="field-type">VARCHAR(10)</span></div>
+  </div>
+  <div class="table-box">
+    <div class="table-head">🪪 SG_TEMPORARY_CARDS</div>
+    <div class="field"><span class="field-name">id_temp</span><span class="field-pk">PK</span><span class="field-type">INT AUTO</span></div>
+    <div class="field"><span class="field-name">id_utilisateur</span><span class="field-fk">FK</span><span class="field-type">INT</span></div>
+    <div class="field"><span class="field-name">rfid_uid_temp</span><span class="field-type">VARCHAR(20)</span></div>
+    <div class="field"><span class="field-name">expiration_time</span><span class="field-type">DATETIME</span></div>
+    <div class="field"><span class="field-name">created_by</span><span class="field-fk">FK</span><span class="field-type">INT</span></div>
+  </div>
+  <div class="table-box">
+    <div class="table-head">👑 SG_ACCOUNTS</div>
+    <div class="field"><span class="field-name">id_account</span><span class="field-pk">PK</span><span class="field-type">INT AUTO</span></div>
+    <div class="field"><span class="field-name">username</span><span class="field-type">VARCHAR(50) UNQ</span></div>
+    <div class="field"><span class="field-name">password_hash</span><span class="field-type">VARCHAR(255)</span></div>
+    <div class="field"><span class="field-name">role</span><span class="field-type">ENUM(admin,user)</span></div>
+    <div class="field"><span class="field-name">display_name</span><span class="field-type">VARCHAR(100)</span></div>
+  </div>
+  <div class="table-box">
+    <div class="table-head">📸 SG_PHOTOS</div>
+    <div class="field"><span class="field-name">id_photo</span><span class="field-pk">PK</span><span class="field-type">INT AUTO</span></div>
+    <div class="field"><span class="field-name">id_utilisateur</span><span class="field-fk">FK</span><span class="field-type">INT</span></div>
+    <div class="field"><span class="field-name">photo_path</span><span class="field-type">VARCHAR(255)</span></div>
+    <div class="field"><span class="field-name">captured_at</span><span class="field-type">DATETIME</span></div>
+    <div class="field"><span class="field-name">event_type</span><span class="field-type">ENUM(ENTRY,TEMP,FAIL)</span></div>
+  </div>
+  <div class="table-box">
+    <div class="table-head">🔔 SG_EVENTS</div>
+    <div class="field"><span class="field-name">id_event</span><span class="field-pk">PK</span><span class="field-type">INT AUTO</span></div>
+    <div class="field"><span class="field-name">event_type</span><span class="field-type">VARCHAR(30)</span></div>
+    <div class="field"><span class="field-name">payload</span><span class="field-type">JSON</span></div>
+    <div class="field"><span class="field-name">created_at</span><span class="field-type">DATETIME</span></div>
+    <div class="field"><span class="field-name">read_at</span><span class="field-type">DATETIME NULL</span></div>
+  </div>
+</div>
+<div class="legend">
+  <div class="leg"><div class="leg-dot" style="background:#ffd700"></div>PK — Clé primaire</div>
+  <div class="leg"><div class="leg-dot" style="background:#a78bfa"></div>FK — Clé étrangère</div>
+  <div class="leg"><div class="leg-dot" style="background:#1f6feb"></div>Table principale</div>
+</div>
+</body>
+</html>

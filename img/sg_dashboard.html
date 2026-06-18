@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartGate – Dashboard</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family: Arial, sans-serif; background:#f4f6f9; color:#222; }
+.navbar { background:#1a1a2e; padding:0 28px; display:flex; align-items:center; justify-content:space-between; height:56px; }
+.nav-brand { color:white; font-size:16px; font-weight:bold; letter-spacing:2px; }
+.nav-links { display:flex; gap:4px; align-items:center; }
+.nav-links a { color:#aaa; text-decoration:none; padding:8px 14px; border-radius:6px; font-size:14px; font-weight:bold; }
+.nav-links a.active { background:#16213e; color:white; }
+.nav-user { color:#aaa; font-size:13px; padding:0 8px; border-left:1px solid #333; margin-left:4px; }
+.btn-logout { background:#fee2e2; color:#991b1b; padding:6px 12px; border-radius:6px; font-size:13px; font-weight:bold; }
+.container { padding:32px; max-width:1200px; margin:0 auto; }
+h1 { font-size:24px; color:#222; margin-bottom:6px; }
+.subtitle { color:#888; font-size:13px; margin-bottom:24px; }
+h2 { font-size:18px; color:#333; margin:28px 0 14px; }
+.stats { display:flex; gap:16px; margin-bottom:32px; flex-wrap:wrap; }
+.stat-card { background:white; border-radius:10px; padding:20px 24px; flex:1; min-width:150px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+.stat-card.blue   { border-left:5px solid #3b82f6; }
+.stat-card.green  { border-left:5px solid #22c55e; }
+.stat-card.red    { border-left:5px solid #ef4444; }
+.stat-card.orange { border-left:5px solid #f97316; }
+.stat-card.purple { border-left:5px solid #a855f7; }
+.stat-card .num   { font-size:38px; font-weight:bold; color:#222; line-height:1; }
+.stat-card .lbl   { font-size:12px; color:#888; margin-top:6px; }
+.live-badge { display:inline-block; background:#22c55e; color:white; font-size:11px; padding:2px 8px; border-radius:10px; margin-left:10px; }
+.table-wrap { background:white; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+table { width:100%; border-collapse:collapse; }
+th,td { padding:10px 14px; text-align:left; border-bottom:1px solid #f0f0f0; font-size:14px; }
+th { background:#1a1a2e; color:white; font-size:13px; }
+tr:last-child td { border:none; }
+.badge { display:inline-block; padding:3px 10px; border-radius:10px; font-size:11px; font-weight:bold; }
+.badge-ok { background:#dcfce7; color:#166534; }
+.badge-danger { background:#fee2e2; color:#991b1b; }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand">⬛ SmartGate V4</div>
+  <div class="nav-links">
+    <a href="#" class="active">Dashboard</a>
+    <a href="#">Élèves</a>
+    <a href="#">Logs</a>
+    <a href="#">Cartes temp.</a>
+    <a href="#">👑 Comptes</a>
+    <a href="#">Terminal ↗</a>
+    <span class="nav-user">👑 Admin</span>
+    <span class="btn-logout">🚪</span>
+  </div>
+</nav>
+<div class="container">
+  <h1>SmartGate</h1>
+  <div class="subtitle">Lycée Jean Jaurès — Argenteuil — Zone 1 : Entrée principale</div>
+  <div class="stats">
+    <div class="stat-card blue"><div class="num">247</div><div class="lbl">Élèves enregistrés</div></div>
+    <div class="stat-card green"><div class="num">83</div><div class="lbl">Accès autorisés aujourd'hui</div></div>
+    <div class="stat-card red"><div class="num">4</div><div class="lbl">Accès refusés aujourd'hui</div></div>
+    <div class="stat-card orange"><div class="num">2</div><div class="lbl">Cartes temporaires actives</div></div>
+    <div class="stat-card purple"><div class="num">61</div><div class="lbl">Élèves dans le lycée</div></div>
+  </div>
+  <h2>Derniers accès <span class="live-badge">⬤ EN DIRECT</span></h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Horodatage</th><th>Élève</th><th>Classe</th><th>Méthode</th><th>Statut</th></tr></thead>
+      <tbody>
+        <tr><td>09:14:32</td><td>Krishna P.</td><td>BTS CIEL A</td><td>🆔 RFID</td><td><span class="badge badge-ok">AUTORISÉ</span></td></tr>
+        <tr><td>09:13:47</td><td>Martin L.</td><td>BTS SN</td><td>🆔 RFID</td><td><span class="badge badge-ok">AUTORISÉ</span></td></tr>
+        <tr><td>09:12:05</td><td>Dubois A.</td><td>BTS CIEL B</td><td>🖐 Biométrie</td><td><span class="badge badge-ok">AUTORISÉ</span></td></tr>
+        <tr><td>09:11:18</td><td>Inconnu</td><td>—</td><td>🆔 RFID</td><td><span class="badge badge-danger">REFUSÉ</span></td></tr>
+        <tr><td>09:10:52</td><td>Leroy T.</td><td>1ère Pro</td><td>🆔 RFID</td><td><span class="badge badge-ok">AUTORISÉ</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

@@ -971,6 +971,48 @@ section { scroll-margin-top: 70px; }
   #hamburger { display: flex; }
 }
 
+
+/* ═══════════════════════════════════════
+   SKILL LEVELS
+═══════════════════════════════════════ */
+.sp.lvl-master { border-color: rgba(6,182,212,.4); color: var(--accent); background: rgba(6,182,212,.08); }
+.sp.lvl-used   { border-color: rgba(124,58,237,.3); color: #a78bfa; background: rgba(124,58,237,.06); }
+.sp.lvl-notion { border-color: rgba(255,255,255,.1); color: var(--muted); background: transparent; }
+.skill-legend { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.skill-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted2); font-family: 'JetBrains Mono', monospace; }
+.skill-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.sld-master { background: var(--accent); }
+.sld-used   { background: #a78bfa; }
+.sld-notion { background: var(--muted); }
+
+
+/* SMART GATE GALLERY */
+.sg-gallery { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 24px 0; }
+.sg-preview {
+  border-radius: 10px; overflow: hidden; aspect-ratio: 16/9;
+  border: 1px solid var(--border2); background: var(--bg3);
+  position: relative; cursor: pointer;
+}
+.sg-preview iframe {
+  width: 200%; height: 200%; transform: scale(0.5); transform-origin: top left;
+  pointer-events: none; border: none;
+}
+.sg-preview-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(5,10,12,.75); backdrop-filter: blur(4px);
+  color: var(--muted2); font-size: 10px; padding: 4px 8px;
+  font-family: 'JetBrains Mono', monospace; text-align: center;
+}
+.sg-preview a.sg-open {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 22px; opacity: 0;
+  background: rgba(6,182,212,.18); transition: opacity .2s;
+  text-decoration: none;
+}
+.sg-preview:hover a.sg-open { opacity: 1; }
+@media (max-width: 700px) { .sg-gallery { grid-template-columns: 1fr; } }
+
 </style>
 </head>
 <body>
@@ -1030,7 +1072,7 @@ section { scroll-margin-top: 70px; }
           <span class="hbadge o" id="badge-alt">Alternance dès sept. 2026</span>
         </div>
         <div class="hero-stats-strip">
-          <div class="hstat"><span class="hstat-val">2</span><span class="hstat-lbl">ESP32 déployés</span></div>
+          <div class="hstat"><span class="hstat-val">2</span><span class="hstat-lbl">ESP32 + 1 Raspberry Pi</span></div>
           <div class="hstat"><span class="hstat-val">3</span><span class="hstat-lbl">Projets GitHub</span></div>
           <div class="hstat"><span class="hstat-val">1an</span><span class="hstat-lbl">Expérience IT</span></div>
           <div class="hstat"><span class="hstat-val">7+</span><span class="hstat-lbl">Langages</span></div>
@@ -1048,8 +1090,8 @@ section { scroll-margin-top: 70px; }
         <div class="hc-sub" id="hc-sub">BTS CIEL A · Session 2026</div>
         <div class="hc-stats">
           <div class="hc-stat">
-            <span class="n">5</span>
-            <span class="l">ESP32 / Raspberry Pi déployés</span>
+            <span class="n">2</span>
+            <span class="l">ESP32 + 1 Raspberry Pi déployés</span>
           </div>
           <div class="hc-stat">
             <span class="n">V5</span>
@@ -1177,109 +1219,111 @@ section { scroll-margin-top: 70px; }
   <div class="container">
     <div class="section-eyebrow" id="skills-eyebrow">Expertise</div>
     <h2 class="section-h" id="skills-h">Compétences techniques</h2>
+    <div class="skill-legend">
+      <div class="skill-legend-item"><div class="skill-legend-dot sld-master"></div>Maîtrisé</div>
+      <div class="skill-legend-item"><div class="skill-legend-dot sld-used"></div>Utilisé</div>
+      <div class="skill-legend-item"><div class="skill-legend-dot sld-notion"></div>Notions</div>
+    </div>
     <div class="skills-wrapper">
 
       <div class="skill-cat fade-up">
         <h3>⌨️ Langages</h3>
         <div class="skill-pills">
-          <span class="sp">Python 3</span>
-          <span class="sp">C / C++</span>
-          <span class="sp">PHP</span>
-          <span class="sp">JavaScript</span>
-          <span class="sp">SQL</span>
-          <span class="sp">HTML / CSS</span>
-          <span class="sp">Arduino (.ino)</span>
+          <span class="sp lvl-master">Python 3</span>
+          <span class="sp lvl-master">C / C++</span>
+          <span class="sp lvl-master">PHP</span>
+          <span class="sp lvl-master">SQL</span>
+          <span class="sp lvl-used">JavaScript</span>
+          <span class="sp lvl-used">HTML / CSS</span>
+          <span class="sp lvl-used">Arduino (.ino)</span>
         </div>
       </div>
 
       <div class="skill-cat fade-up">
         <h3>🌐 Web & Backend</h3>
         <div class="skill-pills">
-          <span class="sp">Flask (Python)</span>
-          <span class="sp">Apache2</span>
-          <span class="sp">PHP / PDO</span>
-          <span class="sp">Bootstrap</span>
-          <span class="sp">REST API</span>
-          <span class="sp">JSON / HTTP</span>
-          <span class="sp">Tkinter</span>
+          <span class="sp lvl-master">Flask (Python)</span>
+          <span class="sp lvl-master">PHP / PDO</span>
+          <span class="sp lvl-master">REST API</span>
+          <span class="sp lvl-used">Apache2</span>
+          <span class="sp lvl-used">Bootstrap</span>
+          <span class="sp lvl-used">JSON / HTTP</span>
+          <span class="sp lvl-notion">Streamlit</span>
         </div>
       </div>
 
       <div class="skill-cat fade-up">
         <h3>🔌 Embarqué & Hardware</h3>
         <div class="skill-pills">
-          <span class="sp">ESP32 (WiFi)</span>
-          <span class="sp">RFID MFRC522</span>
-          <span class="sp">Adafruit FPS</span>
-          <span class="sp">WS2812B NeoPixel</span>
-          <span class="sp">Buzzer KY-006</span>
-          <span class="sp">Moteur DC (AFMotor)</span>
-          <span class="sp">SPI / UART</span>
-          <span class="sp">Raspberry Pi</span>
+          <span class="sp lvl-master">ESP32 (WiFi)</span>
+          <span class="sp lvl-master">Raspberry Pi</span>
+          <span class="sp lvl-used">RFID MFRC522</span>
+          <span class="sp lvl-used">Adafruit FPS</span>
+          <span class="sp lvl-used">WS2812B NeoPixel</span>
+          <span class="sp lvl-used">SPI / UART</span>
+          <span class="sp lvl-notion">Moteur DC (AFMotor)</span>
         </div>
       </div>
 
       <div class="skill-cat fade-up">
         <h3>🗄️ Bases de données</h3>
         <div class="skill-pills">
-          <span class="sp">MySQL</span>
-          <span class="sp">MariaDB</span>
-          <span class="sp">SQLite</span>
-          <span class="sp">Vues SQL</span>
-          <span class="sp">Index & Optimisation</span>
-          <span class="sp">phpMyAdmin</span>
-          <span class="sp">Migrations SQL</span>
+          <span class="sp lvl-master">MySQL</span>
+          <span class="sp lvl-master">MariaDB</span>
+          <span class="sp lvl-used">SQLite</span>
+          <span class="sp lvl-used">Vues SQL</span>
+          <span class="sp lvl-used">phpMyAdmin</span>
+          <span class="sp lvl-notion">Index & Optimisation</span>
         </div>
       </div>
 
       <div class="skill-cat fade-up">
         <h3>🔒 Sécurité</h3>
         <div class="skill-pills">
-          <span class="sp">AES-256</span>
-          <span class="sp">RGPD</span>
-          <span class="sp">API Key Auth</span>
-          <span class="sp">Sessions PHP</span>
-          <span class="sp">Anti-bruteforce</span>
-          <span class="sp">HTTPS</span>
-          <span class="sp">Chiffrement symétrique</span>
+          <span class="sp lvl-master">AES-256</span>
+          <span class="sp lvl-master">RGPD</span>
+          <span class="sp lvl-used">API Key Auth</span>
+          <span class="sp lvl-used">Sessions PHP</span>
+          <span class="sp lvl-used">HTTPS</span>
+          <span class="sp lvl-notion">Anti-bruteforce</span>
+          <span class="sp lvl-notion">Chiffrement symétrique</span>
         </div>
       </div>
 
       <div class="skill-cat fade-up">
         <h3>🌍 Réseaux & Infra</h3>
         <div class="skill-pills">
-          <span class="sp">TCP/IP</span>
-          <span class="sp">WiFi / VLAN</span>
-          <span class="sp">SSH</span>
-          <span class="sp">DHCP / DNS</span>
-          <span class="sp">Cisco Packet Tracer</span>
-          <span class="sp">Wireshark</span>
-          <span class="sp">Linux (Raspbian)</span>
+          <span class="sp lvl-master">TCP/IP</span>
+          <span class="sp lvl-master">SSH</span>
+          <span class="sp lvl-master">Linux (Raspbian)</span>
+          <span class="sp lvl-used">WiFi / VLAN</span>
+          <span class="sp lvl-used">DHCP / DNS</span>
+          <span class="sp lvl-used">Wireshark</span>
+          <span class="sp lvl-notion">Cisco Packet Tracer</span>
         </div>
       </div>
 
       <div class="skill-cat fade-up">
         <h3>🛠️ Outils</h3>
         <div class="skill-pills">
-          <span class="sp">VS Code</span>
-          <span class="sp">Arduino IDE</span>
-          <span class="sp">Git</span>
-          <span class="sp">Postman</span>
-          <span class="sp">PIL / Pillow</span>
-          <span class="sp">CSV</span>
-          <span class="sp">Gantt / SysML</span>
+          <span class="sp lvl-master">Git</span>
+          <span class="sp lvl-master">VS Code</span>
+          <span class="sp lvl-used">Arduino IDE</span>
+          <span class="sp lvl-used">Postman</span>
+          <span class="sp lvl-used">PIL / Pillow</span>
+          <span class="sp lvl-notion">Gantt / SysML</span>
         </div>
       </div>
 
       <div class="skill-cat fade-up">
         <h3>💡 Soft Skills</h3>
         <div class="skill-pills">
-          <span class="sp">Support IT N1/N2</span>
-          <span class="sp">Ticketing</span>
-          <span class="sp">Travail en équipe</span>
-          <span class="sp">Autonomie</span>
-          <span class="sp">Rédaction technique</span>
-          <span class="sp">Déploiement postes</span>
+          <span class="sp lvl-master">Autonomie</span>
+          <span class="sp lvl-master">Travail en équipe</span>
+          <span class="sp lvl-master">Rédaction technique</span>
+          <span class="sp lvl-used">Support IT N1/N2</span>
+          <span class="sp lvl-used">Ticketing</span>
+          <span class="sp lvl-notion">Active Directory</span>
         </div>
       </div>
 
@@ -1321,13 +1365,31 @@ section { scroll-margin-top: 70px; }
       </p>
 
       <div class="pf-stats">
-        <div class="pf-stat"><span class="n">2</span><span class="l">ESP32 physiques<br>(CPE + Porte)</span></div>
+        <div class="pf-stat"><span class="n">2</span><span class="l">ESP32 déployés<br>(CPE + Porte)</span></div>
         <div class="pf-stat"><span class="n">5</span><span class="l">Versions itérées<br>V1 → V5</span></div>
         <div class="pf-stat"><span class="n">9</span><span class="l">Tables MySQL<br>+ vues SQL</span></div>
         <div class="pf-stat"><span class="n">AES</span><span class="l">256 bits<br>empreintes chiffrées</span></div>
         <div class="pf-stat"><span class="n">5</span><span class="l">Zones lycée<br>unifiées</span></div>
       </div>
 
+
+      <div class="sg-gallery">
+        <div class="sg-preview">
+          <iframe src="img/sg_dashboard.html" loading="lazy" scrolling="no" title="Dashboard SmartGate"></iframe>
+          <div class="sg-preview-label">🖥️ Dashboard PHP · Temps réel</div>
+          <a href="img/sg_dashboard.html" target="_blank" class="sg-open">↗</a>
+        </div>
+        <div class="sg-preview">
+          <iframe src="img/sg_bdd.html" loading="lazy" scrolling="no" title="Schéma BDD SmartGate"></iframe>
+          <div class="sg-preview-label">🗄️ Schéma BDD MySQL · 9 tables</div>
+          <a href="img/sg_bdd.html" target="_blank" class="sg-open">↗</a>
+        </div>
+        <div class="sg-preview">
+          <iframe src="img/sg_esp32.html" loading="lazy" scrolling="no" title="Montage ESP32"></iframe>
+          <div class="sg-preview-label">🔌 Schéma ESP32 · RFID + Biométrie</div>
+          <a href="img/sg_esp32.html" target="_blank" class="sg-open">↗</a>
+        </div>
+      </div>
       <div style="margin-bottom:20px;">
         <a href="https://github.com/Paurtheiv/smart-gate-jaures" target="_blank" class="btn btn-o" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:9px 20px;">
           <span>⬛</span> Voir le code sur GitHub
@@ -1388,6 +1450,18 @@ section { scroll-margin-top: 70px; }
           <a href="https://github.com/Paurtheiv/jeu-jpo-ljj" target="_blank" style="font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">⬛ GitHub →</a>
           <a href="https://paurtheiv.github.io/jeu-jpo-ljj/" target="_blank" style="font-size:12px;color:var(--green);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">▶ Démo →</a>
         </div>
+      </div>
+
+
+      <div class="proj-card fade-up">
+        <div class="proj-emoji">✂️</div>
+        <div class="proj-year">Projet personnel · 2026</div>
+        <h3>File d'attente — Salon de Coiffure</h3>
+        <p>Système de file d'attente temps réel. Écran réception (saisie client + choix coiffeur) et écran salle d'attente avec compte à rebours par coiffeur. Communication via localStorage, refresh toutes les 5 secondes.</p>
+        <div class="proj-techs">
+          <span class="pt">HTML/JS</span><span class="pt">localStorage</span><span class="pt">Temps réel</span>
+        </div>
+        <a href="https://github.com/Paurtheiv/file-attente-coiffure" target="_blank" style="margin-top:12px;font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">⬛ GitHub →</a>
       </div>
 
   </div>
@@ -1519,13 +1593,7 @@ section { scroll-margin-top: 70px; }
           <div class="mini-pills"><span class="mini-pill">Cisco PT</span><span class="mini-pill">TCP/IP</span><span class="mini-pill">Wireshark</span></div>
         </div>
 
-        <div class="mini-card fade-up">
-          <div class="mini-icon">💻</div>
-          <div class="mini-ctx">TP Architecture · BTS 1ère année</div>
-          <h4>Simulateur CPU Von Neumann</h4>
-          <p>Simulation du cycle fetch-decode-execute, programmation assembleur, identification des blocs fonctionnels (UC, RAM, bus).</p>
-          <div class="mini-pills"><span class="mini-pill">Assembleur</span><span class="mini-pill">Architecture CPU</span></div>
-        </div>
+
 
         <div class="mini-card fade-up">
           <div class="mini-icon">🔍</div>
@@ -1543,31 +1611,12 @@ section { scroll-margin-top: 70px; }
           <div class="mini-pills"><span class="mini-pill">SysML</span><span class="mini-pill">Biométrie</span><span class="mini-pill">Rédaction</span></div>
         </div>
 
-        <div class="mini-card fade-up">
-          <div class="mini-icon">📡</div>
-          <div class="mini-ctx">Co-animation Physique · BTS 1ère année</div>
-          <h4>Présentation pédagogique Arduino</h4>
-          <p>Présentation réalisée devant la classe sur l'écosystème Arduino : architecture, GPIO, programmation, démonstrations pratiques de montages.</p>
-          <div class="mini-pills"><span class="mini-pill">Arduino</span><span class="mini-pill">Pédagogie</span><span class="mini-pill">Présentation</span></div>
-        </div>
-
-        <div class="mini-card fade-up">
-          <div class="mini-icon">🏭</div>
-          <div class="mini-ctx">BAC Microtechniques · 2024</div>
-          <h4>Chef d'œuvre — Microtechniques</h4>
-          <p>Projet de fin de Bac Pro sur les procédés de fabrication mécanique de précision. Présentation orale devant jury avec support de diaporama.</p>
-          <div class="mini-pills"><span class="mini-pill">Fabrication</span><span class="mini-pill">Présentation orale</span><span class="mini-pill">PowerPoint</span></div>
-        </div>
 
 
-        <div class="mini-card fade-up">
-          <div class="mini-icon">✂️</div>
-          <div class="mini-ctx">Petit projet personnel · 2026</div>
-          <h4>File d'attente Salon de Coiffure</h4>
-          <p>Système de file d'attente temps réel pour salon de coiffure. Écran réception (saisie client + choix coiffeur) et écran salle d'attente avec compte à rebours par coiffeur. Communication via localStorage, refresh toutes les 5s.</p>
-          <div class="mini-pills"><span class="mini-pill">HTML/JS</span><span class="mini-pill">localStorage</span><span class="mini-pill">Temps réel</span></div>
-          <a href="https://github.com/Paurtheiv/file-attente-coiffure" target="_blank" style="margin-top:8px;font-size:11px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:4px;">⬛ GitHub →</a>
-        </div>
+
+
+
+
 
       </div>
     </div>
