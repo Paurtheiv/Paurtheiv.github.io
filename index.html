@@ -1066,6 +1066,19 @@ section { scroll-margin-top: 70px; }
 .ctf-tag { background: rgba(234,179,8,.08); border: 1px solid rgba(234,179,8,.2); color: #fbbf24; font-size: 11px; padding: 3px 10px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; }
 .ctf-obtained { display: inline-flex; align-items: center; gap: 6px; background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.3); color: #4ade80; font-size: 11px; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; }
 
+
+/* EXPERTISE BLOCKS */
+.expertise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
+.exp-block {
+  background: var(--bg3); border: 1px solid var(--border2); border-radius: 12px;
+  padding: 18px 20px; transition: .2s;
+}
+.exp-block:hover { border-color: rgba(6,182,212,.35); transform: translateY(-2px); }
+.exp-block-icon { font-size: 26px; margin-bottom: 8px; }
+.exp-block-title { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.exp-block-desc { font-size: 11px; color: var(--muted2); line-height: 1.5; font-family: 'JetBrains Mono', monospace; }
+@media (max-width: 600px) { .expertise-grid { grid-template-columns: 1fr; } }
+
 </style>
 </head>
 <body>
@@ -1112,10 +1125,7 @@ section { scroll-margin-top: 70px; }
         <div class="hero-greeting" id="hero-greeting-div"><span class="hg-line"></span><span class="hg-text" id="hero-greeting">Bonjour, je suis</span></div>
         <h1 class="hero-name">Paurtheiv<br>Krishna Laxman</h1>
         <div class="hero-role" id="hero-role">Étudiant Ingénieur · Embarqué · Backend Python · CTF Top 5%</div>
-        <p class="hero-desc" id="hero-desc">
-          Passionné par les systèmes embarqués et les réseaux, je construis des solutions IoT de bout en bout — du microcontrôleur à l'API.
-          Admis en cycle ingénieur à l'<strong>ESEO Paris-Vélizy</strong>, je recherche une <strong>alternance dès septembre 2026</strong>.
-        </p>
+
         <div class="hero-badges">
           <span class="hbadge g" id="badge-eseo">✓ Admis ESEO Paris 2026</span>
           <span class="hbadge b" id="badge-bts">BTS CIEL A · Argenteuil</span>
@@ -1170,54 +1180,34 @@ section { scroll-margin-top: 70px; }
           je m'adapte rapidement à de nouveaux environnements techniques.
         </p>
       </div>
-      <div class="about-infos">
-        <div class="ai">
-          <div class="ai-icon">🎓</div>
-          <div>
-            <div class="ai-lbl">Formation actuelle</div>
-            <div class="ai-val">BTS CIEL A — Lycée Jean Jaurès, Argenteuil</div>
-          </div>
-        </div>
-        <div class="ai">
-          <div class="ai-icon">🚀</div>
-          <div>
-            <div class="ai-lbl">Admis en (sept. 2026)</div>
-            <div class="ai-val">Cycle ingénieur ESEO Paris-Vélizy · Cybersécurité & Réseaux</div>
-          </div>
-        </div>
-        <div class="ai">
-          <div class="ai-icon">💼</div>
-          <div>
-            <div class="ai-lbl">Recherche</div>
-            <div class="ai-val">Alternance 3 ans · Systèmes / Réseaux / Cybersécurité · dès sept. 2026</div>
-          </div>
-        </div>
-        <div class="ai">
-          <div class="ai-icon">📧</div>
-          <div>
-            <div class="ai-lbl">Email</div>
-            <div class="ai-val"><a href="mailto:paurtheiv.laxman.fr@gmail.com">paurtheiv.laxman.fr@gmail.com</a></div>
-          </div>
-        </div>
-        <div class="ai">
-          <div class="ai-icon">📱</div>
-          <div>
-            <div class="ai-lbl">Téléphone</div>
-            <div class="ai-val"><a href="tel:+33652499368">+33 6 52 49 93 68</a></div>
-          </div>
-        </div>
-        <div class="ai">
-          <div class="ai-icon">🌐</div>
-          <div>
-            <div class="ai-lbl">LinkedIn</div>
-            <div class="ai-val"><a href="https://linkedin.com/in/paurtheiv-krishna-laxman080068345" target="_blank">linkedin.com/in/paurtheiv-krishna-laxman</a></div>
-          </div>
-        </div>
-        <div class="ai">
+      <div>
+        <div class="ai" style="margin-bottom:16px;">
           <div class="ai-icon">🗣️</div>
           <div>
             <div class="ai-lbl">Langues</div>
             <div class="ai-val">Français (courant) · Anglais (courant) · Tamoul (maternelle)</div>
+          </div>
+        </div>
+        <div class="expertise-grid">
+          <div class="exp-block">
+            <div class="exp-block-icon">🔌</div>
+            <div class="exp-block-title">Systèmes Embarqués</div>
+            <div class="exp-block-desc">ESP32, RFID, biométrie déployée</div>
+          </div>
+          <div class="exp-block">
+            <div class="exp-block-icon">🔒</div>
+            <div class="exp-block-title">Cybersécurité</div>
+            <div class="exp-block-desc">AES-256, CTF Top 5%, forensics</div>
+          </div>
+          <div class="exp-block">
+            <div class="exp-block-icon">🌐</div>
+            <div class="exp-block-title">Backend & API</div>
+            <div class="exp-block-desc">Flask, PHP, REST API, MySQL temps réel</div>
+          </div>
+          <div class="exp-block">
+            <div class="exp-block-icon">🖥️</div>
+            <div class="exp-block-title">Réseaux & Linux</div>
+            <div class="exp-block-desc">VLAN, SSH, TCP/IP, Linux terrain</div>
           </div>
         </div>
       </div>
@@ -1936,7 +1926,7 @@ var T = {
     "lang-btn": "EN",
     "hero-greeting": "Bonjour, je suis",
     "hero-role": "Développeur IoT · Systèmes & Réseaux",
-    "hero-desc": "Passionné par les systèmes embarqués et les réseaux, je construis des solutions IoT de bout en bout — du microcontrôleur à l&#39;API. Admis en cycle ingénieur à l&#39;<strong>ESEO Paris-Vélizy</strong>, je recherche une <strong>alternance dès septembre 2026</strong>.",
+    "hero-desc": "",
     "badge-eseo": "✓ Admis ESEO Paris 2026",
     "badge-bts": "BTS CIEL A · Argenteuil",
     "badge-iot": "IoT · Embarqué · Réseaux",
