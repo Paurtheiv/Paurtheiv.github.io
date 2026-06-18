@@ -1770,15 +1770,39 @@ section { scroll-margin-top: 70px; }
   <div class="container">
     <div class="contact-inner">
 
-      <!-- LEFT: Texte -->
+      <!-- LEFT: Form -->
       <div class="contact-left">
         <div class="section-eyebrow" id="contact-eyebrow">Disponible dès sept. 2026</div>
         <h2 class="section-h" style="margin-bottom:8px;" id="contact-h">Travaillons ensemble 🤝</h2>
-        <p id="contact-p" style="color:var(--muted2);font-size:15px;line-height:1.7;max-width:420px;">
+        <p id="contact-p" style="color:var(--muted2);font-size:15px;line-height:1.7;margin-bottom:24px;max-width:420px;">
           Étudiant ingénieur en alternance à l'ESEO Paris-Vélizy dès septembre 2026, je recherche
           une entreprise dans les domaines des systèmes embarqués, réseaux ou cybersécurité.
           N'hésitez pas à me contacter !
         </p>
+
+        <form id="contact-form" class="contact-form-wrap"
+              action="https://formsubmit.co/paurtheiv.laxman.fr@gmail.com" method="POST">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://paurtheiv.github.io/#contact">
+          <input type="hidden" name="_autoresponse" value="Merci pour votre message ! Je vous répondrai rapidement. / Thank you for your message! I'll get back to you soon.">
+
+          <div class="form-group">
+            <label class="form-lbl" id="fl-name">Votre nom</label>
+            <input class="form-inp" type="text" name="name" placeholder="Comment vous appelez-vous ?" required>
+          </div>
+          <div class="form-group">
+            <label class="form-lbl" id="fl-email">Votre email</label>
+            <input class="form-inp" type="email" name="email" placeholder="votre@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-lbl" id="fl-msg">Votre message</label>
+            <textarea class="form-ta" name="message" placeholder="Votre message..." required></textarea>
+          </div>
+          <button type="submit" class="btn-send" id="btn-send">
+            <span>📨</span> <span id="btn-send-txt">Envoyer le message</span>
+          </button>
+          <div class="form-success" id="form-success">✓ Message envoyé ! Je vous réponds rapidement.</div>
+        </form>
       </div>
 
       <!-- RIGHT: Info cards -->
@@ -1796,49 +1820,6 @@ section { scroll-margin-top: 70px; }
             </div>
           </div>
 
-          <div class="crv-avail" id="crv-avail">
-            Disponible pour alternance — sept. 2026
-          </div>
-
-          <div class="crv-info">
-            <div class="ci-icon">📧</div>
-            <div>
-              <div class="ci-lbl">Email</div>
-              <div class="ci-val"><a href="mailto:paurtheiv.laxman.fr@gmail.com">paurtheiv.laxman.fr@gmail.com</a></div>
-            </div>
-          </div>
-
-          <div class="crv-info">
-            <div class="ci-icon">📱</div>
-            <div>
-              <div class="ci-lbl">Téléphone</div>
-              <div class="ci-val"><a href="tel:+33652499368">+33 6 52 49 93 68</a></div>
-            </div>
-          </div>
-
-          <div class="crv-info">
-            <div class="ci-icon">🔗</div>
-            <div>
-              <div class="ci-lbl">LinkedIn</div>
-              <div class="ci-val"><a href="https://linkedin.com/in/paurtheiv-krishna-laxman080068345" target="_blank">linkedin.com/in/paurtheiv</a></div>
-            </div>
-          </div>
-
-          <div class="crv-info">
-            <div class="ci-icon">📍</div>
-            <div>
-              <div class="ci-lbl">Localisation</div>
-              <div class="ci-val">Argenteuil, 95 — Île-de-France</div>
-            </div>
-          </div>
-
-          <div class="crv-info">
-            <div class="ci-icon">🎓</div>
-            <div>
-              <div class="ci-lbl">Alternance recherchée</div>
-              <div class="ci-val">ESEO Paris-Vélizy · 3 ans · Systèmes / Réseaux / Cyber</div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -2118,4 +2099,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
