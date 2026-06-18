@@ -1780,12 +1780,7 @@ section { scroll-margin-top: 70px; }
           N'hésitez pas à me contacter !
         </p>
 
-        <form id="contact-form" class="contact-form-wrap"
-              action="https://formsubmit.co/paurtheiv.laxman.fr@gmail.com" method="POST">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://paurtheiv.github.io/#contact">
-          <input type="hidden" name="_autoresponse" value="Merci pour votre message ! Je vous répondrai rapidement. / Thank you for your message! I'll get back to you soon.">
-
+        <form id="contact-form" class="contact-form-wrap">
           <div class="form-group">
             <label class="form-lbl" id="fl-name">Votre nom</label>
             <input class="form-inp" type="text" name="name" placeholder="Comment vous appelez-vous ?" required>
@@ -2068,13 +2063,32 @@ function applyLang(l) {
 function toggleLang() { applyLang(lang === 'fr' ? 'en' : 'fr'); }
 
 
-// Form submit
+// Form submit (AJAX — pas de redirection)
 var contactForm = document.getElementById('contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
     var btn = document.getElementById('btn-send');
     var txt = document.getElementById('btn-send-txt');
+    var success = document.getElementById('form-success');
     if (btn) { btn.disabled = true; txt.textContent = 'Envoi...'; }
+
+    var data = new FormData(contactForm);
+    fetch('https://formsubmit.co/ajax/paurtheiv.laxman.fr@gmail.com', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(res) {
+      if (success) { success.style.display = 'block'; }
+      contactForm.reset();
+      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
+    })
+    .catch(function() {
+      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
+      alert('Erreur lors de l\'envoi. Réessayez.');
+    });
   });
 }
 document.addEventListener('DOMContentLoaded', function() {
@@ -2099,4 +2113,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
