@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paurtheiv Krishna Laxman — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   RESET & VARIABLES
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* CUSTOM CURSOR */
+#cur { position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;will-change:transform;transition:width .15s,height .15s; }
+#cur-ring { position:fixed;width:32px;height:32px;border:1.5px solid rgba(6,182,212,.5);border-radius:50%;pointer-events:none;z-index:9998;will-change:transform;transition:width .2s,height .2s; }
+body { cursor: none; }
+a, button { cursor: none; }
+
+:root {
+  --bg:        #050a0c;
+  --bg2:       #070d10;
+  --bg3:       #0d1618;
+  --card:      #0e181c;
+  --card2:     #111f23;
+  --border:    #152428;
+  --border2:   #1c2e34;
+  --accent:    #06b6d4;
+  --accent2:   #7c3aed;
+  --green:     #22c55e;
+  --orange:    #f97316;
+  --red:       #ef4444;
+  --yellow:    #eab308;
+  --text:      #e8eaf6;
+  --muted:     #6b748a;
+  --muted2:    #9199b3;
+  --radius:    12px;
+  --max:       1080px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 60px;
+  background: rgba(6,8,16,.88);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+}
+.nav-logo { font-size: 15px; font-weight: 800; color: var(--accent); letter-spacing: .5px; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { color: var(--muted2); text-decoration: none; font-size: 13px; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; padding: 7px 18px;
+  border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none;
+  transition: background .2s;
+}
+.nav-cta:hover { background: #0891b2; }
+
+/* ═══════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════ */
+.container { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+section { padding: 100px 0; }
+section:nth-child(odd) { background: var(--bg); }
+section:nth-child(even) { background: var(--bg2); }
+
+.section-eyebrow {
+  font-size: 11px; letter-spacing: 3px; font-weight: 600;
+  text-transform: uppercase; color: var(--muted2);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+h2.section-h {
+  font-size: clamp(26px, 4vw, 38px); font-weight: 800;
+  margin-bottom: 48px; letter-spacing: -.5px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+h2.section-h em { color: var(--accent); font-style: normal; }
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+#hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding-top: 60px; position: relative; overflow: hidden;
+}
+#hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 40%, rgba(6,182,212,.1) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 70% at 5% 90%, rgba(124,58,237,.08) 0%, transparent 55%);
+}
+/* Grid dots */
+#hero::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(6,182,212,.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+}
+
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 340px;
+  gap: 60px; align-items: center; width: 100%; position: relative; z-index: 1;
+}
+
+.hero-greeting {
+  font-size: 14px; color: var(--accent); font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-greeting .hg-line { display: inline-block; width: 32px; height: 2px; background: var(--accent); flex-shrink: 0; }
+.hero-greeting .hg-text { display: inline; width: auto; height: auto; background: none; }
+
+h1.hero-name {
+  font-size: clamp(42px, 6.5vw, 80px); font-weight: 900; line-height: .95;
+  letter-spacing: -3px; margin-bottom: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  background: linear-gradient(135deg, #ffffff 0%, #8ba8d4 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-role {
+  font-size: clamp(16px, 2.2vw, 22px); font-weight: 600;
+  color: transparent; margin-bottom: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-desc {
+  font-size: 16px; color: var(--muted2); max-width: 520px;
+  line-height: 1.75; margin-bottom: 32px;
+}
+.hero-badges {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px;
+}
+.hbadge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 99px; font-size: 12px; font-weight: 600;
+  border: 1px solid; background: rgba(0,0,0,.3);
+}
+.hbadge.g { border-color: rgba(34,197,94,.4); color: var(--green); }
+.hbadge.b { border-color: rgba(6,182,212,.4); color: var(--accent); }
+.hbadge.p { border-color: rgba(124,58,237,.4); color: #a78bfa; }
+.hbadge.o { border-color: rgba(249,115,22,.4); color: var(--orange); }
+
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 26px; border-radius: 10px; font-size: 14px; font-weight: 700;
+  text-decoration: none; cursor: pointer; border: none; transition: all .2s;
+}
+.btn-p { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+.btn-p:hover { background: linear-gradient(135deg, #0891b2, #6d28d9); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(6,182,212,.3); }
+.btn-o { background: transparent; color: var(--text); border: 1px solid var(--border2); }
+.btn-o:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+/* Hero card (right side) */
+.hero-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px; padding: 32px;
+  position: relative; overflow: hidden;
+}
+.hero-card::before {
+  content: ''; position: absolute; top: -40px; right: -40px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(6,182,212,.15), transparent);
+  pointer-events: none;
+}
+.hc-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(6,182,212,.3), rgba(124,58,237,.3));
+  border: 2px solid var(--border2);
+  font-size: 36px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.hc-name { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.hc-sub { font-size: 12px; color: var(--muted2); margin-bottom: 20px; }
+.hc-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+.hc-stat {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px; text-align: center;
+}
+.hc-stat .n {
+  font-size: 20px; font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; display: block; margin-bottom: 2px;
+}
+.hc-stat .l { font-size: 10px; color: var(--muted); line-height: 1.3; }
+.hc-location {
+  font-size: 12px; color: var(--muted2);
+  display: flex; align-items: center; gap: 6px;
+}
+.hc-location::before { content: '📍'; font-size: 14px; }
+
+/* ═══════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════ */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.about-text p { color: var(--muted2); font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+.about-text strong { color: var(--text); }
+
+.about-infos { display: flex; flex-direction: column; gap: 12px; }
+.ai {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px;
+  display: flex; align-items: center; gap: 14px;
+}
+.ai .ai-icon { font-size: 20px; flex-shrink: 0; }
+.ai .ai-lbl { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.ai .ai-val { font-size: 14px; font-weight: 600; color: var(--text); }
+.ai .ai-val a { color: var(--accent); text-decoration: none; }
+.ai .ai-val a:hover { text-decoration: underline; }
+
+/* ═══════════════════════════════════════
+   COMPÉTENCES
+═══════════════════════════════════════ */
+.skills-wrapper { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.skill-cat {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px;
+  transition: border-color .2s, transform .2s;
+}
+.skill-cat:hover { border-color: var(--border2); transform: translateY(-2px); }
+.skill-cat h3 {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 14px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 6px;
+}
+.skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.sp {
+  background: rgba(255,255,255,.04); border: 1px solid var(--border);
+  color: var(--muted2); font-size: 11px; padding: 4px 10px;
+  border-radius: 6px; font-weight: 500; transition: all .15s;
+  font-family: 'JetBrains Mono', monospace;
+}
+.sp:hover { border-color: var(--accent); color: var(--accent); background: rgba(6,182,212,.07); }
+
+/* ═══════════════════════════════════════
+   PROJETS
+═══════════════════════════════════════ */
+.project-featured {
+  background: linear-gradient(135deg, var(--card2), var(--bg3));
+  border: 1px solid var(--border);
+  border-radius: 20px; padding: 44px;
+  position: relative; overflow: hidden; margin-bottom: 32px;
+}
+.project-featured::after {
+  content: ''; position: absolute; top: -80px; right: -80px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(6,182,212,.08), transparent);
+  pointer-events: none;
+}
+
+.pf-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
+.pf-badge {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 99px;
+  margin-bottom: 10px; display: inline-block;
+}
+.pf-title { font-size: 30px; font-weight: 900; letter-spacing: -.5px; margin-bottom: 6px; }
+.pf-subtitle { font-size: 14px; color: var(--muted2); }
+.pf-meta { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; flex-shrink: 0; }
+.pf-tag {
+  background: rgba(6,182,212,.1); border: 1px solid rgba(6,182,212,.2);
+  color: var(--accent); font-size: 11px; padding: 4px 10px; border-radius: 6px;
+}
+.pf-desc { font-size: 15px; color: var(--muted2); max-width: 680px; line-height: 1.75; margin-bottom: 28px; }
+
+.pf-stats { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 28px; }
+.pf-stat .n {
+  font-size: 32px; font-weight: 900;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1; display: block; margin-bottom: 4px;
+}
+.pf-stat .l { font-size: 11px; color: var(--muted); }
+
+.pf-techs { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech {
+  background: rgba(6,182,212,.1); border: 1px solid rgba(6,182,212,.2);
+  color: var(--accent); font-size: 12px; font-weight: 600;
+  padding: 4px 10px; border-radius: 6px;
+}
+.tech.purple { background: rgba(124,58,237,.1); border-color: rgba(124,58,237,.2); color: #a78bfa; }
+.tech.green  { background: rgba(34,197,94,.1);  border-color: rgba(34,197,94,.2);  color: var(--green); }
+.tech.orange { background: rgba(249,115,22,.1); border-color: rgba(249,115,22,.2); color: var(--orange); }
+
+/* Grid projets secondaires */
+.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.proj-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px;
+  display: flex; flex-direction: column;
+  transition: border-color .2s, transform .2s;
+}
+.proj-card:hover { border-color: rgba(6,182,212,.4); transform: translateY(-3px); }
+
+.proj-emoji { font-size: 26px; margin-bottom: 12px; }
+.proj-year {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 6px; font-weight: 600;
+}
+.proj-card h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+.proj-card p { font-size: 13px; color: var(--muted2); line-height: 1.6; flex: 1; margin-bottom: 14px; }
+.proj-techs { display: flex; flex-wrap: wrap; gap: 5px; }
+.pt {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--muted2); font-size: 11px; padding: 2px 8px;
+  border-radius: 4px; font-weight: 600;
+}
+
+/* ═══════════════════════════════════════
+   EXPÉRIENCES
+═══════════════════════════════════════ */
+.exp-list { display: flex; flex-direction: column; gap: 20px; }
+.exp-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px 32px;
+  display: grid; grid-template-columns: 90px 1fr;
+  gap: 24px; align-items: start;
+  transition: border-color .2s;
+}
+.exp-card:hover { border-color: rgba(6,182,212,.3); }
+.exp-period {
+  font-size: 12px; color: var(--muted); padding-top: 4px;
+  font-weight: 600; line-height: 1.5;
+}
+.exp-title { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+.exp-co { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 14px; }
+.exp-ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.exp-ul li {
+  font-size: 13px; color: var(--muted2); line-height: 1.6;
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.exp-ul li::before { content: '▸'; color: var(--accent); flex-shrink: 0; font-size: 10px; margin-top: 4px; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
+.exp-tag {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--muted2); font-size: 11px; padding: 2px 8px;
+  border-radius: 4px; font-weight: 600;
+}
+
+/* ═══════════════════════════════════════
+   FORMATION
+═══════════════════════════════════════ */
+.edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.edu-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px;
+  transition: border-color .2s;
+}
+.edu-card:hover { border-color: rgba(6,182,212,.3); }
+.edu-card.current { border-color: rgba(6,182,212,.5); background: linear-gradient(135deg, var(--card), rgba(6,182,212,.04)); }
+.edu-year { font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 8px; }
+.edu-card h3 { font-size: 15px; font-weight: 800; margin-bottom: 6px; }
+.edu-card .edu-school { font-size: 13px; color: var(--accent); margin-bottom: 8px; }
+.edu-card p { font-size: 12px; color: var(--muted2); line-height: 1.6; }
+.edu-badge {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 10px;
+  background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.3);
+  color: var(--green); font-size: 11px; padding: 3px 10px; border-radius: 99px; font-weight: 700;
+}
+
+/* ═══════════════════════════════════════
+   MINI-PROJETS SCOLAIRES
+═══════════════════════════════════════ */
+.mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.mini-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px;
+  transition: border-color .15s, transform .15s;
+}
+.mini-card:hover { border-color: rgba(6,182,212,.35); transform: translateY(-2px); }
+.mini-icon { font-size: 22px; margin-bottom: 10px; }
+.mini-ctx { font-size: 10px; color: var(--muted); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+.mini-card h4 { font-size: 14px; font-weight: 800; margin-bottom: 6px; }
+.mini-card p { font-size: 12px; color: var(--muted2); line-height: 1.55; margin-bottom: 10px; }
+.mini-pills { display: flex; flex-wrap: wrap; gap: 4px; }
+.mini-pill {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--muted2); font-size: 10px; padding: 2px 7px;
+  border-radius: 4px; font-weight: 600;
+}
+
+
+/* ═══════════════════════════════════════
+   CONTACT — FORM LAYOUT
+═══════════════════════════════════════ */
+#contact {
+  background: #000;
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0;
+}
+#contact::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 40%, rgba(6,182,212,.14) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 60% at 80% 60%, rgba(124,58,237,.14) 0%, transparent 50%),
+    linear-gradient(135deg, #020408 0%, #080c18 50%, #030508 100%);
+  z-index: 0;
+}
+/* Star field */
+#contact::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    radial-gradient(1px 1px at 8% 23%, rgba(255,255,255,.7), transparent),
+    radial-gradient(1px 1px at 15% 67%, rgba(255,255,255,.5), transparent),
+    radial-gradient(2px 2px at 23% 11%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1px 1px at 31% 89%, rgba(255,255,255,.4), transparent),
+    radial-gradient(1px 1px at 42% 34%, rgba(255,255,255,.7), transparent),
+    radial-gradient(1px 1px at 56% 78%, rgba(255,255,255,.5), transparent),
+    radial-gradient(2px 2px at 63% 5%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1px 1px at 71% 56%, rgba(255,255,255,.4), transparent),
+    radial-gradient(1px 1px at 84% 91%, rgba(255,255,255,.7), transparent),
+    radial-gradient(1px 1px at 92% 42%, rgba(255,255,255,.5), transparent),
+    radial-gradient(1px 1px at 4% 51%, rgba(255,255,255,.6), transparent),
+    radial-gradient(2px 2px at 11% 8%, rgba(255,255,255,.4), transparent),
+    radial-gradient(1px 1px at 19% 74%, rgba(255,255,255,.7), transparent),
+    radial-gradient(1px 1px at 28% 19%, rgba(255,255,255,.5), transparent),
+    radial-gradient(1px 1px at 37% 95%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1px 1px at 46% 47%, rgba(255,255,255,.4), transparent),
+    radial-gradient(1px 1px at 53% 3%, rgba(255,255,255,.7), transparent),
+    radial-gradient(1px 1px at 67% 62%, rgba(255,255,255,.5), transparent),
+    radial-gradient(1px 1px at 76% 28%, rgba(255,255,255,.6), transparent),
+    radial-gradient(2px 2px at 88% 84%, rgba(255,255,255,.4), transparent),
+    radial-gradient(1px 1px at 96% 15%, rgba(255,255,255,.7), transparent),
+    radial-gradient(1px 1px at 6% 39%, rgba(255,255,255,.5), transparent),
+    radial-gradient(1px 1px at 33% 7%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1px 1px at 58% 25%, rgba(255,255,255,.4), transparent),
+    radial-gradient(1px 1px at 79% 44%, rgba(255,255,255,.7), transparent),
+    radial-gradient(1px 1px at 87% 72%, rgba(255,255,255,.5), transparent);
+  opacity: .85;
+  animation: starBlink 4s ease-in-out infinite;
+}
+@keyframes starBlink {
+  0%, 100% { opacity: .85; }
+  50% { opacity: .5; }
+}
+.contact-inner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  position: relative;
+  z-index: 2;
+}
+.contact-left { flex: 1; }
+.contact-right {
+  flex: 0 0 44%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-right-visual {
+  width: 100%;
+  max-width: 380px;
+  background: rgba(13,17,42,.7);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 36px 32px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.crv-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.crv-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: rgba(6,182,212,.06);
+  border: 1px solid rgba(6,182,212,.15);
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--muted2);
+  transition: border-color .2s;
+}
+.crv-info:hover { border-color: rgba(6,182,212,.35); }
+.crv-info .ci-icon { font-size: 20px; flex-shrink: 0; }
+.crv-info .ci-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px; font-weight: 700; }
+.crv-info .ci-val { font-size: 13px; color: var(--text); font-weight: 600; }
+.crv-info .ci-val a { color: var(--accent); text-decoration: none; }
+.crv-avail {
+  background: rgba(34,197,94,.08);
+  border: 1px solid rgba(34,197,94,.25);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--green);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.crv-avail::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; box-shadow: 0 0 8px var(--green); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* Form */
+.contact-form-wrap { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; max-width: 460px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-lbl { font-size: 12px; font-weight: 700; color: var(--text); letter-spacing: .5px; }
+.form-inp, .form-ta {
+  background: rgba(13,17,42,.9);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  outline: none;
+  resize: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.form-inp::placeholder, .form-ta::placeholder { color: var(--muted); }
+.form-inp:focus, .form-ta:focus {
+  border-color: rgba(6,182,212,.5);
+  box-shadow: 0 0 0 3px rgba(6,182,212,.08);
+}
+.form-ta { height: 130px; }
+.btn-send {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+}
+.btn-send:hover { background: #0891b2; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(6,182,212,.3); }
+.btn-send:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+.form-success {
+  display: none;
+  background: rgba(34,197,94,.1);
+  border: 1px solid rgba(34,197,94,.3);
+  border-radius: 10px;
+  padding: 14px 18px;
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .contact-inner { flex-direction: column; }
+  .contact-right { width: 100%; flex: none; }
+  .contact-right-visual { max-width: 100%; }
+  .contact-form-wrap { max-width: 100%; }
+}
+
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 28px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; color: var(--muted);
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-card { display: none; }
+  .about-grid { grid-template-columns: 1fr; }
+  .skills-wrapper { grid-template-columns: 1fr 1fr; }
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+  .edu-grid { grid-template-columns: 1fr; }
+  .exp-card { grid-template-columns: 1fr; }
+  section { padding: 70px 0; }
+}
+@media (max-width: 600px) {
+  .skills-wrapper { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
+  .pf-stats { gap: 20px; }
+}
+
+/* ═══════════════════════════════════════
+   SCROLL PROGRESS
+═══════════════════════════════════════ */
+#scroll-bar {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  z-index: 9999; transition: width .08s linear;
+}
+
+/* ═══════════════════════════════════════
+   LANG BUTTON
+═══════════════════════════════════════ */
+#lang-btn {
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--muted2);
+  padding: 5px 13px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  transition: all .2s;
+  margin-left: 10px;
+}
+#lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ═══════════════════════════════════════
+   FADE-IN ANIMATIONS
+═══════════════════════════════════════ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .65s cubic-bezier(.4,0,.2,1), transform .65s cubic-bezier(.4,0,.2,1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up:nth-child(2) { transition-delay: .08s; }
+.fade-up:nth-child(3) { transition-delay: .16s; }
+.fade-up:nth-child(4) { transition-delay: .24s; }
+.fade-up:nth-child(5) { transition-delay: .32s; }
+.fade-up:nth-child(6) { transition-delay: .40s; }
+
+/* ═══════════════════════════════════════
+   IMPROVED CARD GLOWS
+═══════════════════════════════════════ */
+.skill-cat:hover {
+  border-color: rgba(6,182,212,.45);
+  box-shadow: 0 0 28px rgba(6,182,212,.07);
+  transform: translateY(-3px);
+}
+.proj-card:hover {
+  border-color: rgba(6,182,212,.45);
+  box-shadow: 0 0 28px rgba(6,182,212,.07);
+}
+.edu-card:hover {
+  border-color: rgba(6,182,212,.4);
+  box-shadow: 0 0 24px rgba(6,182,212,.06);
+}
+.mini-card:hover {
+  border-color: rgba(6,182,212,.4);
+  box-shadow: 0 0 20px rgba(6,182,212,.05);
+}
+.exp-card:hover {
+  border-color: rgba(6,182,212,.35);
+  box-shadow: 0 0 24px rgba(6,182,212,.06);
+}
+.ai:hover {
+  border-color: rgba(6,182,212,.3);
+  background: var(--card2);
+  transition: all .2s;
+}
+
+/* ═══════════════════════════════════════
+   HERO CARD FLOAT
+═══════════════════════════════════════ */
+.hero-card {
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ═══════════════════════════════════════
+   IMPROVED HERO GRADIENT
+═══════════════════════════════════════ */
+h1.hero-name {
+  background: linear-gradient(135deg, #ffffff 0%, #a5f3fc 50%, #c4b5fd 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* ═══════════════════════════════════════
+   SECTION TRANSITIONS
+═══════════════════════════════════════ */
+section { scroll-margin-top: 70px; }
+.section-eyebrow { margin-bottom: 10px; }
+
+/* ═══════════════════════════════════════
+   IMPROVED FEATURED PROJECT BORDER
+═══════════════════════════════════════ */
+.project-featured {
+  border-color: rgba(6,182,212,.2);
+  transition: border-color .3s;
+}
+.project-featured:hover { border-color: rgba(6,182,212,.4); }
+
+/* ═══════════════════════════════════════
+   ACTIVE NAV LINK INDICATOR
+═══════════════════════════════════════ */
+.nav-links a.active { color: var(--text); }
+
+
+
+/* ═══════════════════════════════════════
+   HERO DOT PULSE
+═══════════════════════════════════════ */
+.hero-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+  animation: pdot 2.2s ease-in-out infinite;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+@keyframes pdot {
+  0%,100% { box-shadow: 0 0 10px var(--accent); }
+  50% { box-shadow: 0 0 24px var(--accent), 0 0 48px rgba(6,182,212,.3); }
+}
+
+/* ═══════════════════════════════════════
+   SCROLL MOUSE HINT
+═══════════════════════════════════════ */
+.scroll-hint {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px; z-index: 2;
+}
+.scroll-mouse {
+  width: 22px; height: 36px;
+  border: 1.5px solid rgba(6,182,212,.4); border-radius: 11px;
+  display: flex; justify-content: center; padding-top: 5px;
+}
+.scroll-ball {
+  width: 3px; height: 6px;
+  background: var(--accent); border-radius: 2px;
+  animation: sb 1.8s ease-in-out infinite;
+}
+@keyframes sb {
+  0%   { opacity:1; transform: translateY(0); }
+  70%  { opacity:0; transform: translateY(10px); }
+  100% { opacity:0; transform: translateY(0); }
+}
+.scroll-hint-txt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════
+   HERO STATS STRIP (inline below desc)
+═══════════════════════════════════════ */
+.hero-stats-strip {
+  display: flex; gap: 32px; margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.hstat { display: flex; flex-direction: column; }
+.hstat-val {
+  font-family: 'Space Grotesk', sans-serif; font-weight: 800;
+  font-size: 26px; line-height: 1;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hstat-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════
+   PARTICLE CANVAS
+═══════════════════════════════════════ */
+#particle-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+
+/* ═══════════════════════════════════════
+   FLORAL SUBTLE BG
+═══════════════════════════════════════ */
+.floral {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  opacity: .025;
+  background-image:
+    repeating-radial-gradient(ellipse 38px 68px at 40px 40px, rgba(6,182,212,.3) 0, rgba(6,182,212,.3) 1px, transparent 1px, transparent 100%),
+    repeating-radial-gradient(ellipse 68px 38px at 40px 40px, rgba(6,182,212,.3) 0, rgba(6,182,212,.3) 1px, transparent 1px, transparent 100%);
+  background-size: 80px 80px;
+}
+
+/* ═══════════════════════════════════════
+   EXPERIENCE TIMELINE
+═══════════════════════════════════════ */
+.tl-wrap {
+  position: relative;
+  max-width: 860px;
+  margin: 2rem auto 0;
+  padding: 0;
+}
+.tl-line-v {
+  position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(6,182,212,.3) 10%, rgba(6,182,212,.3) 90%, transparent);
+  transform: translateX(-50%);
+}
+.tl-item {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0;
+  margin-bottom: 3rem;
+  align-items: start;
+}
+.tl-item:nth-child(even) .tl-card-wrap { grid-column: 3; }
+.tl-item:nth-child(even) .tl-center { grid-column: 2; grid-row: 1; }
+.tl-item:nth-child(even) .tl-empty { grid-column: 1; grid-row: 1; }
+.tl-item:nth-child(odd) .tl-card-wrap { grid-column: 1; }
+.tl-item:nth-child(odd) .tl-center { grid-column: 2; grid-row: 1; }
+.tl-item:nth-child(odd) .tl-empty { grid-column: 3; grid-row: 1; }
+.tl-center {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px; padding-top: 12px;
+}
+.tl-node {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--card2); border: 1.5px solid rgba(6,182,212,.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 0 16px rgba(6,182,212,.2);
+}
+.tl-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted); text-align: center;
+  line-height: 1.4; white-space: nowrap;
+}
+.tl-card-wrap { padding: 0 8px; }
+.tl-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 24px;
+  transition: transform .3s cubic-bezier(.4,0,.2,1), border-color .3s, box-shadow .3s;
+}
+.tl-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(6,182,212,.35);
+  box-shadow: 0 12px 32px rgba(0,0,0,.4);
+}
+.tl-role { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; color: var(--text); margin-bottom: 4px; }
+.tl-co { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+.tl-ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.tl-ul li { font-size: 12px; color: var(--muted2); line-height: 1.6; padding-left: 14px; position: relative; }
+.tl-ul li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 9px; top: 4px; }
+.tl-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 12px; }
+.tl-tag { background: var(--bg3); border: 1px solid var(--border); color: var(--muted2); font-size: 10px; padding: 2px 8px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+
+@media (max-width: 768px) {
+  .tl-item { grid-template-columns: 40px 1fr; }
+  .tl-line-v { left: 20px; }
+  .tl-item:nth-child(odd) .tl-card-wrap,
+  .tl-item:nth-child(even) .tl-card-wrap { grid-column: 2; }
+  .tl-item:nth-child(odd) .tl-center,
+  .tl-item:nth-child(even) .tl-center { grid-column: 1; }
+  .tl-item:nth-child(odd) .tl-empty,
+  .tl-item:nth-child(even) .tl-empty { display: none; }
+}
+
+/* ═══════════════════════════════════════
+   CARD HOVER — CUBIC BEZIER
+═══════════════════════════════════════ */
+.skill-cat, .proj-card, .edu-card, .mini-card {
+  transition: transform .3s cubic-bezier(.4,0,.2,1), border-color .3s, box-shadow .3s !important;
+  transform: translateZ(0);
+}
+
+/* ═══════════════════════════════════════
+   TYPING CURSOR on role
+═══════════════════════════════════════ */
+.hero-role::after {
+  content: '|';
+  -webkit-text-fill-color: var(--accent);
+  animation: blink .8s step-end infinite;
+  margin-left: 2px;
+  font-weight: 300;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ═══════════════════════════════════════
+   SECTION H IMPROVEMENTS
+═══════════════════════════════════════ */
+.sh-accent { color: var(--accent); }
+
+
+/* ═══════════════════════════════════════
+   PRO ANIMATIONS — CYAN/VIOLET THEME
+═══════════════════════════════════════ */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.sh-accent {
+  background: linear-gradient(90deg, var(--accent), #a78bfa, var(--accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+.hstat-val {
+  background: linear-gradient(90deg, var(--accent), #a78bfa, var(--accent)) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: shimmer 3s linear infinite !important;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 26px; line-height: 1; display: block;
+}
+.project-featured { position: relative; }
+.project-featured::before {
+  content: ''; position: absolute; inset: -1px; border-radius: 21px;
+  background: linear-gradient(135deg, rgba(6,182,212,.2), rgba(124,58,237,.2), transparent);
+  z-index: -1; animation: glow-ring 4s ease-in-out infinite;
+}
+@keyframes glow-ring { 0%,100% { opacity:.5; } 50% { opacity:1; } }
+.tl-node { animation: node-pulse 3s ease-in-out infinite; }
+@keyframes node-pulse {
+  0%,100% { box-shadow: 0 0 14px rgba(6,182,212,.2); }
+  50% { box-shadow: 0 0 26px rgba(6,182,212,.5), 0 0 44px rgba(124,58,237,.2); }
+}
+
+
+/* ═══════════════════════════════════════
+   MOBILE HAMBURGER NAV
+═══════════════════════════════════════ */
+#hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: none; padding: 4px;
+}
+#hamburger span { display: block; width: 22px; height: 2px; background: var(--muted2); border-radius: 2px; transition: all .3s; }
+#mobile-menu {
+  display: none; position: fixed; top: 60px; left: 0; right: 0;
+  background: rgba(5,10,12,.97); border-bottom: 1px solid var(--border);
+  padding: 20px 28px; flex-direction: column; gap: 16px;
+  backdrop-filter: blur(16px); z-index: 199;
+}
+#mobile-menu.open { display: flex; }
+#mobile-menu a { color: var(--muted2); text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px 0; border-bottom: 1px solid var(--border); }
+#mobile-menu a:last-child { border-bottom: none; color: var(--green); }
+@media (max-width: 900px) {
+  .nav-links { display: none !important; }
+  #hamburger { display: flex; }
+}
+
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+<div class="floral"></div>
+<div id="scroll-bar"></div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="nav-logo">PK.</div>
+  <ul class="nav-links">
+    <li><a href="#about" id="nav-about">À propos</a></li>
+    <li><a href="#skills" id="nav-skills">Compétences</a></li>
+    <li><a href="#projects" id="nav-projects">Projets</a></li>
+    <li><a href="#experience" id="nav-exp">Expériences</a></li>
+    <li><a href="#formation" id="nav-edu">Formation</a></li>
+    <li><a href="#contact" id="nav-contact">Contact</a></li>
+  </ul>
+  <a href="mailto:paurtheiv.laxman.fr@gmail.com" class="nav-cta" id="nav-cta">Me contacter</a>
+  <a href="https://github.com/Paurtheiv" target="_blank" style="color:var(--muted2);font-size:13px;text-decoration:none;padding:5px 10px;border:1px solid var(--border2);border-radius:8px;transition:all .2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--muted2)'">⬛ GitHub</a>
+  <button id="lang-btn" onclick="toggleLang()" aria-label="Switch language">EN</button>
+  <button id="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div id="mobile-menu">
+  <a href="#about" onclick="document.getElementById('mobile-menu').classList.remove('open')">À propos</a>
+  <a href="#skills" onclick="document.getElementById('mobile-menu').classList.remove('open')">Compétences</a>
+  <a href="#projects" onclick="document.getElementById('mobile-menu').classList.remove('open')">Projets</a>
+  <a href="#experience" onclick="document.getElementById('mobile-menu').classList.remove('open')">Expériences</a>
+  <a href="#formation" onclick="document.getElementById('mobile-menu').classList.remove('open')">Formation</a>
+  <a href="#contact" onclick="document.getElementById('mobile-menu').classList.remove('open')">Contact</a>
+  <a href="CV_Paurtheiv_Krishna_Laxman.pdf" download>⬇ Télécharger mon CV</a>
+</div>
+
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <canvas id="particle-canvas"></canvas>
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-dot"></div>
+        <div class="hero-greeting" id="hero-greeting-div"><span class="hg-line"></span><span class="hg-text" id="hero-greeting">Bonjour, je suis</span></div>
+        <h1 class="hero-name">Paurtheiv<br>Krishna Laxman</h1>
+        <div class="hero-role" id="hero-role">Étudiant Ingénieur · IoT · Cyber · Réseaux</div>
+        <p class="hero-desc" id="hero-desc">
+          Passionné par l'informatique, les réseaux et la cybersécurité, je suis étudiant en
+          <strong>BTS CIEL A</strong> et admis en cycle ingénieur à l'<strong>ESEO Paris-Vélizy</strong>
+          (rentrée 2026). Je conçois des systèmes IoT, développe des APIs et configure des
+          infrastructures réseau — avec une vraie expérience terrain acquise en stage et sur
+          des projets concrets.
+        </p>
+        <div class="hero-badges">
+          <span class="hbadge g" id="badge-eseo">✓ Admis ESEO Paris 2026</span>
+          <span class="hbadge b" id="badge-bts">BTS CIEL A · Argenteuil</span>
+          <span class="hbadge p" id="badge-iot">IoT · Cyber · Dev</span>
+          <span class="hbadge o" id="badge-alt">Alternance dès sept. 2026</span>
+        </div>
+        <div class="hero-stats-strip">
+          <div class="hstat"><span class="hstat-val">2</span><span class="hstat-lbl">ESP32 déployés</span></div>
+          <div class="hstat"><span class="hstat-val">3</span><span class="hstat-lbl">Projets GitHub</span></div>
+          <div class="hstat"><span class="hstat-val">1an</span><span class="hstat-lbl">Expérience IT</span></div>
+          <div class="hstat"><span class="hstat-val">7+</span><span class="hstat-lbl">Langages</span></div>
+        </div>
+        <div class="hero-btns">
+          <a href="#projects" class="btn btn-p" id="btn-projects">Voir mes projets →</a>
+          <a href="#contact" class="btn btn-o" id="btn-contact-hero">Contact</a>
+          <a href="CV_Paurtheiv_Krishna_Laxman.pdf" download class="btn btn-o" style="border-color:rgba(34,197,94,.5);color:var(--green);">⬇ CV</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hc-avatar">🧑‍💻</div>
+        <div class="hc-name">Paurtheiv K.L.</div>
+        <div class="hc-sub" id="hc-sub">BTS CIEL A · Session 2026</div>
+        <div class="hc-stats">
+          <div class="hc-stat">
+            <span class="n">5</span>
+            <span class="l">ESP32 / Raspberry Pi déployés</span>
+          </div>
+          <div class="hc-stat">
+            <span class="n">V5</span>
+            <span class="l">Versions du projet Smart Gate</span>
+          </div>
+          <div class="hc-stat">
+            <span class="n">9</span>
+            <span class="l">Tables MySQL conçues</span>
+          </div>
+          <div class="hc-stat">
+            <span class="n">7+</span>
+            <span class="l">Langages & frameworks maîtrisés</span>
+          </div>
+        </div>
+        <div class="hc-location" id="hc-location">Argenteuil, 95 — Île-de-France</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-mouse"><div class="scroll-ball"></div></div><span class="scroll-hint-txt">Scroll</span></div>
+</section>
+
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about">
+  <div class="container">
+    <div class="section-eyebrow" id="about-eyebrow">Présentation</div>
+    <h2 class="section-h" id="about-h">À propos de moi</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Je suis <strong>Paurtheiv Krishna Laxman</strong>, étudiant en BTS CIEL A
+          (Cybersécurité, Informatique et Électronique des Réseaux) au Lycée Jean Jaurès
+          d'Argenteuil, admis en <strong>cycle ingénieur à l'ESEO Paris-Vélizy</strong>
+          pour la rentrée 2026. Je recherche une alternance de 3 ans en systèmes, réseaux
+          ou cybersécurité (2 semaines entreprise / 2 semaines école).
+        </p>
+        <p>
+          Ce qui me définit : une curiosité technique large. Je programme en
+          <strong>Python, C++, PHP et JavaScript</strong>, je configure des réseaux
+          (TCP/IP, VLAN, DNS/DHCP), je travaille sur des microcontrôleurs
+          <strong>ESP32 et Raspberry Pi</strong>, et je construis des APIs REST.
+          J'aime comprendre comment les systèmes fonctionnent de bout en bout —
+          du composant électronique à l'interface web.
+        </p>
+        <p>
+          Mon <strong>stage chez Bilfinger Peters Engineering</strong> (support IT N1/N2,
+          ticketing, déploiement de postes, Active Directory) m'a apporté une première
+          expérience professionnelle concrète. Autonome, rigoureux et à l'aise en équipe,
+          je m'adapte rapidement à de nouveaux environnements techniques.
+        </p>
+      </div>
+      <div class="about-infos">
+        <div class="ai">
+          <div class="ai-icon">🎓</div>
+          <div>
+            <div class="ai-lbl">Formation actuelle</div>
+            <div class="ai-val">BTS CIEL A — Lycée Jean Jaurès, Argenteuil</div>
+          </div>
+        </div>
+        <div class="ai">
+          <div class="ai-icon">🚀</div>
+          <div>
+            <div class="ai-lbl">Admis en (sept. 2026)</div>
+            <div class="ai-val">Cycle ingénieur ESEO Paris-Vélizy · Cybersécurité & Réseaux</div>
+          </div>
+        </div>
+        <div class="ai">
+          <div class="ai-icon">💼</div>
+          <div>
+            <div class="ai-lbl">Recherche</div>
+            <div class="ai-val">Alternance 3 ans · Systèmes / Réseaux / Cybersécurité · dès sept. 2026</div>
+          </div>
+        </div>
+        <div class="ai">
+          <div class="ai-icon">📧</div>
+          <div>
+            <div class="ai-lbl">Email</div>
+            <div class="ai-val"><a href="mailto:paurtheiv.laxman.fr@gmail.com">paurtheiv.laxman.fr@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="ai">
+          <div class="ai-icon">📱</div>
+          <div>
+            <div class="ai-lbl">Téléphone</div>
+            <div class="ai-val"><a href="tel:+33652499368">+33 6 52 49 93 68</a></div>
+          </div>
+        </div>
+        <div class="ai">
+          <div class="ai-icon">🌐</div>
+          <div>
+            <div class="ai-lbl">LinkedIn</div>
+            <div class="ai-val"><a href="https://linkedin.com/in/paurtheiv-krishna-laxman080068345" target="_blank">linkedin.com/in/paurtheiv-krishna-laxman</a></div>
+          </div>
+        </div>
+        <div class="ai">
+          <div class="ai-icon">🗣️</div>
+          <div>
+            <div class="ai-lbl">Langues</div>
+            <div class="ai-val">Français (courant) · Anglais (courant) · Tamoul (maternelle)</div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="proj-card fade-up">
+        <div class="proj-emoji">🔐</div>
+        <div class="proj-year">Atelier JPO · BTS CIEL A · Janvier 2026</div>
+        <h3>Escape Game — Coffre Caméra</h3>
+        <p>Jeu d'évasion web créé pour la JPO du lycée. Déchiffrement César, accès à une vraie caméra IP HIKVISION sur le réseau interne, système de jetons-récompenses. Faux documents leurres inclus pour corser l'énigme.</p>
+        <div class="proj-techs">
+          <span class="pt">HTML/JS</span><span class="pt">Bootstrap</span><span class="pt">Chiffrement César</span><span class="pt">Caméra IP</span>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
+          <a href="https://github.com/Paurtheiv/escape-game" target="_blank" style="font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">⬛ GitHub →</a>
+          <a href="https://paurtheiv.github.io/escape-game/" target="_blank" style="font-size:12px;color:var(--green);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">▶ Démo →</a>
+        </div>
+      </div>
+
+  </div>
+  </div>
+</section>
+
+
+<!-- ══════════ COMPÉTENCES ══════════ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-eyebrow" id="skills-eyebrow">Expertise</div>
+    <h2 class="section-h" id="skills-h">Compétences techniques</h2>
+    <div class="skills-wrapper">
+
+      <div class="skill-cat fade-up">
+        <h3>⌨️ Langages</h3>
+        <div class="skill-pills">
+          <span class="sp">Python 3</span>
+          <span class="sp">C / C++</span>
+          <span class="sp">PHP</span>
+          <span class="sp">JavaScript</span>
+          <span class="sp">SQL</span>
+          <span class="sp">HTML / CSS</span>
+          <span class="sp">Arduino (.ino)</span>
+        </div>
+      </div>
+
+      <div class="skill-cat fade-up">
+        <h3>🌐 Web & Backend</h3>
+        <div class="skill-pills">
+          <span class="sp">Flask (Python)</span>
+          <span class="sp">Apache2</span>
+          <span class="sp">PHP / PDO</span>
+          <span class="sp">Bootstrap</span>
+          <span class="sp">REST API</span>
+          <span class="sp">JSON / HTTP</span>
+          <span class="sp">Tkinter</span>
+        </div>
+      </div>
+
+      <div class="skill-cat fade-up">
+        <h3>🔌 Embarqué & Hardware</h3>
+        <div class="skill-pills">
+          <span class="sp">ESP32 (WiFi)</span>
+          <span class="sp">RFID MFRC522</span>
+          <span class="sp">Adafruit FPS</span>
+          <span class="sp">WS2812B NeoPixel</span>
+          <span class="sp">Buzzer KY-006</span>
+          <span class="sp">Moteur DC (AFMotor)</span>
+          <span class="sp">SPI / UART</span>
+          <span class="sp">Raspberry Pi</span>
+        </div>
+      </div>
+
+      <div class="skill-cat fade-up">
+        <h3>🗄️ Bases de données</h3>
+        <div class="skill-pills">
+          <span class="sp">MySQL</span>
+          <span class="sp">MariaDB</span>
+          <span class="sp">SQLite</span>
+          <span class="sp">Vues SQL</span>
+          <span class="sp">Index & Optimisation</span>
+          <span class="sp">phpMyAdmin</span>
+          <span class="sp">Migrations SQL</span>
+        </div>
+      </div>
+
+      <div class="skill-cat fade-up">
+        <h3>🔒 Sécurité</h3>
+        <div class="skill-pills">
+          <span class="sp">AES-256</span>
+          <span class="sp">RGPD</span>
+          <span class="sp">API Key Auth</span>
+          <span class="sp">Sessions PHP</span>
+          <span class="sp">Anti-bruteforce</span>
+          <span class="sp">HTTPS</span>
+          <span class="sp">Chiffrement symétrique</span>
+        </div>
+      </div>
+
+      <div class="skill-cat fade-up">
+        <h3>🌍 Réseaux & Infra</h3>
+        <div class="skill-pills">
+          <span class="sp">TCP/IP</span>
+          <span class="sp">WiFi / VLAN</span>
+          <span class="sp">SSH</span>
+          <span class="sp">DHCP / DNS</span>
+          <span class="sp">Cisco Packet Tracer</span>
+          <span class="sp">Wireshark</span>
+          <span class="sp">Linux (Raspbian)</span>
+        </div>
+      </div>
+
+      <div class="skill-cat fade-up">
+        <h3>🛠️ Outils</h3>
+        <div class="skill-pills">
+          <span class="sp">VS Code</span>
+          <span class="sp">Arduino IDE</span>
+          <span class="sp">Git</span>
+          <span class="sp">Postman</span>
+          <span class="sp">PIL / Pillow</span>
+          <span class="sp">CSV</span>
+          <span class="sp">Gantt / SysML</span>
+        </div>
+      </div>
+
+      <div class="skill-cat fade-up">
+        <h3>💡 Soft Skills</h3>
+        <div class="skill-pills">
+          <span class="sp">Support IT N1/N2</span>
+          <span class="sp">Ticketing</span>
+          <span class="sp">Travail en équipe</span>
+          <span class="sp">Autonomie</span>
+          <span class="sp">Rédaction technique</span>
+          <span class="sp">Déploiement postes</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ PROJETS ══════════ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-eyebrow" id="proj-eyebrow">Réalisations</div>
+    <h2 class="section-h" id="proj-h">Mes projets</h2>
+
+    <!-- PROJET PRINCIPAL -->
+    <div class="project-featured">
+      <div class="pf-header">
+        <div>
+          <div class="pf-badge" id="pf-badge">🏆 PROJET PRINCIPAL — E6 BTS CIEL</div>
+          <div class="pf-title">⬛ Smart Gate Jaurès</div>
+          <div class="pf-subtitle">Lycée Jean Jaurès · Argenteuil · Projet E6-IR · 5 étudiants · Session 2026</div>
+        </div>
+        <div class="pf-meta">
+          <div class="pf-tag">Janv. → Juin 2026</div>
+          <div class="pf-tag">Zone 1 : Entrée principale</div>
+          <div class="pf-tag">Version finale V5</div>
+        </div>
+      </div>
+
+      <p class="pf-desc" id="pf-desc">
+        Système IoT complet de contrôle d'accès biométrique déployé pour le Lycée Jean Jaurès d'Argenteuil.
+        Identification des élèves par badge RFID (MFRC522) ou empreinte digitale, validation/refus en temps réel
+        avec feedback LED WS2812B + buzzer, chiffrement AES-256 des empreintes, gestion RGPD, dashboard web PHP
+        temps réel et base de données MySQL centralisée pour 5 zones du lycée.
+        <br><br>
+        <strong>Mon rôle :</strong> responsable de la Zone 1 (entrée principale) — conception et programmation
+        des deux firmware ESP32 (CPE + Porte), API REST Flask (port 5000), interface web PHP complète,
+        schéma BDD MySQL, et coordination de la migration/unification des bases des 5 étudiants.
+      </p>
+
+      <div class="pf-stats">
+        <div class="pf-stat"><span class="n">2</span><span class="l">ESP32 physiques<br>(CPE + Porte)</span></div>
+        <div class="pf-stat"><span class="n">5</span><span class="l">Versions itérées<br>V1 → V5</span></div>
+        <div class="pf-stat"><span class="n">9</span><span class="l">Tables MySQL<br>+ vues SQL</span></div>
+        <div class="pf-stat"><span class="n">AES</span><span class="l">256 bits<br>empreintes chiffrées</span></div>
+        <div class="pf-stat"><span class="n">5</span><span class="l">Zones lycée<br>unifiées</span></div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <a href="https://github.com/Paurtheiv/smart-gate-jaures" target="_blank" class="btn btn-o" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:9px 20px;">
+          <span>⬛</span> Voir le code sur GitHub
+        </a>
+      </div>
+
+      <div class="pf-techs">
+        <span class="tech">C++ Arduino</span>
+        <span class="tech">Python Flask</span>
+        <span class="tech">PHP / Apache</span>
+        <span class="tech">MySQL / MariaDB</span>
+        <span class="tech purple">AES-256</span>
+        <span class="tech purple">Adafruit FPS</span>
+        <span class="tech">ESP32 WiFi</span>
+        <span class="tech green">RFID MFRC522</span>
+        <span class="tech green">WS2812B NeoPixel</span>
+        <span class="tech orange">Raspberry Pi</span>
+        <span class="tech orange">REST API</span>
+        <span class="tech">RGPD</span>
+        <span class="tech">Linux Raspbian</span>
+      </div>
+    </div>
+
+    <!-- PROJETS SECONDAIRES -->
+    <div class="projects-grid">
+
+      <div class="proj-card fade-up">
+        <div class="proj-emoji">🥎</div>
+        <div class="proj-year">BTS CIEL A · 2ème année · 2026</div>
+        <h3>Tableau de Score Softball</h3>
+        <p>Interface web temps réel pour arbitres de softball. Backend PHP avec authentification par session, API JSON pour sauvegarder les matchs en MySQL. Affichage spectateurs synchronisé en temps réel via polling JS.</p>
+        <div class="proj-techs">
+          <span class="pt">PHP</span><span class="pt">MySQL</span><span class="pt">JavaScript</span><span class="pt">Bootstrap</span>
+        </div>
+        <a href="https://github.com/Paurtheiv/softball-scoreboard" target="_blank" style="margin-top:12px;font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">⬛ GitHub →</a>
+      </div>
+
+      <div class="proj-card fade-up">
+        <div class="proj-emoji">📄</div>
+        <div class="proj-year">Stage Bilfinger · 2025</div>
+        <h3>Comparateur de PDF</h3>
+        <p>Outil Python/Streamlit développé en autonomie lors de mon stage chez Bilfinger Peters Engineering. Comparaison pixel par pixel de PDFs techniques, diff textuel page par page, génération automatique d'un rapport PDF annoté avec zones surlignées.</p>
+        <div class="proj-techs">
+          <span class="pt">Python</span><span class="pt">Streamlit</span><span class="pt">pdf2image</span><span class="pt">ReportLab</span><span class="pt">Pillow</span><span class="pt">NumPy</span>
+        </div>
+        <a href="https://github.com/Paurtheiv/pdf-comparateur-stage" target="_blank" style="margin-top:12px;font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">⬛ GitHub →</a>
+      </div>
+
+      <div class="proj-card fade-up">
+        <div class="proj-emoji">🎮</div>
+        <div class="proj-year">JPO Lycée Jean Jaurès · Janvier 2026</div>
+        <h3>Jeu de Visite JPO — Lycée Jean Jaurès</h3>
+        <p>Jeu de visite guidée web pour la JPO du lycée. Choix du guide étudiant, QCM adaptatif (collégien / lycéen / étudiant), visite virtuelle des labos BTS CIEL. Voix clonées par IA (TopMedia), synchronisées scène par scène. HTML/JS vanilla — machine à états, Web Audio API.</p>
+        <div class="proj-techs">
+          <span class="pt">HTML/JS</span><span class="pt">Web Audio API</span><span class="pt">IA vocale</span><span class="pt">Netlify Forms</span>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
+          <a href="https://github.com/Paurtheiv/jeu-jpo-ljj" target="_blank" style="font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">⬛ GitHub →</a>
+          <a href="https://paurtheiv.github.io/jeu-jpo-ljj/" target="_blank" style="font-size:12px;color:var(--green);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">▶ Démo →</a>
+        </div>
+      </div>
+
+  </div>
+  </div>
+</section>
+
+
+<!-- ══════════ EXPÉRIENCES ══════════ -->
+<section id="experience">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:8px;">
+      <div class="section-eyebrow" style="justify-content:center;" id="exp-eyebrow">Parcours Pro</div>
+      <h2 class="section-h" style="margin-bottom:0;" id="exp-h">Expériences <em class="sh-accent">professionnelles</em></h2>
+    </div>
+    <div class="tl-wrap">
+      <div class="tl-line-v"></div>
+
+      <div class="tl-item fade-up">
+        <div class="tl-card-wrap">
+          <div class="tl-card">
+            <div class="tl-role">Stagiaire Support Informatique — IT Support N1/N2</div>
+            <div class="tl-co">Bilfinger Peters Engineering · Montrouge</div>
+            <ul class="tl-ul">
+              <li>Support utilisateur N1/N2 : diagnostics, pannes matérielles et logicielles</li>
+              <li>Gestion et suivi des tickets via outil de support interne</li>
+              <li>Déploiement de postes, configuration réseau, Active Directory</li>
+              <li>Diagnostic réseau : connectivité, IP, pare-feu</li>
+            </ul>
+            <div class="tl-tags">
+              <span class="tl-tag">Support IT</span><span class="tl-tag">Ticketing</span><span class="tl-tag">Active Directory</span><span class="tl-tag">TCP/IP</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-center">
+          <div class="tl-node">💼</div>
+          <div class="tl-date">2024<br>–<br>2025</div>
+        </div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <div class="tl-item fade-up">
+        <div class="tl-empty"></div>
+        <div class="tl-center">
+          <div class="tl-node">🏭</div>
+          <div class="tl-date">2023</div>
+        </div>
+        <div class="tl-card-wrap">
+          <div class="tl-card">
+            <div class="tl-role">Stagiaire — Fabrication industrielle</div>
+            <div class="tl-co">Néon France</div>
+            <ul class="tl-ul">
+              <li>Fabrication de LEDs et lampes — processus techniques</li>
+              <li>Amélioration des procédés de production et contrôle qualité</li>
+            </ul>
+            <div class="tl-tags">
+              <span class="tl-tag">Production</span><span class="tl-tag">Contrôle qualité</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-up">
+        <div class="tl-card-wrap">
+          <div class="tl-card">
+            <div class="tl-role">Job d'été — Production</div>
+            <div class="tl-co">Hypsiyple · Argenteuil</div>
+            <ul class="tl-ul">
+              <li>Production de bougies selon normes qualité et cadences</li>
+              <li>Gestion des flux de production</li>
+            </ul>
+            <div class="tl-tags">
+              <span class="tl-tag">Production</span><span class="tl-tag">Rigueur</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-center">
+          <div class="tl-node">⚡</div>
+          <div class="tl-date">2022<br>–<br>2023</div>
+        </div>
+        <div class="tl-empty"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FORMATION ══════════ -->
+<section id="formation">
+  <div class="container">
+    <div class="section-eyebrow" id="edu-eyebrow">Éducation</div>
+    <h2 class="section-h" id="edu-h">Parcours académique</h2>
+    <div class="edu-grid">
+
+      <div class="edu-card current fade-up">
+        <div class="edu-year" id="edu1-year">2026 – 2029 (à venir)</div>
+        <h3>Cycle Ingénieur</h3>
+        <div class="edu-school">ESEO Paris-Vélizy</div>
+        <p>Spécialité Informatique, Systèmes, Réseaux & Cybersécurité. Programme en apprentissage (alternance 2 sem. entreprise / 2 sem. école).</p>
+        <div class="edu-badge" id="edu1-badge">✓ Admis · Session 2026</div>
+      </div>
+
+      <div class="edu-card fade-up">
+        <div class="edu-year" id="edu2-year">2024 – 2026</div>
+        <h3>BTS CIEL A — 2ème année</h3>
+        <div class="edu-school">Lycée Jean Jaurès · Argenteuil</div>
+        <p>Cybersécurité, Informatique et Électronique des Réseaux. Option IR (Informatique et Réseaux). Projet E6 : Smart Gate Jaurès.</p>
+      </div>
+
+      <div class="edu-card fade-up">
+        <div class="edu-year" id="edu3-year">2022 – 2024</div>
+        <h3>Baccalauréat Microtechniques</h3>
+        <div class="edu-school">Lycée Jean Jaurès · Argenteuil</div>
+        <p>Formation en mécanique de précision, électronique et systèmes automatisés. Bases en fabrication industrielle et technologie.</p>
+      </div>
+
+    </div>
+
+    <!-- Mini-projets scolaires notables -->
+    <div style="margin-top: 48px;">
+      <div class="section-eyebrow" style="margin-bottom:12px;" id="mini-eyebrow">Travaux scolaires notables</div>
+      <div class="mini-grid">
+
+        <div class="mini-card fade-up">
+          <div class="mini-icon">🔌</div>
+          <div class="mini-ctx">TP Réseaux · BTS 1ère année</div>
+          <h4>Infrastructure réseau Cisco</h4>
+          <p>Configuration de réseaux LAN/WAN, adressage IP, VLAN, protocoles TCP/IP, DNS/DHCP. Tests et diagnostics avec Wireshark.</p>
+          <div class="mini-pills"><span class="mini-pill">Cisco PT</span><span class="mini-pill">TCP/IP</span><span class="mini-pill">Wireshark</span></div>
+        </div>
+
+        <div class="mini-card fade-up">
+          <div class="mini-icon">💻</div>
+          <div class="mini-ctx">TP Architecture · BTS 1ère année</div>
+          <h4>Simulateur CPU Von Neumann</h4>
+          <p>Simulation du cycle fetch-decode-execute, programmation assembleur, identification des blocs fonctionnels (UC, RAM, bus).</p>
+          <div class="mini-pills"><span class="mini-pill">Assembleur</span><span class="mini-pill">Architecture CPU</span></div>
+        </div>
+
+        <div class="mini-card fade-up">
+          <div class="mini-icon">🔍</div>
+          <div class="mini-ctx">TP Cybersécurité · BTS 2ème année</div>
+          <h4>Scan réseau & analyse Wireshark</h4>
+          <p>Cartographie d'un réseau local avec Angry IP Scanner et Nmap, capture et analyse de trames TCP/UDP sous Wireshark, identification de flux suspects.</p>
+          <div class="mini-pills"><span class="mini-pill">Wireshark</span><span class="mini-pill">Nmap</span><span class="mini-pill">TCP/IP</span></div>
+        </div>
+
+        <div class="mini-card fade-up">
+          <div class="mini-icon">📋</div>
+          <div class="mini-ctx">Cahier des charges · BTS 2ème année</div>
+          <h4>SAS Biométrique Laboratoire</h4>
+          <p>Rédaction d'un cahier des charges complet pour un SAS d'accès biométrique : diagramme UML, comparatif composants, plan de test, chiffrage.</p>
+          <div class="mini-pills"><span class="mini-pill">SysML</span><span class="mini-pill">Biométrie</span><span class="mini-pill">Rédaction</span></div>
+        </div>
+
+        <div class="mini-card fade-up">
+          <div class="mini-icon">📡</div>
+          <div class="mini-ctx">Co-animation Physique · BTS 1ère année</div>
+          <h4>Présentation pédagogique Arduino</h4>
+          <p>Présentation réalisée devant la classe sur l'écosystème Arduino : architecture, GPIO, programmation, démonstrations pratiques de montages.</p>
+          <div class="mini-pills"><span class="mini-pill">Arduino</span><span class="mini-pill">Pédagogie</span><span class="mini-pill">Présentation</span></div>
+        </div>
+
+        <div class="mini-card fade-up">
+          <div class="mini-icon">🏭</div>
+          <div class="mini-ctx">BAC Microtechniques · 2024</div>
+          <h4>Chef d'œuvre — Microtechniques</h4>
+          <p>Projet de fin de Bac Pro sur les procédés de fabrication mécanique de précision. Présentation orale devant jury avec support de diaporama.</p>
+          <div class="mini-pills"><span class="mini-pill">Fabrication</span><span class="mini-pill">Présentation orale</span><span class="mini-pill">PowerPoint</span></div>
+        </div>
+
+
+        <div class="mini-card fade-up">
+          <div class="mini-icon">✂️</div>
+          <div class="mini-ctx">Petit projet personnel · 2026</div>
+          <h4>File d'attente Salon de Coiffure</h4>
+          <p>Système de file d'attente temps réel pour salon de coiffure. Écran réception (saisie client + choix coiffeur) et écran salle d'attente avec compte à rebours par coiffeur. Communication via localStorage, refresh toutes les 5s.</p>
+          <div class="mini-pills"><span class="mini-pill">HTML/JS</span><span class="mini-pill">localStorage</span><span class="mini-pill">Temps réel</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+
+      <!-- LEFT: Form -->
+      <div class="contact-left">
+        <div class="section-eyebrow" id="contact-eyebrow">Disponible dès sept. 2026</div>
+        <h2 class="section-h" style="margin-bottom:8px;" id="contact-h">Travaillons ensemble 🤝</h2>
+        <p id="contact-p" style="color:var(--muted2);font-size:15px;line-height:1.7;margin-bottom:0;max-width:420px;">
+          Futur ingénieur en alternance à l'ESEO Paris-Vélizy (rentrée sept. 2026), je recherche
+          une entreprise dans les domaines des systèmes, réseaux ou cybersécurité.
+          N'hésitez pas à me contacter !
+        </p>
+
+        <form id="contact-form" class="contact-form-wrap"
+              action="https://formsubmit.co/paurtheiv.laxman.fr@gmail.com" method="POST">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://paurtheiv.github.io/#contact">
+          <input type="hidden" name="_autoresponse" value="Merci pour votre message ! Je vous répondrai rapidement. / Thank you for your message! I'll get back to you soon.">
+
+          <div class="form-group">
+            <label class="form-lbl" id="fl-name">Votre nom</label>
+            <input class="form-inp" type="text" name="name" placeholder="Comment vous appelez-vous ?" required>
+          </div>
+          <div class="form-group">
+            <label class="form-lbl" id="fl-email">Votre email</label>
+            <input class="form-inp" type="email" name="email" placeholder="votre@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-lbl" id="fl-msg">Votre message</label>
+            <textarea class="form-ta" name="message" placeholder="Votre message..." required></textarea>
+          </div>
+          <button type="submit" class="btn-send" id="btn-send">
+            <span>📨</span> <span id="btn-send-txt">Envoyer le message</span>
+          </button>
+          <div class="form-success" id="form-success">✓ Message envoyé ! Je vous réponds rapidement.</div>
+        </form>
+      </div>
+
+      <!-- RIGHT: Info cards -->
+      <div class="contact-right">
+        <div class="contact-right-visual">
+          <div class="crv-title">Contactez-moi</div>
+
+          <div class="crv-avail" id="crv-avail">
+            Disponible pour alternance — sept. 2026
+          </div>
+
+          <div class="crv-info">
+            <div class="ci-icon">📧</div>
+            <div>
+              <div class="ci-lbl">Email</div>
+              <div class="ci-val"><a href="mailto:paurtheiv.laxman.fr@gmail.com">paurtheiv.laxman.fr@gmail.com</a></div>
+            </div>
+          </div>
+
+          <div class="crv-info">
+            <div class="ci-icon">📱</div>
+            <div>
+              <div class="ci-lbl">Téléphone</div>
+              <div class="ci-val"><a href="tel:+33652499368">+33 6 52 49 93 68</a></div>
+            </div>
+          </div>
+
+          <div class="crv-info">
+            <div class="ci-icon">🔗</div>
+            <div>
+              <div class="ci-lbl">LinkedIn</div>
+              <div class="ci-val"><a href="https://linkedin.com/in/paurtheiv-krishna-laxman080068345" target="_blank">linkedin.com/in/paurtheiv</a></div>
+            </div>
+          </div>
+
+          <div class="crv-info">
+            <div class="ci-icon">📍</div>
+            <div>
+              <div class="ci-lbl">Localisation</div>
+              <div class="ci-val">Argenteuil, 95 — Île-de-France</div>
+            </div>
+          </div>
+
+          <div class="crv-info">
+            <div class="ci-icon">🎓</div>
+            <div>
+              <div class="ci-lbl">Alternance recherchée</div>
+              <div class="ci-val">ESEO Paris-Vélizy · 3 ans · Systèmes / Réseaux / Cyber</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div id="footer-l">© 2026 <strong>Paurtheiv Krishna Laxman</strong> · BTS CIEL A · Lycée Jean Jaurès · Argenteuil</div>
+  <div id="footer-r">Projet <a href="#projects">Smart Gate Jaurès</a> — Système IoT de contrôle d'accès biométrique</div>
+</footer>
+
+
+<script>
+
+// ══════════════════════════════════════════════════════
+//  CUSTOM CURSOR
+// ══════════════════════════════════════════════════════
+(function() {
+  var cur = document.getElementById('cur');
+  var ring = document.getElementById('cur-ring');
+  if (!cur || !ring) return;
+  var mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; });
+  cur.style.transform = 'translate(-50%,-50%)';
+  ring.style.transform = 'translate(-50%,-50%)';
+  function animCursor() {
+    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+  document.querySelectorAll('a,button,.btn,.btn-p,.btn-o,.proj-card,.skill-cat,.edu-card').forEach(function(el) {
+    el.addEventListener('mouseenter', function() {
+      cur.style.width = '18px'; cur.style.height = '18px';
+      cur.style.opacity = '.6';
+      ring.style.width = '44px'; ring.style.height = '44px';
+    });
+    el.addEventListener('mouseleave', function() {
+      cur.style.width = '10px'; cur.style.height = '10px';
+      cur.style.opacity = '1';
+      ring.style.width = '32px'; ring.style.height = '32px';
+    });
+  });
+})();
+
+// ══════════════════════════════════════════════════════
+//  PARTICLE CANVAS (HERO)
+// ══════════════════════════════════════════════════════
+(function() {
+  var canvas = document.getElementById('particle-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var N = 55;
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (var i = 0; i < N; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.5,
+      vx: (Math.random() - .5) * .4,
+      vy: (Math.random() - .5) * .4,
+      alpha: Math.random() * .5 + .1
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(6,182,212,' + p.alpha + ')';
+      ctx.fill();
+
+      // Connect nearby
+      for (var j = i + 1; j < particles.length; j++) {
+        var q = particles[j];
+        var dx = p.x - q.x, dy = p.y - q.y;
+        var dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(6,182,212,' + (.12 * (1 - dist/120)) + ')';
+          ctx.lineWidth = .5;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+window.addEventListener('scroll', function() {
+  var el = document.getElementById('scroll-bar');
+  var pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+  el.style.width = Math.min(pct, 100) + '%';
+  var sections = ['about','skills','projects','experience','formation','contact'];
+  sections.forEach(function(id) {
+    var sec = document.getElementById(id);
+    var link = document.querySelector('a[href="#' + id + '"]');
+    if (!sec || !link) return;
+    var top = sec.getBoundingClientRect().top;
+    if (top <= 80 && top > -sec.offsetHeight + 80) link.classList.add('active');
+    else link.classList.remove('active');
+  });
+});
+
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+
+var T = {
+  fr: {
+    "nav-about": "À propos",
+    "nav-skills": "Compétences",
+    "nav-projects": "Projets",
+    "nav-exp": "Expériences",
+    "nav-edu": "Formation",
+    "nav-contact": "Contact",
+    "nav-cta": "Me contacter",
+    "lang-btn": "EN",
+    "hero-greeting": "Bonjour, je suis",
+    "hero-role": "Développeur IoT · Systèmes & Réseaux",
+    "hero-desc": "Étudiant en <strong>BTS CIEL A</strong> au Lycée Jean Jaurès d&#39;Argenteuil, admis en cycle ingénieur à l&#39;<strong>ESEO Paris-Vélizy</strong> (rentrée 2026). Passionné par les systèmes embarqués, les réseaux et la cybersécurité — j&#39;ai conçu et déployé <strong>Smart Gate Jaurès</strong>, un système IoT complet de contrôle d&#39;accès biométrique pour un lycée réel.",
+    "badge-eseo": "✓ Admis ESEO Paris 2026",
+    "badge-bts": "BTS CIEL A · Argenteuil",
+    "badge-iot": "IoT · Embarqué · Réseaux",
+    "badge-alt": "Alternance dès sept. 2026",
+    "btn-projects": "Voir mes projets →",
+    "hc-sub": "BTS CIEL A · Session 2026",
+    "hc-location": "Argenteuil, 95 — Île-de-France",
+    "about-eyebrow": "Présentation",
+    "about-h": "À propos de moi",
+    "skills-eyebrow": "Expertise",
+    "skills-h": "Compétences techniques",
+    "proj-eyebrow": "Réalisations",
+    "proj-h": "Mes projets",
+    "pf-badge": "🏆 PROJET PRINCIPAL — E6 BTS CIEL",
+    "pf-desc": "Système IoT complet de contrôle d&#39;accès biométrique déployé pour le Lycée Jean Jaurès d&#39;Argenteuil. Identification des élèves par badge RFID (MFRC522) ou empreinte digitale, validation/refus en temps réel avec feedback LED WS2812B + buzzer, chiffrement AES-256 des empreintes, gestion RGPD, dashboard PHP temps réel et base MySQL pour 5 zones du lycée.<br><br><strong>Mon rôle :</strong> Zone 1 (entrée principale) — conception des deux firmware ESP32 (CPE + Porte), API REST Flask, interface PHP, schéma MySQL.",
+    "exp-eyebrow": "Parcours Pro",
+    "exp-h": "Expériences professionnelles",
+    "edu-eyebrow": "Éducation",
+    "edu-h": "Parcours académique",
+    "edu1-year": "2026 – 2029 (à venir)",
+    "edu1-badge": "✓ Admis · Session 2026",
+    "edu2-year": "2024 – 2026",
+    "edu3-year": "2022 – 2024",
+    "mini-eyebrow": "Travaux scolaires notables",
+    "contact-eyebrow": "Disponible dès sept. 2026",
+    "contact-h": "Travaillons ensemble 🤝",
+    "fl-name": "Votre nom",
+    "fl-email": "Votre email",
+    "fl-msg": "Votre message",
+    "btn-send-txt": "Envoyer le message",
+    "crv-avail": "Disponible pour alternance — sept. 2026",
+    "contact-p": "Futur ingénieur en alternance à l&#39;ESEO Paris-Vélizy (rentrée sept. 2026), je recherche une entreprise dans les domaines des systèmes, réseaux ou cybersécurité. N&#39;hésitez pas à me contacter !",
+    "footer-l": "© 2026 <strong>Paurtheiv Krishna Laxman</strong> · BTS CIEL A · Lycée Jean Jaurès · Argenteuil",
+    "footer-r": "Projet <a href=\"#projects\">Smart Gate Jaurès</a> — Système IoT de contrôle d&#39;accès biométrique"
+  },
+  en: {
+    "nav-about": "About",
+    "nav-skills": "Skills",
+    "nav-projects": "Projects",
+    "nav-exp": "Experience",
+    "nav-edu": "Education",
+    "nav-contact": "Contact",
+    "nav-cta": "Contact me",
+    "lang-btn": "FR",
+    "hero-greeting": "Hello, I am",
+    "hero-role": "IoT Developer · Systems & Networks",
+    "hero-desc": "Student in <strong>BTS CIEL A</strong> (Cybersecurity, IT & Electronics) at Lycée Jean Jaurès, Argenteuil, admitted to the <strong>ESEO Paris-Vélizy</strong> engineering cycle (Sept. 2026). Passionate about embedded systems, networks & cybersecurity — I designed and deployed <strong>Smart Gate Jaurès</strong>, a full IoT biometric access control system for a real high school.",
+    "badge-eseo": "✓ Admitted ESEO Paris 2026",
+    "badge-bts": "BTS CIEL A · Argenteuil",
+    "badge-iot": "IoT · Embedded · Networks",
+    "badge-alt": "Apprenticeship from Sept. 2026",
+    "btn-projects": "View my projects →",
+    "hc-sub": "BTS CIEL A · Class of 2026",
+    "hc-location": "Argenteuil, 95 — Île-de-France",
+    "about-eyebrow": "Introduction",
+    "about-h": "About me",
+    "skills-eyebrow": "Expertise",
+    "skills-h": "Technical skills",
+    "proj-eyebrow": "Projects",
+    "proj-h": "My projects",
+    "pf-badge": "🏆 MAIN PROJECT — E6 BTS CIEL",
+    "pf-desc": "Complete IoT biometric access control system deployed at Lycée Jean Jaurès in Argenteuil. Students identified by RFID badge (MFRC522) or fingerprint, real-time feedback via WS2812B LEDs + buzzer, AES-256 encryption, GDPR compliance, PHP dashboard and centralized MySQL database for 5 school zones.<br><br><strong>My role:</strong> Zone 1 (main entrance) — both ESP32 firmwares (CPE + Door), Flask REST API, PHP web interface, MySQL schema.",
+    "exp-eyebrow": "Career",
+    "exp-h": "Professional experience",
+    "edu-eyebrow": "Education",
+    "edu-h": "Academic background",
+    "edu1-year": "2026 – 2029 (upcoming)",
+    "edu1-badge": "✓ Admitted · Class of 2026",
+    "edu2-year": "2024 – 2026",
+    "edu3-year": "2022 – 2024",
+    "mini-eyebrow": "Notable school projects",
+    "contact-eyebrow": "Available from Sept. 2026",
+    "contact-h": "Let&#39;s work together 🤝",
+    "fl-name": "Your name",
+    "fl-email": "Your email",
+    "fl-msg": "Your message",
+    "btn-send-txt": "Send message",
+    "crv-avail": "Available for apprenticeship — Sept. 2026",
+    "contact-p": "Future apprentice engineer at ESEO Paris-Vélizy (starting Sept. 2026), looking for a company in systems, networks or cybersecurity. Feel free to reach out!",
+    "footer-l": "© 2026 <strong>Paurtheiv Krishna Laxman</strong> · BTS CIEL A · Lycée Jean Jaurès · Argenteuil",
+    "footer-r": "Project <a href=\"#projects\">Smart Gate Jaurès</a> — IoT biometric access control system"
+  }
+};
+
+var lang = localStorage.getItem('lang') || 'fr';
+
+function applyLang(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  var dict = T[l];
+  var htmlKeys = ['hero-desc','pf-desc','footer-l','footer-r','contact-p'];
+  Object.keys(dict).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    if (htmlKeys.indexOf(id) !== -1) el.innerHTML = dict[id];
+    else el.textContent = dict[id];
+  });
+  document.getElementById('lang-btn').textContent = T[l]['lang-btn'];
+  document.documentElement.lang = l;
+}
+
+function toggleLang() { applyLang(lang === 'fr' ? 'en' : 'fr'); }
+
+
+// Form submit
+var contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(e) {
+    var btn = document.getElementById('btn-send');
+    var txt = document.getElementById('btn-send-txt');
+    if (btn) { btn.disabled = true; txt.textContent = 'Envoi...'; }
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (lang === 'en') applyLang('en');
+});
+</script>
+
+</body>
+</html>
