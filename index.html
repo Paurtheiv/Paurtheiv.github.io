@@ -1124,7 +1124,7 @@ section { scroll-margin-top: 70px; }
         <div class="hero-dot"></div>
         <div class="hero-greeting" id="hero-greeting-div"><span class="hg-line"></span><span class="hg-text" id="hero-greeting">Bonjour, je suis</span></div>
         <h1 class="hero-name">Paurtheiv<br>Krishna Laxman</h1>
-        <div class="hero-role" id="hero-role">Étudiant Ingénieur · Embarqué · Backend Python · CTF Top 5%</div>
+        <div class="hero-role" id="hero-role">Étudiant Ingénieur · Embarqué · Cybersécurité · CTF Top 5%</div>
 
         <div class="hero-badges">
           <span class="hbadge g" id="badge-eseo">✓ Admis ESEO Paris 2026</span>
@@ -1133,7 +1133,6 @@ section { scroll-margin-top: 70px; }
           <span class="hbadge o" id="badge-alt">Alternance dès sept. 2026</span>
         </div>
         <div class="hero-stats-strip">
-          <div class="hstat"><span class="hstat-val">2</span><span class="hstat-lbl">ESP32 + 1 Raspberry Pi</span></div>
           <div class="hstat"><span class="hstat-val">6</span><span class="hstat-lbl">Projets GitHub</span></div>
           <div class="hstat"><span class="hstat-val">Top 5%</span><span class="hstat-lbl">CTF · 812 équipes</span></div>
           <div class="hstat"><span class="hstat-val">7+</span><span class="hstat-lbl">Langages</span></div>
@@ -1669,9 +1668,9 @@ section { scroll-margin-top: 70px; }
         <div class="mini-card fade-up">
           <div class="mini-icon">🔍</div>
           <div class="mini-ctx">TP Cybersécurité · BTS 2ème année</div>
-          <h4>Scan réseau & analyse Wireshark</h4>
-          <p>Cartographie d'un réseau local avec Angry IP Scanner et Nmap, capture et analyse de trames TCP/UDP sous Wireshark, identification de flux suspects.</p>
-          <div class="mini-pills"><span class="mini-pill">Wireshark</span><span class="mini-pill">Nmap</span><span class="mini-pill">TCP/IP</span></div>
+          <h4>Audit réseau — Wireshark & Nmap</h4>
+          <p>Cartographie complète d'un réseau local, capture et analyse de trames TCP/UDP, identification de flux suspects et rédaction d'un rapport d'audit.</p>
+          <div class="mini-pills"><span class="mini-pill">Wireshark</span><span class="mini-pill">Nmap</span><span class="mini-pill">Rapport d'audit</span></div>
         </div>
 
         <div class="mini-card fade-up">
@@ -1698,45 +1697,16 @@ section { scroll-margin-top: 70px; }
 <!-- ══════════ CONTACT ══════════ -->
 <section id="contact">
   <div class="container">
-    <div class="contact-inner">
-
-      <!-- LEFT: Form -->
-      <div class="contact-left">
+    <div style="text-align:center;margin-bottom:40px;">
         <div class="section-eyebrow" id="contact-eyebrow">Disponible dès sept. 2026</div>
         <h2 class="section-h" style="margin-bottom:8px;" id="contact-h">Travaillons ensemble 🤝</h2>
-        <p id="contact-p" style="color:var(--muted2);font-size:15px;line-height:1.7;margin-bottom:0;max-width:420px;">
+        <p id="contact-p" style="color:var(--muted2);font-size:15px;line-height:1.7;margin-bottom:0;max-width:480px;margin:0 auto;">
           Étudiant ingénieur en alternance à l'ESEO Paris-Vélizy dès septembre 2026, je recherche
           une entreprise dans les domaines des systèmes embarqués, réseaux ou cybersécurité.
-          N'hésitez pas à me contacter !
         </p>
-
-        <form id="contact-form" class="contact-form-wrap"
-              action="https://formsubmit.co/paurtheiv.laxman.fr@gmail.com" method="POST">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://paurtheiv.github.io/#contact">
-          <input type="hidden" name="_autoresponse" value="Merci pour votre message ! Je vous répondrai rapidement. / Thank you for your message! I'll get back to you soon.">
-
-          <div class="form-group">
-            <label class="form-lbl" id="fl-name">Votre nom</label>
-            <input class="form-inp" type="text" name="name" placeholder="Comment vous appelez-vous ?" required>
-          </div>
-          <div class="form-group">
-            <label class="form-lbl" id="fl-email">Votre email</label>
-            <input class="form-inp" type="email" name="email" placeholder="votre@email.com" required>
-          </div>
-          <div class="form-group">
-            <label class="form-lbl" id="fl-msg">Votre message</label>
-            <textarea class="form-ta" name="message" placeholder="Votre message..." required></textarea>
-          </div>
-          <button type="submit" class="btn-send" id="btn-send">
-            <span>📨</span> <span id="btn-send-txt">Envoyer le message</span>
-          </button>
-          <div class="form-success" id="form-success">✓ Message envoyé ! Je vous réponds rapidement.</div>
-        </form>
       </div>
-
-      <!-- RIGHT: Info cards -->
-      <div class="contact-right">
+    <div class="contact-inner" style="justify-content:center;">
+      <div class="contact-right" style="width:100%;max-width:480px;">
         <div class="contact-right-visual">
           <div class="crv-title">Contactez-moi</div>
 
@@ -1950,7 +1920,7 @@ var T = {
     "edu1-badge": "✓ Admis · Session 2026",
     "edu2-year": "2024 – 2026",
     "edu3-year": "2022 – 2024",
-    "mini-eyebrow": "Travaux scolaires notables",
+    "mini-eyebrow": "TPs & Livrables techniques",
     "contact-eyebrow": "Disponible dès sept. 2026",
     "contact-h": "Travaillons ensemble 🤝",
     "fl-name": "Votre nom",
