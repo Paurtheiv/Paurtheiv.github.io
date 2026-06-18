@@ -1038,6 +1038,34 @@ section { scroll-margin-top: 70px; }
 .sft.active { background:var(--accent); border-color:var(--accent); color:#000; font-weight:700; }
 .sp.hidden { display:none !important; }
 
+
+/* CTF COMPETITION SECTION */
+.ctf-card {
+  background: linear-gradient(135deg, var(--card) 0%, rgba(234,179,8,.04) 100%);
+  border: 1px solid rgba(234,179,8,.25); border-radius: 16px;
+  padding: 32px; display: flex; gap: 32px; align-items: flex-start;
+  flex-wrap: wrap;
+}
+.ctf-badge {
+  background: rgba(234,179,8,.12); border: 2px solid rgba(234,179,8,.4);
+  border-radius: 12px; padding: 20px; text-align: center; min-width: 120px;
+  flex-shrink: 0;
+}
+.ctf-badge-icon { font-size: 36px; }
+.ctf-badge-rank { font-size: 22px; font-weight: 900; color: #fbbf24; margin: 6px 0 2px; }
+.ctf-badge-label { font-size: 10px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+.ctf-body { flex: 1; min-width: 220px; }
+.ctf-title { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+.ctf-meta { font-size: 12px; color: var(--muted2); margin-bottom: 14px; font-family: 'JetBrains Mono', monospace; }
+.ctf-stats { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; }
+.ctf-stat { text-align: center; }
+.ctf-stat .cn { font-size: 24px; font-weight: 900; color: #fbbf24; }
+.ctf-stat .cl { font-size: 11px; color: var(--muted); }
+.ctf-desc { font-size: 13px; color: var(--muted2); line-height: 1.6; margin-bottom: 14px; }
+.ctf-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.ctf-tag { background: rgba(234,179,8,.08); border: 1px solid rgba(234,179,8,.2); color: #fbbf24; font-size: 11px; padding: 3px 10px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; }
+.ctf-obtained { display: inline-flex; align-items: center; gap: 6px; background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.3); color: #4ade80; font-size: 11px; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; }
+
 </style>
 </head>
 <body>
@@ -1052,7 +1080,8 @@ section { scroll-margin-top: 70px; }
   <ul class="nav-links">
     <li><a href="#about" id="nav-about">À propos</a></li>
     <li><a href="#skills" id="nav-skills">Compétences</a></li>
-    <li><a href="#projects" id="nav-projects">Projets</a></li>
+    <li><a href="#projects" id="nav-projects">Projets</a>
+      <a href="#competitions">CTF</a></li>
     <li><a href="#experience" id="nav-exp">Expériences</a></li>
     <li><a href="#formation" id="nav-edu">Formation</a></li>
     <li><a href="#contact" id="nav-contact">Contact</a></li>
@@ -1082,24 +1111,21 @@ section { scroll-margin-top: 70px; }
         <div class="hero-dot"></div>
         <div class="hero-greeting" id="hero-greeting-div"><span class="hg-line"></span><span class="hg-text" id="hero-greeting">Bonjour, je suis</span></div>
         <h1 class="hero-name">Paurtheiv<br>Krishna Laxman</h1>
-        <div class="hero-role" id="hero-role">Étudiant Ingénieur · IoT · Cyber · Réseaux</div>
+        <div class="hero-role" id="hero-role">Étudiant Ingénieur · Embarqué · Backend Python · CTF Top 5%</div>
         <p class="hero-desc" id="hero-desc">
-          Passionné par l'informatique, les réseaux et la cybersécurité, je suis étudiant en
-          <strong>BTS CIEL A</strong> et admis en cycle ingénieur à l'<strong>ESEO Paris-Vélizy</strong>
-          (rentrée 2026). Je conçois des systèmes IoT, développe des APIs et configure des
-          infrastructures réseau — avec une vraie expérience terrain acquise en stage et sur
-          des projets concrets.
+          Passionné par les systèmes embarqués et les réseaux, je construis des solutions IoT de bout en bout — du microcontrôleur à l'API.
+          Admis en cycle ingénieur à l'<strong>ESEO Paris-Vélizy</strong>, je recherche une <strong>alternance dès septembre 2026</strong>.
         </p>
         <div class="hero-badges">
           <span class="hbadge g" id="badge-eseo">✓ Admis ESEO Paris 2026</span>
           <span class="hbadge b" id="badge-bts">BTS CIEL A · Argenteuil</span>
-          <span class="hbadge p" id="badge-iot">IoT · Cyber · Dev</span>
+          <span class="hbadge p" id="badge-iot">Embarqué · Backend · CTF</span>
           <span class="hbadge o" id="badge-alt">Alternance dès sept. 2026</span>
         </div>
         <div class="hero-stats-strip">
           <div class="hstat"><span class="hstat-val">2</span><span class="hstat-lbl">ESP32 + 1 Raspberry Pi</span></div>
           <div class="hstat"><span class="hstat-val">6</span><span class="hstat-lbl">Projets GitHub</span></div>
-          <div class="hstat"><span class="hstat-val">1an</span><span class="hstat-lbl">Expérience IT</span></div>
+          <div class="hstat"><span class="hstat-val">Top 5%</span><span class="hstat-lbl">CTF · 812 équipes</span></div>
           <div class="hstat"><span class="hstat-val">7+</span><span class="hstat-lbl">Langages</span></div>
         </div>
         <div class="hero-btns">
@@ -1309,7 +1335,7 @@ section { scroll-margin-top: 70px; }
         <div class="skill-pills">
           <span class="sp lvl-master">Autonomie</span>
           <span class="sp lvl-master">Travail en équipe</span>
-          <span class="sp lvl-master">Rédaction technique</span>
+          <span class="sp lvl-master">Documentation technique (SysML, Gantt, cahier des charges)</span>
         </div>
       </div>
 
@@ -1344,7 +1370,8 @@ section { scroll-margin-top: 70px; }
           <div class="pf-subtitle">Lycée Jean Jaurès · Argenteuil · Projet E6-IR · 5 étudiants · Session 2026</div>
         </div>
         <div class="pf-meta">
-          <div class="pf-tag">Janv. → Juin 2026</div>
+          <div class="pf-tag">Janv. 2026 → Mai 2026</div>
+          <div class="pf-tag" style="background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.4);color:#4ade80;">✓ Présenté session 2026 — Terminé</div>
           <div class="pf-tag">Zone 1 : Entrée principale</div>
           
         </div>
@@ -1362,8 +1389,9 @@ section { scroll-margin-top: 70px; }
       </p>
 
       <div class="pf-stats">
-        <div class="pf-stat"><span class="n">2</span><span class="l">ESP32 déployés<br>(CPE + Porte)</span></div>
-        
+        <div class="pf-stat"><span class="n">&lt; 2s</span><span class="l">Temps de réponse<br>moyen</span></div>
+        <div class="pf-stat"><span class="n">10/10</span><span class="l">Tests fonctionnels<br>validés</span></div>
+        <div class="pf-stat"><span class="n">0</span><span class="l">Race condition<br>(10 enrôl. parallèles)</span></div>
         <div class="pf-stat"><span class="n">9</span><span class="l">Tables MySQL<br>+ vues SQL</span></div>
         <div class="pf-stat"><span class="n">AES</span><span class="l">256 bits<br>empreintes chiffrées</span></div>
         <div class="pf-stat"><span class="n">5</span><span class="l">Zones lycée<br>unifiées</span></div>
@@ -1417,7 +1445,7 @@ section { scroll-margin-top: 70px; }
         <div class="proj-thumb pt-softball"><span>🥎</span><span class="proj-thumb-label">SOFTBALL STATS</span></div>
         <div class="proj-year">BTS CIEL A · 2ème année · 2026</div>
         <h3>Tableau de Score Softball</h3>
-        <p>Interface web temps réel pour arbitres de softball. Backend PHP avec authentification par session, API JSON pour sauvegarder les matchs en MySQL. Affichage spectateurs synchronisé en temps réel via polling JS.</p>
+        <p>Développé pour l'équipe de softball du lycée Jean Jaurès. Interface web temps réel pour arbitres de softball. Backend PHP avec authentification par session, API JSON pour sauvegarder les matchs en MySQL. Affichage spectateurs synchronisé en temps réel via polling JS.</p>
         <div class="proj-techs">
           <span class="pt">PHP</span><span class="pt">MySQL</span><span class="pt">JavaScript</span><span class="pt">Bootstrap</span>
         </div>
@@ -1433,6 +1461,7 @@ section { scroll-margin-top: 70px; }
           <span class="pt">Python</span><span class="pt">Streamlit</span><span class="pt">pdf2image</span><span class="pt">ReportLab</span><span class="pt">Pillow</span><span class="pt">NumPy</span>
         </div>
         <a href="https://github.com/Paurtheiv/pdf-comparateur-stage" target="_blank" style="margin-top:12px;font-size:12px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">⬛ GitHub →</a>
+        <span style="display:inline-block;margin-top:8px;font-size:11px;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.3);color:#a78bfa;padding:3px 10px;border-radius:20px;">📸 Screenshots disponibles sur GitHub</span>
       </div>
 
       <div class="proj-card fade-up">
@@ -1479,6 +1508,44 @@ section { scroll-margin-top: 70px; }
       </div>
 
   </div>
+  </div>
+</section>
+
+
+
+<!-- ══════════ COMPÉTITIONS ══════════ -->
+<section id="competitions" style="padding:80px 0 60px;">
+  <div class="container">
+    <div class="section-eyebrow">Compétitions</div>
+    <h2 class="section-h">Challenges & CTF</h2>
+
+    <div class="ctf-card fade-up">
+      <div class="ctf-badge">
+        <div class="ctf-badge-icon">🥇</div>
+        <div class="ctf-badge-rank">TOP 5%</div>
+        <div class="ctf-badge-label">37ème / 812<br>équipes</div>
+      </div>
+      <div class="ctf-body">
+        <div class="ctf-title">CTF — Passe ton Hack 2026</div>
+        <div class="ctf-meta">Équipe : Les Chipies · Compétition nationale · 2026</div>
+        <div class="ctf-obtained">✓ Badge obtenu : "Explorateur Cybersécurité"</div>
+        <div class="ctf-stats">
+          <div class="ctf-stat"><div class="cn">37e</div><div class="cl">Classement</div></div>
+          <div class="ctf-stat"><div class="cn">940</div><div class="cl">Points</div></div>
+          <div class="ctf-stat"><div class="cn">22</div><div class="cl">Challenges résolus</div></div>
+          <div class="ctf-stat"><div class="cn">812</div><div class="cl">Équipes</div></div>
+        </div>
+        <p class="ctf-desc">Challenges en analyse, investigation et résolution de problèmes cybersécurité. Compétition nationale CTF — catégories forensics, réseau, cryptographie et investigation numérique.</p>
+        <div class="ctf-tags">
+          <span class="ctf-tag">CTF</span>
+          <span class="ctf-tag">Cybersécurité</span>
+          <span class="ctf-tag">Investigation</span>
+          <span class="ctf-tag">Forensics</span>
+          <span class="ctf-tag">Équipe</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1589,7 +1656,7 @@ section { scroll-margin-top: 70px; }
         <div class="edu-year" id="edu3-year">2022 – 2024</div>
         <h3>Baccalauréat Microtechniques</h3>
         <div class="edu-school">Lycée Jean Jaurès · Argenteuil</div>
-        <p>Formation en mécanique de précision, électronique et systèmes automatisés. Bases en fabrication industrielle et technologie.</p>
+        <p>Formation en fabrication, assemblage et maintenance de systèmes de précision — bases en électronique et systèmes automatisés.</p>
       </div>
 
     </div>
@@ -1642,8 +1709,8 @@ section { scroll-margin-top: 70px; }
         <div class="section-eyebrow" id="contact-eyebrow">Disponible dès sept. 2026</div>
         <h2 class="section-h" style="margin-bottom:8px;" id="contact-h">Travaillons ensemble 🤝</h2>
         <p id="contact-p" style="color:var(--muted2);font-size:15px;line-height:1.7;margin-bottom:0;max-width:420px;">
-          Futur ingénieur en alternance à l'ESEO Paris-Vélizy (rentrée sept. 2026), je recherche
-          une entreprise dans les domaines des systèmes, réseaux ou cybersécurité.
+          Étudiant ingénieur en alternance à l'ESEO Paris-Vélizy dès septembre 2026, je recherche
+          une entreprise dans les domaines des systèmes embarqués, réseaux ou cybersécurité.
           N'hésitez pas à me contacter !
         </p>
 
@@ -1863,7 +1930,7 @@ var T = {
     "lang-btn": "EN",
     "hero-greeting": "Bonjour, je suis",
     "hero-role": "Développeur IoT · Systèmes & Réseaux",
-    "hero-desc": "Étudiant en <strong>BTS CIEL A</strong> au Lycée Jean Jaurès d&#39;Argenteuil, admis en cycle ingénieur à l&#39;<strong>ESEO Paris-Vélizy</strong> (rentrée 2026). Passionné par les systèmes embarqués, les réseaux et la cybersécurité — j&#39;ai conçu et déployé <strong>Smart Gate Jaurès</strong>, un système IoT complet de contrôle d&#39;accès biométrique pour un lycée réel.",
+    "hero-desc": "Passionné par les systèmes embarqués et les réseaux, je construis des solutions IoT de bout en bout — du microcontrôleur à l&#39;API. Admis en cycle ingénieur à l&#39;<strong>ESEO Paris-Vélizy</strong>, je recherche une <strong>alternance dès septembre 2026</strong>.",
     "badge-eseo": "✓ Admis ESEO Paris 2026",
     "badge-bts": "BTS CIEL A · Argenteuil",
     "badge-iot": "IoT · Embarqué · Réseaux",
@@ -1895,7 +1962,7 @@ var T = {
     "fl-msg": "Votre message",
     "btn-send-txt": "Envoyer le message",
     "crv-avail": "Disponible pour alternance — sept. 2026",
-    "contact-p": "Futur ingénieur en alternance à l&#39;ESEO Paris-Vélizy (rentrée sept. 2026), je recherche une entreprise dans les domaines des systèmes, réseaux ou cybersécurité. N&#39;hésitez pas à me contacter !",
+    "contact-p": "Étudiant ingénieur en alternance à l&#39;ESEO Paris-Vélizy dès septembre 2026, je recherche une entreprise dans les domaines des systèmes embarqués, réseaux ou cybersécurité. N&#39;hésitez pas à me contacter !",
     "footer-l": "© 2026 <strong>Paurtheiv Krishna Laxman</strong> · BTS CIEL A · Lycée Jean Jaurès · Argenteuil",
     "footer-r": "Projet <a href=\"#projects\">Smart Gate Jaurès</a> — Système IoT de contrôle d&#39;accès biométrique"
   },
