@@ -2106,7 +2106,7 @@ var T = {
     "edu3-year": "2022 – 2024",
     "mini-eyebrow": "Notable school projects",
     "contact-eyebrow": "Available from Sept. 2026",
-    "contact-h": "Let&#39;s work together 🤝",
+    "contact-h": "Let's work together 🤝",
     "fl-name": "Your name",
     "fl-email": "Your email",
     "fl-msg": "Your message",
@@ -2199,7 +2199,7 @@ function applyLang(l) {
   lang = l;
   localStorage.setItem('lang', l);
   var dict = T[l];
-  var htmlKeys = ['hero-desc','pf-desc','footer-l','footer-r','contact-p','about-p1','about-p2','about-p3'];
+  var htmlKeys = ['hero-desc','pf-desc','footer-l','footer-r','contact-p','about-p1','about-p2','about-p3','contact-h'];
   Object.keys(dict).forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
@@ -2262,4 +2262,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 </body>
-</html>
