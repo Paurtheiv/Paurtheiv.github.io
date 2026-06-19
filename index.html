@@ -1226,14 +1226,14 @@ section { scroll-margin-top: 70px; }
     <h2 class="section-h" id="about-h">À propos de moi</h2>
     <div class="about-grid">
       <div class="about-text">
-        <p>
+        <p id="about-p1">
           Je suis <strong>Paurtheiv Krishna Laxman</strong>, étudiant en BTS CIEL A
           (Cybersécurité, Informatique et Électronique des Réseaux) au Lycée Jean Jaurès
           d'Argenteuil, admis en <strong>cycle ingénieur à l'ESEO Paris-Vélizy</strong>
           pour la rentrée 2026. Je recherche une alternance de 3 ans en systèmes, réseaux
           ou cybersécurité (2 semaines entreprise / 2 semaines école).
         </p>
-        <p>
+        <p id="about-p2">
           Ce qui me définit : une curiosité technique large. Je programme en
           <strong>Python, C++, PHP et JavaScript</strong>, je configure des réseaux
           (TCP/IP, VLAN, DNS/DHCP), je travaille sur des microcontrôleurs
@@ -1241,7 +1241,7 @@ section { scroll-margin-top: 70px; }
           J'aime comprendre comment les systèmes fonctionnent de bout en bout —
           du composant électronique à l'interface web.
         </p>
-        <p>
+        <p id="about-p3">
           Mon <strong>stage chez Bilfinger Peters Engineering</strong> (support IT N1/N2,
           ticketing, déploiement de postes, Active Directory) m'a apporté une première
           expérience professionnelle concrète. Autonome, rigoureux et à l'aise en équipe,
@@ -1252,30 +1252,30 @@ section { scroll-margin-top: 70px; }
         <div class="ai" style="margin-bottom:16px;">
           <div class="ai-icon">🗣️</div>
           <div>
-            <div class="ai-lbl">Langues</div>
-            <div class="ai-val">Français (courant) · Anglais (courant) · Tamoul (maternelle)</div>
+            <div class="ai-lbl" id="about-lang-lbl">Langues</div>
+            <div class="ai-val" id="about-lang-val">Français (courant) · Anglais (courant) · Tamoul (maternelle)</div>
           </div>
         </div>
         <div class="expertise-grid">
           <div class="exp-block">
             <div class="exp-block-icon">🔌</div>
-            <div class="exp-block-title">Systèmes Embarqués</div>
-            <div class="exp-block-desc">ESP32, RFID, biométrie déployée</div>
+            <div class="exp-block-title" id="eb1-title">Systèmes Embarqués</div>
+            <div class="exp-block-desc" id="eb1-desc">ESP32, RFID, biométrie déployée</div>
           </div>
           <div class="exp-block">
             <div class="exp-block-icon">🔒</div>
-            <div class="exp-block-title">Cybersécurité</div>
-            <div class="exp-block-desc">AES-256, CTF Top 5%, forensics</div>
+            <div class="exp-block-title" id="eb2-title">Cybersécurité</div>
+            <div class="exp-block-desc" id="eb2-desc">AES-256, CTF Top 5%, forensics</div>
           </div>
           <div class="exp-block">
             <div class="exp-block-icon">🌐</div>
-            <div class="exp-block-title">Backend & API</div>
-            <div class="exp-block-desc">Flask, PHP, REST API, MySQL temps réel</div>
+            <div class="exp-block-title" id="eb3-title">Backend & API</div>
+            <div class="exp-block-desc" id="eb3-desc">Flask, PHP, REST API, MySQL temps réel</div>
           </div>
           <div class="exp-block">
             <div class="exp-block-icon">🖥️</div>
-            <div class="exp-block-title">Réseaux & Linux</div>
-            <div class="exp-block-desc">VLAN, SSH, TCP/IP, Linux terrain</div>
+            <div class="exp-block-title" id="eb4-title">Réseaux & Linux</div>
+            <div class="exp-block-desc" id="eb4-desc">VLAN, SSH, TCP/IP, Linux terrain</div>
           </div>
         </div>
       </div>
@@ -1291,10 +1291,10 @@ section { scroll-margin-top: 70px; }
     <div class="section-eyebrow" id="skills-eyebrow">Expertise</div>
     <h2 class="section-h" id="skills-h">Compétences techniques</h2>
     <div class="skill-filter-tabs">
-      <button class="sft active" data-filter="all">Tous</button>
-      <button class="sft" data-filter="master">Maîtrisé</button>
-      <button class="sft" data-filter="used">Utilisé</button>
-      <button class="sft" data-filter="notion">Notions</button>
+      <button class="sft active" data-filter="all" id="sft-all">Tous</button>
+      <button class="sft" data-filter="master" id="sft-master">Maîtrisé</button>
+      <button class="sft" data-filter="used" id="sft-used">Utilisé</button>
+      <button class="sft" data-filter="notion" id="sft-notion">Notions</button>
     </div>
 
     <div class="skills-wrapper">
@@ -1501,9 +1501,9 @@ section { scroll-margin-top: 70px; }
 
       <div class="proj-card fade-up">
         <div class="proj-thumb pt-softball"><span>🥎</span><span class="proj-thumb-label">SOFTBALL STATS</span></div>
-        <div class="proj-year">BTS CIEL A · 2ème année · 2026</div>
-        <h3>Tableau de Score Softball</h3>
-        <p>Développé pour l'équipe de softball du lycée Jean Jaurès. Interface web temps réel pour arbitres de softball. Backend PHP avec authentification par session, API JSON pour sauvegarder les matchs en MySQL. Affichage spectateurs synchronisé en temps réel via polling JS.</p>
+        <div class="proj-year" id="proj-softball-year">BTS CIEL A · 2ème année · 2026</div>
+        <h3 id="proj-softball-title">Tableau de Score Softball</h3>
+        <p id="proj-softball-desc">Développé pour l'équipe de softball du lycée Jean Jaurès. Interface web temps réel pour arbitres de softball. Backend PHP avec authentification par session, API JSON pour sauvegarder les matchs en MySQL. Affichage spectateurs synchronisé en temps réel via polling JS.</p>
         <div class="proj-techs">
           <span class="pt">PHP</span><span class="pt">MySQL</span><span class="pt">JavaScript</span><span class="pt">Bootstrap</span>
         </div>
@@ -1512,9 +1512,9 @@ section { scroll-margin-top: 70px; }
 
       <div class="proj-card fade-up">
         <div class="proj-thumb pt-pdf"><span>📄</span><span class="proj-thumb-label">COMPARATEUR PDF</span></div>
-        <div class="proj-year">Stage Bilfinger · 2025</div>
-        <h3>Comparateur de PDF</h3>
-        <p>Outil Python/Streamlit développé en autonomie lors de mon stage chez Bilfinger Peters Engineering. Comparaison pixel par pixel de PDFs techniques, diff textuel page par page, génération automatique d'un rapport PDF annoté avec zones surlignées.</p>
+        <div class="proj-year" id="proj-pdf-year">Stage Bilfinger · 2025</div>
+        <h3 id="proj-pdf-title">Comparateur de PDF</h3>
+        <p id="proj-pdf-desc">Outil Python/Streamlit développé en autonomie lors de mon stage chez Bilfinger Peters Engineering. Comparaison pixel par pixel de PDFs techniques, diff textuel page par page, génération automatique d'un rapport PDF annoté avec zones surlignées.</p>
         <div class="proj-techs">
           <span class="pt">Python</span><span class="pt">Streamlit</span><span class="pt">pdf2image</span><span class="pt">ReportLab</span><span class="pt">Pillow</span><span class="pt">NumPy</span>
         </div>
@@ -1526,9 +1526,9 @@ section { scroll-margin-top: 70px; }
 
       <div class="proj-card fade-up">
         <div class="proj-thumb pt-jpo"><span>🎮</span><span class="proj-thumb-label">JEU JPO LJJ</span></div>
-        <div class="proj-year">JPO Lycée Jean Jaurès · Janvier 2026</div>
-        <h3>Jeu de Visite JPO — Lycée Jean Jaurès</h3>
-        <p>Jeu de visite guidée web pour la JPO du lycée. Choix du guide étudiant, QCM adaptatif (collégien / lycéen / étudiant), visite virtuelle des labos BTS CIEL. Voix clonées par IA (TopMedia), synchronisées scène par scène. HTML/JS vanilla — machine à états, Web Audio API.</p>
+        <div class="proj-year" id="proj-jpo-year">JPO Lycée Jean Jaurès · Janvier 2026</div>
+        <h3 id="proj-jpo-title">Jeu de Visite JPO — Lycée Jean Jaurès</h3>
+        <p id="proj-jpo-desc">Jeu de visite guidée web pour la JPO du lycée. Choix du guide étudiant, QCM adaptatif (collégien / lycéen / étudiant), visite virtuelle des labos BTS CIEL. Voix clonées par IA (TopMedia), synchronisées scène par scène. HTML/JS vanilla — machine à états, Web Audio API.</p>
         <div class="proj-techs">
           <span class="pt">HTML/JS</span><span class="pt">Web Audio API</span><span class="pt">IA vocale</span><span class="pt">Netlify Forms</span>
         </div>
@@ -1541,9 +1541,9 @@ section { scroll-margin-top: 70px; }
 
       <div class="proj-card fade-up">
         <div class="proj-thumb" style="background:linear-gradient(135deg,#0a1a0a 0%,#1a3d1a 100%);color:#4ade80;"><span>🔐</span><span class="proj-thumb-label">ESCAPE GAME</span></div>
-        <div class="proj-year">Atelier JPO · BTS CIEL A · Janvier 2026</div>
-        <h3>Escape Game — Coffre Caméra</h3>
-        <p>Jeu d'évasion web créé pour la JPO du lycée. Déchiffrement César, accès à une vraie caméra IP HIKVISION sur le réseau interne, système de jetons-récompenses. Faux documents leurres inclus.</p>
+        <div class="proj-year" id="proj-escape-year">Atelier JPO · BTS CIEL A · Janvier 2026</div>
+        <h3 id="proj-escape-title">Escape Game — Coffre Caméra</h3>
+        <p id="proj-escape-desc">Jeu d'évasion web créé pour la JPO du lycée. Déchiffrement César, accès à une vraie caméra IP HIKVISION sur le réseau interne, système de jetons-récompenses. Faux documents leurres inclus.</p>
         <div class="proj-techs">
           <span class="pt">HTML/JS</span><span class="pt">Bootstrap</span><span class="pt">Chiffrement César</span><span class="pt">Caméra IP</span>
         </div>
@@ -1558,9 +1558,9 @@ section { scroll-margin-top: 70px; }
           <span>✂️</span>
           <span class="proj-thumb-label">FILE D'ATTENTE</span>
         </div>
-        <div class="proj-year">Projet personnel · 2026</div>
-        <h3>File d'attente — Salon de Coiffure</h3>
-        <p>Système de file d'attente temps réel. Écran réception (saisie client + choix coiffeur) et écran salle d'attente avec compte à rebours par coiffeur. Communication via localStorage, refresh toutes les 5 secondes.</p>
+        <div class="proj-year" id="proj-queue-year">Projet personnel · 2026</div>
+        <h3 id="proj-queue-title">File d'attente — Salon de Coiffure</h3>
+        <p id="proj-queue-desc">Système de file d'attente temps réel. Écran réception (saisie client + choix coiffeur) et écran salle d'attente avec compte à rebours par coiffeur. Communication via localStorage, refresh toutes les 5 secondes.</p>
         <div class="proj-techs">
           <span class="pt">HTML/JS</span><span class="pt">localStorage</span><span class="pt">Temps réel</span>
         </div>
@@ -1576,8 +1576,8 @@ section { scroll-margin-top: 70px; }
 <!-- ══════════ COMPÉTITIONS ══════════ -->
 <section id="competitions" style="padding:80px 0 60px;">
   <div class="container">
-    <div class="section-eyebrow">Compétitions</div>
-    <h2 class="section-h">Challenges & CTF</h2>
+    <div class="section-eyebrow" id="ctf-eyebrow">Compétitions</div>
+    <h2 class="section-h" id="ctf-h">Challenges & CTF</h2>
 
     <div class="ctf-card fade-up">
       <div class="ctf-badge">
@@ -1586,8 +1586,8 @@ section { scroll-margin-top: 70px; }
         <div class="ctf-badge-label">37ème / 812<br>équipes</div>
       </div>
       <div class="ctf-body">
-        <div class="ctf-title">CTF — Passe ton Hack 2026</div>
-        <div class="ctf-meta">Équipe : Les Chipies · Compétition nationale · 2026</div>
+        <div class="ctf-title" id="ctf-title">CTF — Passe ton Hack 2026</div>
+        <div class="ctf-meta" id="ctf-meta">Équipe : Les Chipies · Compétition nationale · 2026</div>
         <div style="margin-bottom:14px;">
           <a href="https://www.linkedin.com/feed/update/urn:li:activity:7472991937717948416/" target="_blank"
              style="display:inline-flex;align-items:center;gap:8px;background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.3);border-radius:8px;padding:8px 14px;text-decoration:none;color:var(--accent);font-size:12px;font-family:'JetBrains Mono',monospace;transition:.2s;"
@@ -1601,7 +1601,7 @@ section { scroll-margin-top: 70px; }
           <div class="ctf-stat"><div class="cn">22</div><div class="cl">Challenges résolus</div></div>
           <div class="ctf-stat"><div class="cn">812</div><div class="cl">Équipes</div></div>
         </div>
-        <p class="ctf-desc">Challenges en analyse, investigation et résolution de problèmes cybersécurité. Compétition nationale CTF — catégories forensics, réseau, cryptographie et investigation numérique.</p>
+        <p class="ctf-desc" id="ctf-desc">Challenges en analyse, investigation et résolution de problèmes cybersécurité. Compétition nationale CTF — catégories forensics, réseau, cryptographie et investigation numérique.</p>
         <div class="ctf-tags">
           <span class="ctf-tag">CTF</span>
           <span class="ctf-tag">Cybersécurité</span>
@@ -1629,13 +1629,13 @@ section { scroll-margin-top: 70px; }
       <div class="tl-item fade-up">
         <div class="tl-card-wrap">
           <div class="tl-card">
-            <div class="tl-role">Stagiaire Support Informatique — IT Support N1/N2</div>
-            <div class="tl-co">Bilfinger Peters Engineering · Montrouge</div>
+            <div class="tl-role" id="exp1-role">Stagiaire Support Informatique — IT Support N1/N2</div>
+            <div class="tl-co" id="exp1-co">Bilfinger Peters Engineering · Montrouge</div>
             <ul class="tl-ul">
-              <li>Support utilisateur N1/N2 : diagnostics, pannes matérielles et logicielles</li>
-              <li>Gestion et suivi des tickets via outil de support interne</li>
-              <li>Déploiement de postes, configuration réseau, Active Directory</li>
-              <li>Diagnostic réseau : connectivité, IP, pare-feu</li>
+              <li id="exp1-li1">Support utilisateur N1/N2 : diagnostics, pannes matérielles et logicielles</li>
+              <li id="exp1-li2">Gestion et suivi des tickets via outil de support interne</li>
+              <li id="exp1-li3">Déploiement de postes, configuration réseau, Active Directory</li>
+              <li id="exp1-li4">Diagnostic réseau : connectivité, IP, pare-feu</li>
             </ul>
             <div class="tl-tags">
               <span class="tl-tag">Support IT</span><span class="tl-tag">Ticketing</span><span class="tl-tag">Active Directory</span><span class="tl-tag">TCP/IP</span>
@@ -1657,11 +1657,11 @@ section { scroll-margin-top: 70px; }
         </div>
         <div class="tl-card-wrap">
           <div class="tl-card">
-            <div class="tl-role">Stagiaire — Fabrication industrielle</div>
-            <div class="tl-co">Néon France</div>
+            <div class="tl-role" id="exp2-role">Stagiaire — Fabrication industrielle</div>
+            <div class="tl-co" id="exp2-co">Néon France</div>
             <ul class="tl-ul">
-              <li>Fabrication de LEDs et lampes — processus techniques</li>
-              <li>Amélioration des procédés de production et contrôle qualité</li>
+              <li id="exp2-li1">Fabrication de LEDs et lampes — processus techniques</li>
+              <li id="exp2-li2">Amélioration des procédés de production et contrôle qualité</li>
             </ul>
             <div class="tl-tags">
               <span class="tl-tag">Production</span><span class="tl-tag">Contrôle qualité</span>
@@ -1673,11 +1673,11 @@ section { scroll-margin-top: 70px; }
       <div class="tl-item fade-up">
         <div class="tl-card-wrap">
           <div class="tl-card">
-            <div class="tl-role">Job d'été — Production</div>
-            <div class="tl-co">Hypsiyple · Argenteuil</div>
+            <div class="tl-role" id="exp3-role">Job d'été — Production</div>
+            <div class="tl-co" id="exp3-co">Hypsiyple · Argenteuil</div>
             <ul class="tl-ul">
-              <li>Production de bougies selon normes qualité et cadences</li>
-              <li>Gestion des flux de production</li>
+              <li id="exp3-li1">Production de bougies selon normes qualité et cadences</li>
+              <li id="exp3-li2">Gestion des flux de production</li>
             </ul>
             <div class="tl-tags">
               <span class="tl-tag">Production</span><span class="tl-tag">Rigueur</span>
@@ -1705,24 +1705,24 @@ section { scroll-margin-top: 70px; }
 
       <div class="edu-card current fade-up">
         <div class="edu-year" id="edu1-year">2026 – 2029 (à venir)</div>
-        <h3>Cycle Ingénieur</h3>
-        <div class="edu-school">ESEO Paris-Vélizy</div>
-        <p>Spécialité Informatique, Systèmes, Réseaux & Cybersécurité. Programme en apprentissage (alternance 2 sem. entreprise / 2 sem. école).</p>
+        <h3 id="edu1-title">Cycle Ingénieur</h3>
+        <div class="edu-school" id="edu1-school">ESEO Paris-Vélizy</div>
+        <p id="edu1-desc">Spécialité Informatique, Systèmes, Réseaux & Cybersécurité. Programme en apprentissage (alternance 2 sem. entreprise / 2 sem. école).</p>
         <div class="edu-badge" id="edu1-badge">✓ Admis · Session 2026</div>
       </div>
 
       <div class="edu-card fade-up">
         <div class="edu-year" id="edu2-year">2024 – 2026</div>
-        <h3>BTS CIEL A — 2ème année</h3>
-        <div class="edu-school">Lycée Jean Jaurès · Argenteuil</div>
-        <p>Cybersécurité, Informatique et Électronique des Réseaux. Option IR (Informatique et Réseaux). Projet E6 : Smart Gate Jaurès.</p>
+        <h3 id="edu2-title">BTS CIEL A — 2ème année</h3>
+        <div class="edu-school" id="edu2-school">Lycée Jean Jaurès · Argenteuil</div>
+        <p id="edu2-desc">Cybersécurité, Informatique et Électronique des Réseaux. Option IR (Informatique et Réseaux). Projet E6 : Smart Gate Jaurès.</p>
       </div>
 
       <div class="edu-card fade-up">
         <div class="edu-year" id="edu3-year">2022 – 2024</div>
-        <h3>Baccalauréat Microtechniques</h3>
-        <div class="edu-school">Lycée Jean Jaurès · Argenteuil</div>
-        <p>Formation en fabrication, assemblage et maintenance de systèmes de précision — bases en électronique et systèmes automatisés.</p>
+        <h3 id="edu3-title">Baccalauréat Microtechniques</h3>
+        <div class="edu-school" id="edu3-school">Lycée Jean Jaurès · Argenteuil</div>
+        <p id="edu3-desc">Formation en fabrication, assemblage et maintenance de systèmes de précision — bases en électronique et systèmes automatisés.</p>
       </div>
 
     </div>
@@ -1992,7 +1992,82 @@ var T = {
     "crv-avail": "Disponible pour alternance — sept. 2026",
     "contact-p": "Étudiant ingénieur en alternance à l&#39;ESEO Paris-Vélizy dès septembre 2026, je recherche une entreprise dans les domaines des systèmes embarqués, réseaux ou cybersécurité. N&#39;hésitez pas à me contacter !",
     "footer-l": "© 2026 <strong>Paurtheiv Krishna Laxman</strong> · BTS CIEL A · Lycée Jean Jaurès · Argenteuil",
-    "footer-r": "Projet <a href=\"#projects\">Smart Gate Jaurès</a> — Système IoT de contrôle d&#39;accès biométrique"
+    "footer-r": "Projet <a href=\"#projects\">Smart Gate Jaurès</a> — Système IoT de contrôle d&#39;accès biométrique",
+
+    "about-p1": "Je suis <strong>Paurtheiv Krishna Laxman</strong>, étudiant en BTS CIEL A (Cybersécurité, Informatique et Électronique des Réseaux) au Lycée Jean Jaurès d'Argenteuil, admis en <strong>cycle ingénieur à l'ESEO Paris-Vélizy</strong> pour la rentrée 2026. Je recherche une alternance de 3 ans en systèmes, réseaux ou cybersécurité (2 semaines entreprise / 2 semaines école).",
+    "about-p2": "Ce qui me définit : une curiosité technique large. Je programme en <strong>Python, C++, PHP et JavaScript</strong>, je configure des réseaux (TCP/IP, VLAN, DNS/DHCP), je travaille sur des microcontrôleurs <strong>ESP32 et Raspberry Pi</strong>, et je construis des APIs REST. J'aime comprendre comment les systèmes fonctionnent de bout en bout — du composant électronique à l'interface web.",
+    "about-p3": "Mon <strong>stage chez Bilfinger Peters Engineering</strong> (support IT N1/N2, ticketing, déploiement de postes, Active Directory) m'a apporté une première expérience professionnelle concrète. Autonome, rigoureux et à l'aise en équipe, je m'adapte rapidement à de nouveaux environnements techniques.",
+    "about-lang-lbl": "Langues",
+    "about-lang-val": "Français (courant) · Anglais (courant) · Tamoul (maternelle)",
+
+    "eb1-title": "Systèmes Embarqués",
+    "eb1-desc": "ESP32, RFID, biométrie déployée",
+    "eb2-title": "Cybersécurité",
+    "eb2-desc": "AES-256, CTF Top 5%, forensics",
+    "eb3-title": "Backend & API",
+    "eb3-desc": "Flask, PHP, REST API, MySQL temps réel",
+    "eb4-title": "Réseaux & Linux",
+    "eb4-desc": "VLAN, SSH, TCP/IP, Linux terrain",
+
+    "sft-all": "Tous",
+    "sft-master": "Maîtrisé",
+    "sft-used": "Utilisé",
+    "sft-notion": "Notions",
+
+    "proj-softball-year": "BTS CIEL A · 2ème année · 2026",
+    "proj-softball-title": "Tableau de Score Softball",
+    "proj-softball-desc": "Développé pour l'équipe de softball du lycée Jean Jaurès. Interface web temps réel pour arbitres de softball. Backend PHP avec authentification par session, API JSON pour sauvegarder les matchs en MySQL. Affichage spectateurs synchronisé en temps réel via polling JS.",
+
+    "proj-pdf-year": "Stage Bilfinger · 2025",
+    "proj-pdf-title": "Comparateur de PDF",
+    "proj-pdf-desc": "Outil Python/Streamlit développé en autonomie lors de mon stage chez Bilfinger Peters Engineering. Comparaison pixel par pixel de PDFs techniques, diff textuel page par page, génération automatique d'un rapport PDF annoté avec zones surlignées.",
+
+    "proj-jpo-year": "JPO Lycée Jean Jaurès · Janvier 2026",
+    "proj-jpo-title": "Jeu de Visite JPO — Lycée Jean Jaurès",
+    "proj-jpo-desc": "Jeu de visite guidée web pour la JPO du lycée. Choix du guide étudiant, QCM adaptatif (collégien / lycéen / étudiant), visite virtuelle des labos BTS CIEL. Voix clonées par IA (TopMedia), synchronisées scène par scène. HTML/JS vanilla — machine à états, Web Audio API.",
+
+    "proj-escape-year": "Atelier JPO · BTS CIEL A · Janvier 2026",
+    "proj-escape-title": "Escape Game — Coffre Caméra",
+    "proj-escape-desc": "Jeu d'évasion web créé pour la JPO du lycée. Déchiffrement César, accès à une vraie caméra IP HIKVISION sur le réseau interne, système de jetons-récompenses. Faux documents leurres inclus.",
+
+    "proj-queue-year": "Projet personnel · 2026",
+    "proj-queue-title": "File d'attente — Salon de Coiffure",
+    "proj-queue-desc": "Système de file d'attente temps réel. Écran réception (saisie client + choix coiffeur) et écran salle d'attente avec compte à rebours par coiffeur. Communication via localStorage, refresh toutes les 5 secondes.",
+
+    "ctf-eyebrow": "Compétitions",
+    "ctf-h": "Challenges & CTF",
+    "ctf-title": "CTF — Passe ton Hack 2026",
+    "ctf-meta": "Équipe : Les Chipies · Compétition nationale · 2026",
+    "ctf-desc": "Challenges en analyse, investigation et résolution de problèmes cybersécurité. Compétition nationale CTF — catégories forensics, réseau, cryptographie et investigation numérique.",
+
+    "exp1-role": "Stagiaire Support Informatique — IT Support N1/N2",
+    "exp1-co": "Bilfinger Peters Engineering · Montrouge",
+    "exp1-li1": "Support utilisateur N1/N2 : diagnostics, pannes matérielles et logicielles",
+    "exp1-li2": "Gestion et suivi des tickets via outil de support interne",
+    "exp1-li3": "Déploiement de postes, configuration réseau, Active Directory",
+    "exp1-li4": "Diagnostic réseau : connectivité, IP, pare-feu",
+
+    "exp2-role": "Stagiaire — Fabrication industrielle",
+    "exp2-co": "Néon France",
+    "exp2-li1": "Fabrication de LEDs et lampes — processus techniques",
+    "exp2-li2": "Amélioration des procédés de production et contrôle qualité",
+
+    "exp3-role": "Job d'été — Production",
+    "exp3-co": "Hypsiyple · Argenteuil",
+    "exp3-li1": "Production de bougies selon normes qualité et cadences",
+    "exp3-li2": "Gestion des flux de production",
+
+    "edu1-title": "Cycle Ingénieur",
+    "edu1-school": "ESEO Paris-Vélizy",
+    "edu1-desc": "Spécialité Informatique, Systèmes, Réseaux & Cybersécurité. Programme en apprentissage (alternance 2 sem. entreprise / 2 sem. école).",
+
+    "edu2-title": "BTS CIEL A — 2ème année",
+    "edu2-school": "Lycée Jean Jaurès · Argenteuil",
+    "edu2-desc": "Cybersécurité, Informatique et Électronique des Réseaux. Option IR (Informatique et Réseaux). Projet E6 : Smart Gate Jaurès.",
+
+    "edu3-title": "Baccalauréat Microtechniques",
+    "edu3-school": "Lycée Jean Jaurès · Argenteuil",
+    "edu3-desc": "Formation en fabrication, assemblage et maintenance de systèmes de précision — bases en électronique et systèmes automatisés."
   },
   en: {
     "nav-about": "About",
@@ -2039,7 +2114,82 @@ var T = {
     "crv-avail": "Available for apprenticeship — Sept. 2026",
     "contact-p": "Future apprentice engineer at ESEO Paris-Vélizy (starting Sept. 2026), looking for a company in systems, networks or cybersecurity. Feel free to reach out!",
     "footer-l": "© 2026 <strong>Paurtheiv Krishna Laxman</strong> · BTS CIEL A · Lycée Jean Jaurès · Argenteuil",
-    "footer-r": ""
+    "footer-r": "",
+
+    "about-p1": "I am <strong>Paurtheiv Krishna Laxman</strong>, a BTS CIEL A student (Cybersecurity, IT & Electronics) at Lycée Jean Jaurès in Argenteuil, admitted to the <strong>engineering cycle at ESEO Paris-Vélizy</strong> starting September 2026. I am looking for a 3-year apprenticeship in systems, networks or cybersecurity (2 weeks company / 2 weeks school).",
+    "about-p2": "What defines me: broad technical curiosity. I program in <strong>Python, C++, PHP and JavaScript</strong>, configure networks (TCP/IP, VLAN, DNS/DHCP), work on <strong>ESP32 and Raspberry Pi</strong> microcontrollers, and build REST APIs. I enjoy understanding how systems work end-to-end — from the electronic component to the web interface.",
+    "about-p3": "My <strong>internship at Bilfinger Peters Engineering</strong> (N1/N2 IT support, ticketing, workstation deployment, Active Directory) gave me concrete professional experience. Autonomous, rigorous and comfortable in a team, I adapt quickly to new technical environments.",
+    "about-lang-lbl": "Languages",
+    "about-lang-val": "French (fluent) · English (fluent) · Tamil (native)",
+
+    "eb1-title": "Embedded Systems",
+    "eb1-desc": "ESP32, RFID, deployed biometrics",
+    "eb2-title": "Cybersecurity",
+    "eb2-desc": "AES-256, CTF Top 5%, forensics",
+    "eb3-title": "Backend & API",
+    "eb3-desc": "Flask, PHP, REST API, real-time MySQL",
+    "eb4-title": "Networks & Linux",
+    "eb4-desc": "VLAN, SSH, TCP/IP, Linux hands-on",
+
+    "sft-all": "All",
+    "sft-master": "Proficient",
+    "sft-used": "Used",
+    "sft-notion": "Basics",
+
+    "proj-softball-year": "BTS CIEL A · 2nd year · 2026",
+    "proj-softball-title": "Softball Scoreboard",
+    "proj-softball-desc": "Built for the softball team at Lycée Jean Jaurès. Real-time web interface for referees. PHP backend with session authentication, JSON API to save matches in MySQL. Spectator display synchronized in real time via JS polling.",
+
+    "proj-pdf-year": "Internship Bilfinger · 2025",
+    "proj-pdf-title": "PDF Comparator",
+    "proj-pdf-desc": "Python/Streamlit tool built independently during my internship at Bilfinger Peters Engineering. Pixel-by-pixel comparison of technical PDFs, page-by-page text diff, automatic generation of an annotated PDF report with highlighted zones.",
+
+    "proj-jpo-year": "Open House Lycée Jean Jaurès · January 2026",
+    "proj-jpo-title": "Open House Guided Tour Game",
+    "proj-jpo-desc": "Web guided tour game for the school open house. Student guide selection, adaptive quiz (middle school / high school / student), virtual tour of BTS CIEL labs. AI-cloned voices (TopMedia), synchronized scene by scene. Vanilla HTML/JS — state machine, Web Audio API.",
+
+    "proj-escape-year": "Open House Workshop · BTS CIEL A · January 2026",
+    "proj-escape-title": "Escape Game — Camera Safe",
+    "proj-escape-desc": "Web escape game created for the school open house. Caesar cipher decryption, access to a real HIKVISION IP camera on the internal network, token-reward system. Decoy fake documents included.",
+
+    "proj-queue-year": "Personal project · 2026",
+    "proj-queue-title": "Queue System — Hair Salon",
+    "proj-queue-desc": "Real-time queue management system. Reception screen (client entry + stylist selection) and waiting room screen with countdown per stylist. Communication via localStorage, refresh every 5 seconds.",
+
+    "ctf-eyebrow": "Competitions",
+    "ctf-h": "Challenges & CTF",
+    "ctf-title": "CTF — Passe ton Hack 2026",
+    "ctf-meta": "Team: Les Chipies · National competition · 2026",
+    "ctf-desc": "Challenges in analysis, investigation and cybersecurity problem-solving. National CTF competition — forensics, network, cryptography and digital investigation categories.",
+
+    "exp1-role": "IT Support Intern — N1/N2",
+    "exp1-co": "Bilfinger Peters Engineering · Montrouge",
+    "exp1-li1": "N1/N2 user support: diagnostics, hardware and software issues",
+    "exp1-li2": "Ticket management and tracking via internal support tool",
+    "exp1-li3": "Workstation deployment, network configuration, Active Directory",
+    "exp1-li4": "Network diagnostics: connectivity, IP, firewall",
+
+    "exp2-role": "Intern — Industrial Manufacturing",
+    "exp2-co": "Néon France",
+    "exp2-li1": "Manufacturing of LEDs and lamps — technical processes",
+    "exp2-li2": "Production process improvement and quality control",
+
+    "exp3-role": "Summer Job — Production",
+    "exp3-co": "Hypsiyple · Argenteuil",
+    "exp3-li1": "Candle production to quality standards and production rates",
+    "exp3-li2": "Production flow management",
+
+    "edu1-title": "Engineering Cycle",
+    "edu1-school": "ESEO Paris-Vélizy",
+    "edu1-desc": "Specialization: Computer Science, Systems, Networks & Cybersecurity. Apprenticeship program (2 weeks company / 2 weeks school).",
+
+    "edu2-title": "BTS CIEL A — 2nd year",
+    "edu2-school": "Lycée Jean Jaurès · Argenteuil",
+    "edu2-desc": "Cybersecurity, IT & Electronics of Networks. IR track (IT & Networks). E6 project: Smart Gate Jaurès.",
+
+    "edu3-title": "Baccalauréat Microtechnics",
+    "edu3-school": "Lycée Jean Jaurès · Argenteuil",
+    "edu3-desc": "Training in manufacturing, assembly and maintenance of precision systems — fundamentals in electronics and automated systems."
   }
 };
 
@@ -2049,7 +2199,7 @@ function applyLang(l) {
   lang = l;
   localStorage.setItem('lang', l);
   var dict = T[l];
-  var htmlKeys = ['hero-desc','pf-desc','footer-l','footer-r','contact-p'];
+  var htmlKeys = ['hero-desc','pf-desc','footer-l','footer-r','contact-p','about-p1','about-p2','about-p3'];
   Object.keys(dict).forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
@@ -2113,4 +2263,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
