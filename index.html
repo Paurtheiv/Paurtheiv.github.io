@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paurtheiv Krishna Laxman — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════
    RESET & VARIABLES
@@ -119,15 +119,16 @@ h2.section-h em { color: var(--accent); font-style: normal; }
 }
 
 .hero-statement {
-  font-size: clamp(42px, 7vw, 88px);
-  font-weight: 900;
-  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(44px, 7.5vw, 96px);
+  font-weight: 400;
+  font-family: 'DM Serif Display', serif;
   line-height: 1.0;
-  letter-spacing: -2.5px;
+  letter-spacing: -1px;
   color: var(--text);
   margin-bottom: 28px;
+  font-style: italic;
 }
-.hero-statement em { color: var(--accent); font-style: normal; }
+.hero-statement em { color: var(--accent); font-style: normal; font-family: 'DM Serif Display', serif; }
 
 .hero-greeting {
   font-size: 18px; color: var(--muted2); font-weight: 400;
@@ -1486,6 +1487,47 @@ nav {
 /* ═══ PREMIUM: SELECTION COLOR ═══ */
 ::selection { background: rgba(6,182,212,.25); color: #fff; }
 
+/* ═══ CLOSING SECTION ═══ */
+.closing-wrap {
+  padding: 120px 0 80px;
+  display: flex; justify-content: center; align-items: center;
+  background: var(--bg);
+  overflow: hidden;
+}
+.closing-inner {
+  display: flex; align-items: center; gap: 80px;
+  max-width: 900px; margin: 0 auto; padding: 0 40px;
+}
+.closing-art { flex-shrink: 0; }
+.closing-svg {
+  width: 300px; height: 300px;
+  animation: closingSpin 30s linear infinite;
+  filter: drop-shadow(0 0 40px rgba(6,182,212,0.08));
+}
+@keyframes closingSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.closing-text { flex: 1; }
+.closing-quote {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 3.5vw, 48px);
+  line-height: 1.2; color: var(--text);
+  margin-bottom: 24px; font-style: italic;
+}
+.closing-quote em { color: var(--accent); font-style: normal; }
+.closing-sub { font-size: 13px; color: var(--muted); letter-spacing: 1px; margin-bottom: 32px; }
+.closing-ichigo {
+  font-size: 28px; color: rgba(6,182,212,0.2);
+  letter-spacing: 8px; font-family: serif;
+  transition: color 0.5s;
+}
+.closing-wrap:hover .closing-ichigo { color: rgba(6,182,212,0.5); }
+@media (max-width: 768px) {
+  .closing-inner { flex-direction: column; gap: 40px; text-align: center; }
+  .closing-svg { width: 200px; height: 200px; }
+}
+
 </style>
 </head>
 <body>
@@ -2251,6 +2293,59 @@ nav {
     <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"><span>VS Code</span></div>
   </div>
 </div>
+
+<!-- ══════════ CLOSING STATEMENT ══════════ -->
+<div class="closing-wrap">
+  <div class="closing-inner">
+    <div class="closing-art">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="closing-svg">
+        <defs>
+          <radialGradient id="cg1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#080809" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="cg2" cx="30%" cy="70%" r="40%">
+            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.08"/>
+            <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="200" cy="200" r="200" fill="url(#cg1)"/>
+        <circle cx="200" cy="200" r="200" fill="url(#cg2)"/>
+        <!-- Outer ring -->
+        <circle cx="200" cy="200" r="155" fill="none" stroke="rgba(6,182,212,0.12)" stroke-width="1"/>
+        <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(6,182,212,0.08)" stroke-width="1"/>
+        <!-- Orbital dots -->
+        <circle cx="200" cy="45" r="3" fill="#06b6d4" opacity="0.6"/>
+        <circle cx="355" cy="200" r="2" fill="#f59e0b" opacity="0.5"/>
+        <circle cx="200" cy="355" r="2.5" fill="#06b6d4" opacity="0.4"/>
+        <circle cx="45" cy="200" r="2" fill="#f59e0b" opacity="0.4"/>
+        <!-- Inner lines -->
+        <line x1="200" y1="80" x2="200" y2="320" stroke="rgba(6,182,212,0.06)" stroke-width="1"/>
+        <line x1="80" y1="200" x2="320" y2="200" stroke="rgba(6,182,212,0.06)" stroke-width="1"/>
+        <line x1="109" y1="109" x2="291" y2="291" stroke="rgba(6,182,212,0.04)" stroke-width="1"/>
+        <line x1="291" y1="109" x2="109" y2="291" stroke="rgba(6,182,212,0.04)" stroke-width="1"/>
+        <!-- Center -->
+        <circle cx="200" cy="200" r="6" fill="#06b6d4" opacity="0.8"/>
+        <circle cx="200" cy="200" r="18" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.3"/>
+        <!-- Constellation dots -->
+        <circle cx="140" cy="130" r="1.5" fill="white" opacity="0.4"/>
+        <circle cx="170" cy="155" r="1" fill="white" opacity="0.3"/>
+        <circle cx="260" cy="140" r="1.5" fill="white" opacity="0.35"/>
+        <circle cx="240" cy="170" r="1" fill="white" opacity="0.25"/>
+        <circle cx="150" cy="260" r="1.5" fill="white" opacity="0.3"/>
+        <circle cx="265" cy="250" r="1" fill="white" opacity="0.3"/>
+        <line x1="140" y1="130" x2="170" y2="155" stroke="white" stroke-width="0.5" opacity="0.15"/>
+        <line x1="260" y1="140" x2="240" y2="170" stroke="white" stroke-width="0.5" opacity="0.12"/>
+      </svg>
+    </div>
+    <div class="closing-text">
+      <p class="closing-quote">"Du composant<br>à l'interface —<br><em>je maîtrise la chaîne.</em>"</p>
+      <p class="closing-sub" id="closing-sub">Paurtheiv Krishna Laxman · BTS CIEL A · Argenteuil</p>
+      <div class="closing-ichigo">一期一会</div>
+    </div>
+  </div>
+</div>
+
 
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
