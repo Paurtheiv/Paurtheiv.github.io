@@ -38,7 +38,7 @@ a, button { cursor: none; }
   --max:       1080px;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background: var(--bg);
@@ -1367,7 +1367,7 @@ h1.hero-name {
 
 
 /* ═══ PREMIUM: SMOOTH SCROLL ═══ */
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 
 /* ═══ PREMIUM: FILM GRAIN OVERLAY ═══ */
 body::after {
@@ -1529,6 +1529,7 @@ nav {
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
 <body>
 
@@ -2356,6 +2357,30 @@ nav {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+
+
+// ═══ LENIS SMOOTH SCROLL ═══
+var lenis = new Lenis({
+  duration: 1.4,
+  easing: function(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); },
+  smoothWheel: true,
+  wheelMultiplier: 0.9,
+  touchMultiplier: 1.5,
+});
+function lenisRaf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(lenisRaf);
+}
+requestAnimationFrame(lenisRaf);
+
+// Fix anchor links with Lenis
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.querySelector(a.getAttribute('href'));
+    if (target) { lenis.scrollTo(target, { offset: -70, duration: 1.6 }); }
+  });
+});
 
 // ══════════════════════════════════════════════════════
 //  CUSTOM CURSOR
