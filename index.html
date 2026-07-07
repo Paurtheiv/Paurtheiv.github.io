@@ -3043,34 +3043,31 @@ document.querySelectorAll('.sft').forEach(function(btn) {
 
   function playImpact(){
     var ac=audioCtx;var now=ac.currentTime;
-    // Swell resolution — C major chord, hopeful not dark
-    var chordFreqs=[130,164,196,261,329]; // C3 E3 G3 C4 E4
-    chordFreqs.forEach(function(freq,i){
-      var o=ac.createOscillator();o.type='triangle';
-      o.frequency.setValueAtTime(freq,now);
-      o.frequency.linearRampToValueAtTime(freq*0.998,now+3.0);
-      var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=800+i*200;
-      var g=ac.createGain();
-      g.gain.setValueAtTime(0,now+i*0.04);
-      g.gain.linearRampToValueAtTime(0.15-i*0.015,now+0.25+i*0.04);
-      g.gain.linearRampToValueAtTime(0.1-i*0.01,now+1.2);
-      g.gain.linearRampToValueAtTime(0,now+3.5);
-      o.connect(f);f.connect(g);g.connect(ac.destination);
-      o.start(now+i*0.04);o.stop(now+3.6);
-    });
-    // Sub warmth
+    // Chord already started in tick() — just add sub punch + boost existing swell
+    // Sub warmth punch
     var sub=ac.createOscillator();sub.type='sine';sub.frequency.value=65;
     var sg=ac.createGain();
-    sg.gain.setValueAtTime(0,now);sg.gain.linearRampToValueAtTime(0.5,now+0.08);
-    sg.gain.linearRampToValueAtTime(0.3,now+0.6);sg.gain.linearRampToValueAtTime(0,now+1.8);
-    sub.connect(sg);sg.connect(ac.destination);sub.start(now);sub.stop(now+2.0);
-    // Soft noise breath
-    var len=Math.floor(ac.sampleRate*0.2);
+    sg.gain.setValueAtTime(0,now);sg.gain.linearRampToValueAtTime(0.55,now+0.05);
+    sg.gain.linearRampToValueAtTime(0.25,now+0.5);sg.gain.linearRampToValueAtTime(0,now+1.6);
+    sub.connect(sg);sg.connect(ac.destination);sub.start(now);sub.stop(now+1.8);
+    // Reinforce chord with brighter layer — continuity boost
+    [261,329,392].forEach(function(freq,i){
+      var o=ac.createOscillator();o.type='sine';o.frequency.value=freq;
+      var g=ac.createGain();
+      g.gain.setValueAtTime(0,now);
+      g.gain.linearRampToValueAtTime(0.1-i*0.025,now+0.12);
+      g.gain.linearRampToValueAtTime(0.06,now+0.8);
+      g.gain.linearRampToValueAtTime(0,now+3.2);
+      o.connect(g);g.connect(ac.destination);
+      o.start(now);o.stop(now+3.4);
+    });
+    // Soft textured breath — not a sharp hit
+    var len=Math.floor(ac.sampleRate*0.25);
     var buf=ac.createBuffer(1,len,ac.sampleRate);var d=buf.getChannelData(0);
-    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.exp(-i/(ac.sampleRate*0.08))*0.3;
+    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.exp(-i/(ac.sampleRate*0.12))*0.25;
     var ns=ac.createBufferSource();ns.buffer=buf;
-    var nf=ac.createBiquadFilter();nf.type='bandpass';nf.frequency.value=500;nf.Q.value=0.6;
-    var ng=ac.createGain();ng.gain.value=0.6;
+    var nf=ac.createBiquadFilter();nf.type='lowpass';nf.frequency.value=400;
+    var ng=ac.createGain();ng.gain.value=0.5;
     ns.connect(nf);nf.connect(ng);ng.connect(ac.destination);ns.start(now);
   }
   var speeds=[220,210,200,190,175,160,145,130,115,100,85,72,60,50,41,33,26,21,17,13,10,8,6,5,4,4,3,3,3,3];
@@ -3081,25 +3078,38 @@ document.querySelectorAll('.sft').forEach(function(btn) {
     logoEl.style.opacity='0';logoEl.style.transition='none';
     var totalDur=speeds.reduce(function(a,b){return a+b;},0)/1000;
     playRumble(audioCtx.currentTime,totalDur);
-    var fi=0,si=0;
+    var fi=0,si=0;var swellStarted=false;
     function tick(){
       if(si>=speeds.length){
         ctx.fillStyle='#000';ctx.fillRect(0,0,canvas.width,canvas.height);
+        playImpact();
+        logoEl.style.transition='opacity 0.55s ease';
+        logoEl.style.opacity='1';
         setTimeout(function(){
-          playImpact();
-          logoEl.style.transition='opacity 0.75s ease';
-          logoEl.style.opacity='1';
-          setTimeout(function(){
-            overlay.classList.add('fade-out');
-            setTimeout(function(){overlay.style.display='none';},900);
-          },1800);
-        },80);
+          overlay.classList.add('fade-out');
+          setTimeout(function(){overlay.style.display='none';},900);
+        },2200);
         return;
       }
       var progress=si/speeds.length;
       drawFrame(frames[fi%frames.length]);fi++;
       var flipEvery=progress>0.6?1:progress>0.3?2:3;
       if(si%flipEvery===0) playFlip(progress);
+      // Pre-start the swell chord 350ms before end so music is continuous
+      if(!swellStarted && si>=speeds.length-5){
+        swellStarted=true;
+        var ac=audioCtx;var now=ac.currentTime;
+        [130,164,196,261,329].forEach(function(freq,i){
+          var o=ac.createOscillator();o.type='triangle';o.frequency.value=freq;
+          var g=ac.createGain();
+          g.gain.setValueAtTime(0,now+i*0.03);
+          g.gain.linearRampToValueAtTime(0.06-i*0.008,now+0.25+i*0.03);
+          g.gain.linearRampToValueAtTime(0,now+3.8);
+          var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=700+i*150;
+          o.connect(f);f.connect(g);g.connect(ac.destination);
+          o.start(now+i*0.03);o.stop(now+4.0);
+        });
+      }
       setTimeout(tick,speeds[si++]);
     }
     tick();
