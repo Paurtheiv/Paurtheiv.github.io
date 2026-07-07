@@ -2938,11 +2938,11 @@ document.querySelectorAll('.sft').forEach(function(btn) {
     {type:'code',lines:['const gate = new SmartGate();','gate.scan(rfid).then(user => {','  if(user.clearance >= ZONE_1) {','    door.unlock(); led.green();','  }','});'],color:'#00ff88'},
     {type:'grid',label:'RFID · BIOMETRIC · ESP32',color:'#06b6d4'},
     {type:'code',lines:['SELECT users.name, access_log.*','FROM access_log','JOIN users ON uid = users.id','WHERE zone = 1 AND ts > NOW()-3600'],color:'#f59e0b'},
-    {type:'noise',label:'INGÉNIEUR ESO',color:'#fff'},
+    {type:'noise',label:'INGÉNIEUR ESEO',color:'#fff'},
     {type:'code',lines:['<Router>','  <Dashboard path="/admin"/>','  <Access path="/zone/:id"/>','  <Logs path="/history"/>','</Router>'],color:'#a78bfa'},
     {type:'grid',label:'PHP · MySQL · JavaScript',color:'#06b6d4'},
     {type:'code',lines:['nmap -sV 192.168.1.0/24','[+] 192.168.1.10 open','[+] 80/tcp  http','[+] 22/tcp  ssh','[+] 3306/tcp mysql'],color:'#00ff88'},
-    {type:'noise',label:'BTS CIEL · ARGENTEUIL',color:'#fff'},
+    {type:'noise',label:'ESEO · CYCLE INGÉNIEUR',color:'#fff'},
     {type:'code',lines:['interface FastEthernet0/0','  ip address 10.0.1.1','  no shutdown','router ospf 1','  network 10.0.0.0'],color:'#f59e0b'},
     {type:'grid',label:'CISCO · RÉSEAUX · SÉCURITÉ',color:'#06b6d4'},
   ];
@@ -2988,85 +2988,109 @@ document.querySelectorAll('.sft').forEach(function(btn) {
 
   function playFlip(progress){
     var ac=audioCtx;var now=ac.currentTime;
-    // Metallic tick - higher pitched, sharper
-    var buf=ac.createBuffer(1,Math.floor(ac.sampleRate*0.025),ac.sampleRate);
+    var len=Math.floor(ac.sampleRate*0.018);
+    var buf=ac.createBuffer(1,len,ac.sampleRate);
     var d=buf.getChannelData(0);
-    for(var i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3)*0.5;
+    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,4)*0.45;
     var src=ac.createBufferSource();src.buffer=buf;
-    var filt=ac.createBiquadFilter();filt.type='highpass';filt.frequency.value=2000+progress*4000;
-    var g=ac.createGain();g.gain.value=0.25+progress*0.6;
-    src.connect(filt);filt.connect(g);g.connect(ac.destination);src.start(now);
+    var hi=ac.createBiquadFilter();hi.type='highpass';hi.frequency.value=3000+progress*5000;
+    var g=ac.createGain();g.gain.value=0.2+progress*0.55;
+    src.connect(hi);hi.connect(g);g.connect(ac.destination);src.start(now);
   }
 
   function playRumble(t0,dur){
     var ac=audioCtx;
-    // Deep cinematic pulse — heartbeat style
-    var pulseCount=Math.floor(dur/0.35);
-    for(var p=0;p<pulseCount;p++){
-      var pt=t0+p*0.35;
-      var intensity=p/pulseCount;
-      var o=ac.createOscillator();o.type='sine';
-      o.frequency.value=38+intensity*22;
+    // Inception-style rising drone — single long note that builds
+    var drone=ac.createOscillator();drone.type='sine';
+    drone.frequency.setValueAtTime(32,t0);
+    drone.frequency.linearRampToValueAtTime(48,t0+dur*0.6);
+    drone.frequency.linearRampToValueAtTime(42,t0+dur);
+    var dg=ac.createGain();
+    dg.gain.setValueAtTime(0,t0);
+    dg.gain.linearRampToValueAtTime(0.08,t0+0.8);
+    dg.gain.linearRampToValueAtTime(0.25,t0+dur*0.7);
+    dg.gain.linearRampToValueAtTime(0.38,t0+dur*0.92);
+    dg.gain.linearRampToValueAtTime(0,t0+dur);
+    drone.connect(dg);dg.connect(ac.destination);
+    drone.start(t0);drone.stop(t0+dur+0.1);
+
+    // BWAAAAM horn layers — staggered entries, minor intervals
+    var horns=[65,77,98,116]; // C2 Eb2 G2 Bb2 — dark minor chord
+    horns.forEach(function(freq,i){
+      var o=ac.createOscillator();o.type='sawtooth';
+      o.frequency.setValueAtTime(freq,t0+dur*0.15+i*0.18);
+      o.frequency.linearRampToValueAtTime(freq*0.985,t0+dur);
+      var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=400+i*120;f.Q.value=0.8;
       var g=ac.createGain();
-      g.gain.setValueAtTime(0,pt);
-      g.gain.linearRampToValueAtTime(0.18+intensity*0.22,pt+0.04);
-      g.gain.linearRampToValueAtTime(0,pt+0.28);
-      o.connect(g);g.connect(ac.destination);
-      o.start(pt);o.stop(pt+0.32);
-    }
-    // Rising string swell
-    var swell=ac.createOscillator();swell.type='triangle';
-    // Ominous minor chord: root 130Hz, minor third 155Hz, fifth 195Hz
-    [130,155,195].forEach(function(freq,i){
-      var sw=ac.createOscillator();sw.type='triangle';
-      sw.frequency.setValueAtTime(freq,t0+dur*0.1);
-      sw.frequency.linearRampToValueAtTime(freq*1.5,t0+dur);
-      var sg=ac.createGain();
-      sg.gain.setValueAtTime(0,t0+dur*0.05+i*0.15);
-      sg.gain.linearRampToValueAtTime(0.045,t0+dur*0.4);
-      sg.gain.linearRampToValueAtTime(0.09,t0+dur*0.85);
-      sg.gain.linearRampToValueAtTime(0,t0+dur);
-      var sf=ac.createBiquadFilter();sf.type='lowpass';sf.frequency.value=800;
-      sw.connect(sf);sf.connect(sg);sg.connect(ac.destination);
-      sw.start(t0+dur*0.05+i*0.15);sw.stop(t0+dur+0.1);
+      g.gain.setValueAtTime(0,t0+dur*0.15+i*0.18);
+      g.gain.linearRampToValueAtTime(0.07+i*0.01,t0+dur*0.35+i*0.18);
+      g.gain.linearRampToValueAtTime(0.12+i*0.015,t0+dur*0.75);
+      g.gain.linearRampToValueAtTime(0,t0+dur);
+      o.connect(f);f.connect(g);g.connect(ac.destination);
+      o.start(t0+dur*0.15+i*0.18);o.stop(t0+dur+0.1);
     });
+
+    // Tension string tremolo
+    var str=ac.createOscillator();str.type='triangle';
+    str.frequency.setValueAtTime(196,t0+dur*0.3);
+    str.frequency.linearRampToValueAtTime(233,t0+dur*0.8);
+    str.frequency.linearRampToValueAtTime(220,t0+dur);
+    var tremoloRate=ac.createOscillator();tremoloRate.type='sine';
+    tremoloRate.frequency.setValueAtTime(6,t0+dur*0.3);
+    tremoloRate.frequency.linearRampToValueAtTime(14,t0+dur);
+    var tremoloGain=ac.createGain();tremoloGain.gain.value=0.04;
+    var strGain=ac.createGain();strGain.gain.setValueAtTime(0,t0+dur*0.3);
+    strGain.gain.linearRampToValueAtTime(0.07,t0+dur*0.55);
+    strGain.gain.linearRampToValueAtTime(0.14,t0+dur*0.9);
+    strGain.gain.linearRampToValueAtTime(0,t0+dur);
+    tremoloRate.connect(tremoloGain);tremoloGain.connect(strGain.gain);
+    str.connect(strGain);strGain.connect(ac.destination);
+    str.start(t0+dur*0.3);str.stop(t0+dur+0.1);
+    tremoloRate.start(t0+dur*0.3);tremoloRate.stop(t0+dur+0.1);
   }
 
   function playImpact(){
     var ac=audioCtx;var now=ac.currentTime;
-    // Orchestral brass hit
-    var notes=[87,110,130,174]; // E2 A2 C3 F3 — dramatic minor chord
-    notes.forEach(function(freq,i){
+    // THE BWAAAAM — full Inception hit
+    var bwFreqs=[55,65,82,98,130]; // deep minor chord stack
+    bwFreqs.forEach(function(freq,i){
       var o=ac.createOscillator();o.type='sawtooth';
-      o.frequency.setValueAtTime(freq,now);
-      o.frequency.linearRampToValueAtTime(freq*0.97,now+1.2);
+      o.frequency.setValueAtTime(freq*1.02,now);
+      o.frequency.linearRampToValueAtTime(freq,now+0.08);
+      o.frequency.linearRampToValueAtTime(freq*0.96,now+2.5);
+      var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=300+i*200;f.Q.value=1.2;
       var g=ac.createGain();
       g.gain.setValueAtTime(0,now);
-      g.gain.linearRampToValueAtTime(0.18,now+0.02);
-      g.gain.linearRampToValueAtTime(0.12,now+0.4);
-      g.gain.linearRampToValueAtTime(0,now+1.8);
-      var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=1200+i*400;
+      g.gain.linearRampToValueAtTime(0.22-i*0.02,now+0.06);
+      g.gain.linearRampToValueAtTime(0.15-i*0.015,now+0.5);
+      g.gain.linearRampToValueAtTime(0,now+2.8);
       o.connect(f);f.connect(g);g.connect(ac.destination);
-      o.start(now);o.stop(now+2.0);
+      o.start(now);o.stop(now+3.0);
     });
-    // Thunderous sub hit
+    // Sub boom
     var sub=ac.createOscillator();sub.type='sine';
-    sub.frequency.setValueAtTime(60,now);sub.frequency.linearRampToValueAtTime(25,now+0.9);
-    var sg=ac.createGain();sg.gain.setValueAtTime(0.9,now);sg.gain.linearRampToValueAtTime(0,now+1.0);
-    sub.connect(sg);sg.connect(ac.destination);sub.start(now);sub.stop(now+1.1);
-    // White noise burst (impact texture)
-    var buf=ac.createBuffer(1,Math.floor(ac.sampleRate*0.15),ac.sampleRate);
-    var d=buf.getChannelData(0);
-    for(var i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.exp(-i/(ac.sampleRate*0.05));
+    sub.frequency.setValueAtTime(42,now);
+    sub.frequency.linearRampToValueAtTime(22,now+1.2);
+    var sg=ac.createGain();
+    sg.gain.setValueAtTime(0,now);
+    sg.gain.linearRampToValueAtTime(1.0,now+0.04);
+    sg.gain.linearRampToValueAtTime(0.6,now+0.3);
+    sg.gain.linearRampToValueAtTime(0,now+1.4);
+    sub.connect(sg);sg.connect(ac.destination);sub.start(now);sub.stop(now+1.5);
+    // Impact noise
+    var len=Math.floor(ac.sampleRate*0.3);
+    var buf=ac.createBuffer(1,len,ac.sampleRate);var d=buf.getChannelData(0);
+    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.exp(-i/(ac.sampleRate*0.06));
     var ns=ac.createBufferSource();ns.buffer=buf;
-    var nf=ac.createBiquadFilter();nf.type='bandpass';nf.frequency.value=400;nf.Q.value=0.5;
-    var ng=ac.createGain();ng.gain.value=0.8;
+    var nf=ac.createBiquadFilter();nf.type='bandpass';nf.frequency.value=300;nf.Q.value=0.4;
+    var ng=ac.createGain();ng.gain.value=1.0;
     ns.connect(nf);nf.connect(ng);ng.connect(ac.destination);ns.start(now);
-    // High shimmer tail
+    // Reverb tail shimmer
     var sh=ac.createOscillator();sh.type='sine';
-    sh.frequency.setValueAtTime(4200,now+0.02);sh.frequency.linearRampToValueAtTime(1800,now+1.0);
-    var shg=ac.createGain();shg.gain.setValueAtTime(0.08,now+0.02);shg.gain.linearRampToValueAtTime(0,now+1.2);
-    sh.connect(shg);shg.connect(ac.destination);sh.start(now+0.02);sh.stop(now+1.3);
+    sh.frequency.setValueAtTime(3500,now+0.03);
+    sh.frequency.linearRampToValueAtTime(800,now+1.5);
+    var shg=ac.createGain();shg.gain.setValueAtTime(0.06,now+0.03);shg.gain.linearRampToValueAtTime(0,now+2.0);
+    sh.connect(shg);shg.connect(ac.destination);sh.start(now+0.03);sh.stop(now+2.1);
   }
 
   var speeds=[220,210,200,190,175,160,145,130,115,100,85,72,60,50,41,33,26,21,17,13,10,8,6,5,4,4,3,3,3,3];
