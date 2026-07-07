@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paurtheiv Krishna Laxman — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 <style>
 /* ═══════════════════════════════════════
    RESET & VARIABLES
@@ -2148,10 +2148,17 @@ h1.hero-name {
 (function() {
   var loader = document.getElementById('page-loader');
   if (!loader) return;
-  // Hide after 950ms (bar animation is 900ms)
-  setTimeout(function() {
-    loader.classList.add('hidden');
-  }, 950);
+  // Hide after DOM ready + small delay for bar animation
+  function hideLoader() {
+    setTimeout(function() { loader.classList.add('hidden'); }, 300);
+  }
+  if (document.readyState === 'complete') {
+    hideLoader();
+  } else {
+    window.addEventListener('load', hideLoader);
+    // Failsafe: never stay blocked more than 3s
+    setTimeout(function() { loader.classList.add('hidden'); }, 3000);
+  }
 })();
 
 // ══════════════════════════════════════════════════════
@@ -2251,7 +2258,7 @@ h1.hero-name {
 // ══════════════════════════════════════════════════════
 //  GLOBE 3D (CONTACT)
 // ══════════════════════════════════════════════════════
-(function() {
+function initGlobe() {
   var canvas = document.getElementById('globe-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
 
@@ -2405,7 +2412,16 @@ h1.hero-name {
     earth.rotation.x += (mouseY * 0.15 - earth.rotation.x) * 0.02;
     renderer.render(scene, cam);
   })();
-})();
+}
+
+// Init globe after Three.js defer loads
+if (typeof THREE !== 'undefined') {
+  initGlobe();
+} else {
+  window.addEventListener('load', function() {
+    if (typeof THREE !== 'undefined') initGlobe();
+  });
+}
 
 window.addEventListener('scroll', function() {
   var el = document.getElementById('scroll-bar');
@@ -2501,8 +2517,4 @@ var T = {
 
     "proj-pdf-year": "Stage Bilfinger · 2025",
     "proj-pdf-title": "Comparateur de PDF",
-    "proj-pdf-desc": "Outil Python/Streamlit développé en autonomie lors de mon stage chez Bilfinger Peters Engineering. Comparaison pixel par pixel de PDFs techniques, diff textuel page par page, génération automatique d'un rapport PDF annoté avec zones surlignées.",
-
-    "proj-jpo-year": "JPO Lycée Jean Jaurès · Janvier 2026",
-    "proj-jpo-title": "Jeu de Visite JPO — Lycée Jean Jaurès",
-    "proj-jpo-desc": "Jeu de visite guidée web pour la JPO du lycée. Choix du guide étudiant, QCM adaptatif (collégien / lycéen / étudiant), vi
+    "proj-pdf-desc": "Outil Python/Streamlit développ�
