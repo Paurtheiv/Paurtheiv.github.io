@@ -2552,4 +2552,67 @@ function applyLang(l) {
 
 function toggleLang() { applyLang(lang === 'fr' ? 'en' : 'fr'); }
 
-var contactForm = document.getE
+var contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('btn-send');
+    var txt = document.getElementById('btn-send-txt');
+    var success = document.getElementById('form-success');
+    if (btn) { btn.disabled = true; txt.textContent = 'Envoi...'; }
+    var data = new FormData(contactForm);
+    fetch('https://formsubmit.co/ajax/paurtheiv.laxman.fr@gmail.com', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data
+    })
+    .then(function(res) { return res.json(); })
+    .then(function() {
+      if (success) { success.style.display = 'block'; }
+      contactForm.reset();
+      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
+    })
+    .catch(function() {
+      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
+      alert("Erreur lors de l'envoi. Réessayez.");
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (lang === 'en') applyLang('en');
+});
+
+// Live clock
+(function() {
+  var cl = document.getElementById('footer-clock');
+  if (!cl) return;
+  function tick() {
+    var now = new Date();
+    var days = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+    var d = days[now.getDay()];
+    var h = String(now.getHours()).padStart(2,'0');
+    var m = String(now.getMinutes()).padStart(2,'0');
+    var s = String(now.getSeconds()).padStart(2,'0');
+    cl.textContent = d + ' · ' + now.getDate() + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' + now.getFullYear() + ' · ' + h + ':' + m + ':' + s;
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+document.querySelectorAll('.sft').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.sft').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.dataset.filter;
+    document.querySelectorAll('.sp').forEach(function(sp) {
+      if (f === 'all') { sp.classList.remove('hidden'); return; }
+      var has = sp.classList.contains('lvl-' + (f === 'master' ? 'master' : f === 'used' ? 'used' : 'notion'));
+      sp.classList.toggle('hidden', !has);
+    });
+  });
+});
+
+</script>
+</body>
+</html>
