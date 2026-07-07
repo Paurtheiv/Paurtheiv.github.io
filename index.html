@@ -18,15 +18,15 @@ body { cursor: none; }
 a, button { cursor: none; }
 
 :root {
-  --bg:        #050a0c;
-  --bg2:       #070d10;
-  --bg3:       #0d1618;
-  --card:      #0e181c;
-  --card2:     #111f23;
-  --border:    #152428;
-  --border2:   #1c2e34;
+  --bg:        #080809;
+  --bg2:       #0d0d10;
+  --bg3:       #111114;
+  --card:      #131316;
+  --card2:     #18181c;
+  --border:    #1e1e26;
+  --border2:   #26262f;
   --accent:    #06b6d4;
-  --accent2:   #7c3aed;
+  --accent2:   #f59e0b;
   --green:     #22c55e;
   --orange:    #f97316;
   --red:       #ef4444;
@@ -101,8 +101,8 @@ h2.section-h em { color: var(--accent); font-style: normal; }
 #hero::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 60% at 80% 40%, rgba(6,182,212,.1) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 70% at 5% 90%, rgba(124,58,237,.08) 0%, transparent 55%);
+    radial-gradient(ellipse 60% 50% at 75% 35%, rgba(6,182,212,.07) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 60% at 10% 85%, rgba(245,158,11,.04) 0%, transparent 55%);
 }
 /* Grid dots */
 #hero::after {
@@ -118,10 +118,21 @@ h2.section-h em { color: var(--accent); font-style: normal; }
   position: relative; z-index: 1;
 }
 
+.hero-statement {
+  font-size: clamp(42px, 7vw, 88px);
+  font-weight: 900;
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.0;
+  letter-spacing: -2.5px;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+.hero-statement em { color: var(--accent); font-style: normal; }
+
 .hero-greeting {
-  font-size: 14px; color: var(--accent); font-weight: 600;
-  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
-  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--muted); font-weight: 500;
+  letter-spacing: 1px; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
 }
 .hero-greeting .hg-line { display: inline-block; width: 32px; height: 2px; background: var(--accent); flex-shrink: 0; }
 .hero-greeting .hg-text { display: inline; width: auto; height: auto; background: none; }
@@ -137,7 +148,7 @@ h1.hero-name {
   font-size: clamp(16px, 2.2vw, 22px); font-weight: 600;
   color: transparent; margin-bottom: 22px;
   font-family: 'JetBrains Mono', monospace;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  background: linear-gradient(90deg, var(--accent), #0ea5e9);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .hero-desc {
@@ -622,7 +633,7 @@ footer a { color: var(--accent); text-decoration: none; }
 ═══════════════════════════════════════ */
 #scroll-bar {
   position: fixed; top: 0; left: 0; height: 2px; width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  background: linear-gradient(90deg, var(--accent), #0ea5e9);
   z-index: 9999; transition: width .08s linear;
 }
 
@@ -1234,7 +1245,7 @@ section { scroll-margin-top: 70px; }
 }
 .loader-bar {
   height: 100%; width: 0;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  background: linear-gradient(90deg, var(--accent), #0ea5e9);
   border-radius: 2px;
   animation: loaderProgress .9s cubic-bezier(.4,0,.2,1) forwards;
 }
@@ -1403,14 +1414,14 @@ h1.hero-name {
     <div class="hero-inner">
       <div>
         <div class="hero-dot"></div>
-        <div class="hero-greeting hero-anim hero-anim-d1" id="hero-greeting-div"><span class="hg-text" id="hero-greeting">Bonjour, je suis</span></div>
-        <h1 class="hero-name hero-anim hero-anim-d2">Paurtheiv<br>Krishna Laxman</h1>
-        <div class="hero-role hero-anim hero-anim-d3" id="hero-role">Étudiant Ingénieur · Embarqué · Cybersécurité · CTF Top 5%</div>
+        <div class="hero-statement hero-anim hero-anim-d1">Je construis des<br>systèmes qui <em>fonctionnent.</em></div>
+        <div class="hero-greeting hero-anim hero-anim-d2" id="hero-greeting-div"><span class="hg-text" id="hero-greeting">Bonjour, je suis</span> <strong style="color:var(--text)">Paurtheiv Krishna Laxman</strong></div>
+        <div class="hero-role hero-anim hero-anim-d3" id="hero-role">Développeur · Réseaux · Cybersécurité · Systèmes embarqués</div>
 
         <div class="hero-badges hero-anim hero-anim-d4">
           <span class="hbadge g" id="badge-eseo">✓ Admis ESEO Paris 2026</span>
           <span class="hbadge b" id="badge-bts">BTS CIEL A · Diplômé 2026 · 16/20</span>
-          <span class="hbadge p" id="badge-iot">Embarqué · Backend · CTF</span>
+          <span class="hbadge p" id="badge-iot">Dev · Réseaux · Cyber</span>
           <span class="hbadge o" id="badge-alt">Alternance dès sept. 2026</span>
         </div>
         <div class="hero-stats-strip hero-anim hero-anim-d5">
@@ -1431,33 +1442,6 @@ h1.hero-name {
 </section>
 
 
-<!-- ══════════ MARQUEE ══════════ -->
-<div class="marquee-band" aria-hidden="true">
-  <div class="marquee-track">
-    <!-- First set -->
-    <span class="marquee-item"><span class="m-dot"></span> IoT & Embarqué <span class="m-dot"></span></span>
-    <span class="marquee-item"><span class="m-accent">ESP32</span> · RFID · Biométrie <span class="m-dot"></span></span>
-    <span class="marquee-item"><span class="m-dot"></span> Cybersécurité <span class="m-dot"></span></span>
-    <span class="marquee-item">CTF <span class="m-accent">Top 5%</span> · 812 équipes <span class="m-dot"></span></span>
-    <span class="marquee-item"><span class="m-dot"></span> Python · C++ · PHP · JS <span class="m-dot"></span></span>
-    <span class="marquee-item">ESEO Paris-Vélizy <span class="m-accent">2026</span> <span class="m-dot"></span></span>
-    <span class="marquee-item"><span class="m-dot"></span> Smart Gate Jaurès <span class="m-dot"></span></span>
-    <span class="marquee-item">AES-256 · REST API · MySQL <span class="m-dot"></span></span>
-    <span class="marquee-item"><span class="m-dot"></span> Alternance <span class="m-accent">Sept. 2026</span> <span class="m-dot"></span></span>
-    <span class="marquee-item">BTS CIEL A · <span class="m-accent">16/20</span> · Diplômé <span class="m-dot"></span></span>
-    <!-- Duplicate for seamless loop -->
-    <span class="marquee-item"><span class="m-dot"></span> IoT & Embarqué <span class="m-dot"></span></span>
-    <span class="marquee-item"><span class="m-accent">ESP32</span> · RFID · Biométrie <span class="m-dot"></span></span>
-    <span class="marquee-item"><span class="m-dot"></span> Cybersécurité <span class="m-dot"></span></span>
-    <span class="marquee-item">CTF <span class="m-accent">Top 5%</span> · 812 équipes <span class="m-dot"></span></span>
-    <span class="marquee-item"><span class="m-dot"></span> Python · C++ · PHP · JS <span class="m-dot"></span></span>
-    <span class="marquee-item">ESEO Paris-Vélizy <span class="m-accent">2026</span> <span class="m-dot"></span></span>
-    <span class="marquee-item"><span class="m-dot"></span> Smart Gate Jaurès <span class="m-dot"></span></span>
-    <span class="marquee-item">AES-256 · REST API · MySQL <span class="m-dot"></span></span>
-    <span class="marquee-item"><span class="m-dot"></span> Alternance <span class="m-accent">Sept. 2026</span> <span class="m-dot"></span></span>
-    <span class="marquee-item">BTS CIEL A · <span class="m-accent">16/20</span> · Diplômé <span class="m-dot"></span></span>
-  </div>
-</div>
 
 <!-- ══════════ ABOUT ══════════ -->
 <section id="about">
@@ -2128,7 +2112,7 @@ h1.hero-name {
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
   <div id="footer-l">© 2026 <strong>Paurtheiv Krishna Laxman</strong> · BTS CIEL A · Lycée Jean Jaurès · Argenteuil</div>
-  
+  <div id="footer-clock" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:1px;"></div>
 </footer>
 
 
@@ -2306,11 +2290,11 @@ var T = {
     "nav-cta": "Me contacter",
     "lang-btn": "EN",
     "hero-greeting": "Bonjour, je suis",
-    "hero-role": "Développeur IoT · Systèmes & Réseaux",
+    "hero-role": "Développeur · Réseaux · Cybersécurité · Systèmes embarqués",
     "hero-desc": "",
     "badge-eseo": "✓ Admis ESEO Paris 2026",
     "badge-bts": "BTS CIEL A · Diplômé 2026 · 16/20",
-    "badge-iot": "IoT · Embarqué · Réseaux",
+    "badge-iot": "Dev · Réseaux · Cyber",
     "badge-alt": "Alternance dès sept. 2026",
     "btn-projects": "Voir mes projets →",
     "hc-sub": "BTS CIEL A · Diplômé · Session 2026",
@@ -2428,11 +2412,11 @@ var T = {
     "nav-cta": "Contact me",
     "lang-btn": "FR",
     "hero-greeting": "Hello, I'm",
-    "hero-role": "IoT Developer · Systems & Networks",
+    "hero-role": "Developer · Networks · Cybersecurity · Embedded Systems",
     "hero-desc": "",
     "badge-eseo": "✓ Admitted ESEO Paris 2026",
     "badge-bts": "BTS CIEL A · Graduate 2026 · GPA 16/20",
-    "badge-iot": "IoT · Embedded · Networks",
+    "badge-iot": "Dev · Networks · Cyber",
     "badge-alt": "Apprenticeship from Sept. 2026",
     "btn-projects": "View my projects →",
     "hc-sub": "BTS CIEL A · Graduate · Class of 2026",
@@ -2578,6 +2562,23 @@ document.addEventListener('DOMContentLoaded', function() {
   if (lang === 'en') applyLang('en');
 });
 
+// Live clock
+(function() {
+  var cl = document.getElementById('footer-clock');
+  if (!cl) return;
+  function tick() {
+    var now = new Date();
+    var days = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+    var d = days[now.getDay()];
+    var h = String(now.getHours()).padStart(2,'0');
+    var m = String(now.getMinutes()).padStart(2,'0');
+    var s = String(now.getSeconds()).padStart(2,'0');
+    cl.textContent = d + ' · ' + now.getDate() + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' + now.getFullYear() + ' · ' + h + ':' + m + ':' + s;
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
 document.querySelectorAll('.sft').forEach(function(btn) {
   btn.addEventListener('click', function() {
     document.querySelectorAll('.sft').forEach(function(b) { b.classList.remove('active'); });
@@ -2594,4 +2595,19 @@ document.querySelectorAll('.sft').forEach(function(btn) {
 </script>
 </body>
 </html>
-> b.classList.remove('active'
+> b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.sp').forEach(sp => {
+        if (f === 'all') { sp.classList.remove('hidden'); return; }
+        const has = sp.classList.contains('lvl-' + (f === 'master' ? 'master' : f === 'used' ? 'used' : 'notion'));
+        sp.classList.toggle('hidden', !has);
+      });
+    });
+  });
+
+</script>
+
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
