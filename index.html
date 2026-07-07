@@ -18,23 +18,23 @@ body { cursor: none; }
 a, button { cursor: none; }
 
 :root {
-  --bg:        #080809;
-  --bg2:       #0d0d10;
-  --bg3:       #111114;
-  --card:      #131316;
-  --card2:     #18181c;
-  --border:    #1e1e26;
-  --border2:   #26262f;
+  --bg:        #070708;
+  --bg2:       #0c0c0f;
+  --bg3:       #101013;
+  --card:      #111114;
+  --card2:     #161619;
+  --border:    #1c1c24;
+  --border2:   #24242e;
   --accent:    #06b6d4;
   --accent2:   #f59e0b;
   --green:     #22c55e;
   --orange:    #f97316;
   --red:       #ef4444;
   --yellow:    #eab308;
-  --text:      #e8eaf6;
-  --muted:     #6b748a;
-  --muted2:    #9199b3;
-  --radius:    12px;
+  --text:      #ececf0;
+  --muted:     #565e74;
+  --muted2:    #8890a8;
+  --radius:    10px;
   --max:       1080px;
 }
 
@@ -119,13 +119,13 @@ h2.section-h em { color: var(--accent); font-style: normal; }
 }
 
 .hero-statement {
-  font-size: clamp(44px, 7.5vw, 96px);
+  font-size: clamp(48px, 8.5vw, 108px);
   font-weight: 400;
   font-family: 'DM Serif Display', serif;
-  line-height: 1.0;
-  letter-spacing: -1px;
+  line-height: 0.97;
+  letter-spacing: -3px;
   color: var(--text);
-  margin-bottom: 28px;
+  margin-bottom: 36px;
   font-style: italic;
 }
 .hero-statement em { color: var(--accent); font-style: normal; font-family: 'DM Serif Display', serif; }
@@ -1374,9 +1374,9 @@ body::after {
   content: '';
   position: fixed; inset: 0;
   pointer-events: none; z-index: 9997;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.028;
-  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.055;
+  mix-blend-mode: soft-light;
 }
 
 /* ═══ PREMIUM: NAV BLUR ═══ */
@@ -1541,6 +1541,174 @@ nav {
 #intro-overlay:hover #intro-start-icon{border-color:rgba(255,255,255,0.6)}
 #intro-start-txt{font-family:'Space Grotesk',sans-serif;font-size:12px;color:#444;letter-spacing:4px;text-transform:uppercase}
 /* ============================= */
+
+/* ═══════════════════════════════════════════════
+   PREMIUM REDESIGN — AESTHETIC OVERHAUL
+   ═══════════════════════════════════════════════ */
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+/* Nav — glass premium */
+nav {
+  background: rgba(7,7,8,0.72) !important;
+  backdrop-filter: blur(24px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+  border-bottom: 0.5px solid rgba(255,255,255,0.055) !important;
+}
+
+/* Hero — ambient light source */
+#hero {
+  position: relative;
+  overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; left: 50%; transform: translateX(-50%);
+  width: min(900px, 130vw); height: 700px;
+  background: radial-gradient(ellipse at 50% 30%,
+    rgba(6,182,212,0.06) 0%,
+    rgba(6,182,212,0.02) 35%,
+    transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+#hero > .container { position: relative; z-index: 1; }
+
+/* Hero typography — tighter, more editorial */
+.hero-greeting { letter-spacing: -0.01em; }
+.hero-role {
+  letter-spacing: 0.02em;
+  opacity: 0.55;
+  font-size: 13px;
+}
+
+/* Sections — more breathing room */
+#about, #skills, #projects, #competitions,
+#achievements, #experience, #formation, #contact {
+  padding: 110px 0;
+}
+
+/* Section eyebrow — more minimal */
+.section-eyebrow {
+  font-size: 10px !important;
+  letter-spacing: 4px !important;
+  opacity: 0.45;
+  margin-bottom: 16px !important;
+}
+
+/* Section titles — tighter tracking */
+.section-title-lg, .section-title, h2 {
+  letter-spacing: -0.03em;
+}
+
+/* Cards — more refined */
+.exp-block {
+  background: rgba(17,17,20,0.6) !important;
+  border: 0.5px solid rgba(255,255,255,0.07) !important;
+  border-radius: 14px !important;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.3s, transform 0.3s !important;
+}
+.exp-block:hover {
+  border-color: rgba(6,182,212,0.2) !important;
+  transform: translateY(-2px) !important;
+}
+.exp-block-icon {
+  font-size: 13px !important;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  opacity: 0.8;
+  margin-bottom: 12px !important;
+}
+
+/* Skill groups — clean minimal */
+.skill-group {
+  background: rgba(17,17,20,0.5) !important;
+  border: 0.5px solid rgba(255,255,255,0.06) !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+}
+.skill-group h3 {
+  font-size: 10px !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--muted2) !important;
+  margin-bottom: 14px !important;
+  font-weight: 500 !important;
+}
+
+/* Achievement cards — elegant */
+.ach-card {
+  background: transparent !important;
+  border-left: 0.5px solid rgba(6,182,212,0.35) !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+  padding: 20px 24px !important;
+  transition: border-color 0.3s !important;
+}
+.ach-card:hover {
+  border-left-color: var(--accent) !important;
+}
+
+/* CTF card — more subtle gradient */
+.ctf-card {
+  background: rgba(17,17,20,0.5) !important;
+  border: 0.5px solid rgba(234,179,8,0.15) !important;
+  border-radius: 14px !important;
+}
+
+/* Timeline — more minimal */
+.tl-node {
+  font-size: 11px !important;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent) !important;
+  opacity: 0.7;
+}
+
+/* Contact card — cleaner */
+.contact-right-visual {
+  background: rgba(11,11,14,0.8) !important;
+  border: 0.5px solid rgba(255,255,255,0.07) !important;
+  border-radius: 16px !important;
+}
+
+/* Footer — tighter */
+footer {
+  border-top: 0.5px solid rgba(255,255,255,0.05) !important;
+  padding: 48px 0 36px !important;
+}
+
+/* Closing section */
+.closing-wrap { padding: 140px 0 100px !important; }
+.closing-quote { letter-spacing: -0.02em !important; }
+
+/* Input fields — more premium */
+input, textarea {
+  background: rgba(255,255,255,0.03) !important;
+  border: 0.5px solid rgba(255,255,255,0.1) !important;
+  border-radius: 8px !important;
+  transition: border-color 0.2s !important;
+}
+input:focus, textarea:focus {
+  border-color: rgba(6,182,212,0.4) !important;
+  outline: none !important;
+}
+
+/* Fade-in animations — smoother */
+.fade-up {
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
+              transform 0.8s cubic-bezier(0.16,1,0.3,1) !important;
+}
+
+/* ═══════════════════════════════════════════════ */
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
