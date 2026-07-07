@@ -1364,6 +1364,128 @@ h1.hero-name {
   background: var(--accent); box-shadow: 0 0 8px var(--accent);
 }
 
+
+/* ═══ PREMIUM: SMOOTH SCROLL ═══ */
+html { scroll-behavior: smooth; }
+
+/* ═══ PREMIUM: FILM GRAIN OVERLAY ═══ */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 9997;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  mix-blend-mode: overlay;
+}
+
+/* ═══ PREMIUM: NAV BLUR ═══ */
+nav {
+  backdrop-filter: blur(24px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.2) !important;
+  background: rgba(8,8,9,0.75) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+}
+
+/* ═══ PREMIUM: HERO TEXT REVEAL ═══ */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(40px) skewY(2deg); }
+  to   { opacity: 1; transform: translateY(0)    skewY(0deg); }
+}
+.hero-statement {
+  animation: revealUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+}
+.hero-greeting { animation: revealUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
+.hero-role     { animation: revealUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.5s both; }
+.hero-badges   { animation: revealUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.65s both; }
+.hero-stats-strip { animation: revealUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.75s both; }
+.hero-btns     { animation: revealUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.85s both; }
+
+/* ═══ PREMIUM: SCROLL REVEAL ═══ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.fade-up.visible { opacity: 1; transform: none; }
+.fade-up:nth-child(1) { transition-delay: 0s; }
+.fade-up:nth-child(2) { transition-delay: 0.08s; }
+.fade-up:nth-child(3) { transition-delay: 0.16s; }
+.fade-up:nth-child(4) { transition-delay: 0.24s; }
+.fade-up:nth-child(5) { transition-delay: 0.32s; }
+.fade-up:nth-child(6) { transition-delay: 0.40s; }
+
+/* ═══ PREMIUM: CARD HOVERS ═══ */
+.proj-card, .skill-cat, .edu-card, .mini-card, .exp-card, .ach-card {
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+              border-color 0.3s ease,
+              box-shadow 0.4s ease !important;
+}
+.proj-card:hover  { transform: translateY(-6px) !important; border-color: rgba(6,182,212,.5) !important; box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(6,182,212,.15) !important; }
+.skill-cat:hover  { transform: translateY(-4px) !important; border-color: rgba(6,182,212,.4) !important; box-shadow: 0 16px 40px rgba(0,0,0,.4) !important; }
+.edu-card:hover   { transform: translateY(-4px) !important; border-color: rgba(6,182,212,.35) !important; box-shadow: 0 16px 40px rgba(0,0,0,.35) !important; }
+.ach-card:hover   { transform: translateY(-4px) !important; border-color: rgba(6,182,212,.4) !important; box-shadow: 0 16px 40px rgba(0,0,0,.4) !important; }
+.exp-card:hover   { transform: translateY(-3px) !important; border-color: rgba(6,182,212,.3) !important; box-shadow: 0 12px 32px rgba(0,0,0,.3) !important; }
+
+/* ═══ PREMIUM: BUTTON HOVER ═══ */
+.btn-p {
+  position: relative; overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease !important;
+}
+.btn-p::after {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,0.08);
+  opacity: 0; transition: opacity 0.3s;
+}
+.btn-p:hover { transform: translateY(-2px) !important; box-shadow: 0 12px 32px rgba(6,182,212,.25) !important; }
+.btn-p:hover::after { opacity: 1; }
+
+/* ═══ PREMIUM: NAV LINKS ═══ */
+.nav-links a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+/* ═══ PREMIUM: SECTION NUMBERS ═══ */
+.section-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+}
+
+/* ═══ PREMIUM: CURSOR GLOW ═══ */
+#cur {
+  mix-blend-mode: difference;
+  background: #fff !important;
+}
+
+/* ═══ PREMIUM: HSTAT COUNTER ═══ */
+.hstat-val {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.hstat:hover .hstat-val { transform: scale(1.15); }
+
+/* ═══ PREMIUM: MARQUEE SLOWER + SUBTLE ═══ */
+.marquee-band {
+  border-top: 1px solid rgba(255,255,255,0.04) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+  background: rgba(8,8,9,0.6) !important;
+}
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track { animation: marqueeScroll 40s linear infinite !important; }
+
+/* ═══ PREMIUM: SELECTION COLOR ═══ */
+::selection { background: rgba(6,182,212,.25); color: #fff; }
+
 </style>
 </head>
 <body>
@@ -2662,6 +2784,38 @@ document.querySelectorAll('.sft').forEach(function(btn) {
     });
   });
 });
+
+
+// ═══ PREMIUM: ANIMATED COUNTERS ═══
+(function() {
+  var counters = document.querySelectorAll('.hstat-val');
+  var started = false;
+  function animateCounters() {
+    if (started) return; started = true;
+    counters.forEach(function(el) {
+      var target = el.textContent.trim();
+      var num = parseFloat(target.replace(/[^0-9.]/g,''));
+      if (isNaN(num) || num === 0) return;
+      var suffix = target.replace(/[0-9.]/g,'');
+      var start = 0; var duration = 1200; var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        var current = Math.round(ease * num * 10) / 10;
+        el.textContent = (Number.isInteger(num) ? Math.round(current) : current) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  var heroObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) animateCounters(); });
+  }, { threshold: 0.5 });
+  var strip = document.querySelector('.hero-stats-strip');
+  if (strip) heroObs.observe(strip);
+})();
+
 
 </script>
 </body>
