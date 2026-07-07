@@ -1709,6 +1709,102 @@ input:focus, textarea:focus {
 }
 
 /* ═══════════════════════════════════════════════ */
+
+/* ── HERO FULLSCREEN LAYOUT ── */
+#scroll-nav {
+  transform: translateY(-100%);
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+#scroll-nav.visible {
+  transform: translateY(0);
+}
+
+#hero {
+  min-height: 100vh !important;
+  height: 100vh;
+  padding: 0 !important;
+  display: block !important;
+  position: relative;
+  overflow: hidden;
+  background: #050508;
+}
+
+#space-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(6,182,212,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 70%, rgba(107,72,212,0.1) 0%, transparent 60%),
+    linear-gradient(to bottom, rgba(5,5,8,0.3) 0%, rgba(5,5,8,0.55) 60%, rgba(5,5,8,0.85) 100%);
+}
+
+/* Hero nav — right side vertical */
+.hero-nav {
+  position: absolute;
+  top: 50%; right: 52px;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex; flex-direction: column;
+  align-items: flex-end; gap: 6px;
+}
+.hero-nav a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px; font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: color 0.2s, transform 0.2s;
+  line-height: 1.4;
+}
+.hero-nav a:last-child { color: var(--muted2); font-size: 16px; margin-top: 8px; }
+.hero-nav a:hover { color: #fff; transform: translateX(-4px); }
+
+/* Title — top left */
+.hero-title-wrap {
+  position: absolute;
+  top: 52px; left: 52px;
+  z-index: 10; max-width: 60%;
+}
+
+/* Bottom wrap — bottom left */
+.hero-bottom-wrap {
+  position: absolute;
+  bottom: 52px; left: 52px;
+  z-index: 10;
+}
+.hero-bottom-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px; font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+}
+.hero-bottom-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--muted2);
+  letter-spacing: 3px;
+  margin-bottom: 24px;
+}
+.hero-bottom-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute; bottom: 52px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* Mobile hero */
+@media(max-width:768px) {
+  .hero-nav { display: none; }
+  .hero-title-wrap { top: 80px; left: 24px; right: 24px; max-width: 100%; }
+  .hero-bottom-wrap { bottom: 80px; left: 24px; right: 24px; }
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
@@ -1736,21 +1832,16 @@ input:focus, textarea:focus {
 <div id="scroll-bar"></div>
 
 <!-- ══════════ NAV ══════════ -->
-<nav>
+<nav id="scroll-nav">
   <div class="nav-logo">PK.</div>
   <ul class="nav-links">
     <li><a href="#about" id="nav-about">À propos</a></li>
     <li><a href="#skills" id="nav-skills">Compétences</a></li>
     <li><a href="#projects" id="nav-projects">Projets</a></li>
-      <li><a href="#competitions">Compétitions</a></li>
     <li><a href="#experience" id="nav-exp">Expériences</a></li>
-    <li><a href="#formation" id="nav-edu">Formation</a></li>
     <li><a href="#contact" id="nav-contact">Contact</a></li>
   </ul>
-  <a href="mailto:paurtheiv.laxman.fr@gmail.com" class="nav-cta" id="nav-cta">Me contacter</a>
-  <a href="https://github.com/Paurtheiv" target="_blank" style="color:var(--muted2);font-size:13px;text-decoration:none;padding:5px 10px;border:1px solid var(--border2);border-radius:8px;transition:all .2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--muted2)'">⬛ GitHub</a>
-  <button id="lang-btn" onclick="toggleLang()" aria-label="Switch language">EN</button>
-  <button id="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="CV_Paurtheiv_Krishna_Laxman.pdf" download class="nav-cta" id="nav-cta">CV</a>
 </nav>
 <div id="mobile-menu">
   <a href="#about" onclick="document.getElementById('mobile-menu').classList.remove('open')">À propos</a>
@@ -1765,36 +1856,40 @@ input:focus, textarea:focus {
 
 <!-- ══════════ HERO ══════════ -->
 <section id="hero">
-  <canvas id="particle-canvas"></canvas>
-  <div class="container">
-    <div class="hero-inner">
-      <div>
-        <div class="hero-dot"></div>
-        <div class="hero-statement hero-anim hero-anim-d1" id="hero-statement">Je construis des<br>systèmes qui <em>fonctionnent.</em></div>
-        <div class="hero-greeting hero-anim hero-anim-d2" id="hero-greeting-div"><span class="hg-text" id="hero-greeting">Bonjour, je suis</span> <strong style="color:var(--text)">Paurtheiv Krishna Laxman</strong></div>
-        <div class="hero-role hero-anim hero-anim-d3" id="hero-role">Développeur · Réseaux · Cybersécurité · Systèmes embarqués</div>
+  <canvas id="space-canvas"></canvas>
+  <div class="hero-overlay"></div>
 
-        <div class="hero-badges hero-anim hero-anim-d4">
-          <span class="hbadge g" id="badge-eseo">✓ Admis ESEO Paris 2026</span>
-          <span class="hbadge b" id="badge-bts">BTS CIEL A · Diplômé 2026 · 16/20</span>
-          <span class="hbadge p" id="badge-iot">Dev · Réseaux · Cyber</span>
-          <span class="hbadge o" id="badge-alt">Alternance dès sept. 2026</span>
-        </div>
-        <div class="hero-stats-strip hero-anim hero-anim-d5">
-          <div class="hstat"><span class="hstat-val">6</span><span class="hstat-lbl">Projets GitHub</span></div>
-          <div class="hstat"><span class="hstat-val">Top 5%</span><span class="hstat-lbl">CTF · 812 équipes</span></div>
-          <div class="hstat"><span class="hstat-val">7+</span><span class="hstat-lbl">Langages</span></div>
-        </div>
-        <div class="hero-btns hero-anim hero-anim-d6">
-          <a href="#projects" class="btn btn-p" id="btn-projects">Voir mes projets →</a>
-          <a href="#contact" class="btn btn-o" id="btn-contact-hero">Contact</a>
-          <a href="CV_Paurtheiv_Krishna_Laxman.pdf" download class="btn btn-o" style="border-color:rgba(34,197,94,.5);color:var(--green);">⬇ CV</a>
-        </div>
-      </div>
+  <!-- Right side nav — Anmol style -->
+  <nav class="hero-nav">
+    <a href="#about" id="hnav-about">À propos</a>
+    <a href="#skills" id="hnav-skills">Compétences</a>
+    <a href="#projects" id="hnav-projects">Projets</a>
+    <a href="#experience" id="hnav-exp">Expériences</a>
+    <a href="#contact" id="hnav-contact">Contact</a>
+    <a href="CV_Paurtheiv_Krishna_Laxman.pdf" download id="hnav-cv">CV ↗</a>
+  </nav>
 
+  <!-- Title top-left -->
+  <div class="hero-title-wrap hero-anim hero-anim-d1">
+    <div class="hero-statement" id="hero-statement">Je construis des<br>systèmes qui <em>fonctionnent.</em></div>
+  </div>
+
+  <!-- Bottom-left info — name + role -->
+  <div class="hero-bottom-wrap">
+    <div class="hero-bottom-name hero-anim hero-anim-d2">
+      <span id="hero-greeting">Paurtheiv Krishna Laxman</span>
+    </div>
+    <div class="hero-bottom-role hero-anim hero-anim-d3" id="hero-role">
+      DÉVELOPPEUR · RÉSEAUX · CYBERSÉCURITÉ · ESEO 2026
+    </div>
+    <div class="hero-bottom-btns hero-anim hero-anim-d4">
+      <a href="#projects" class="btn btn-p" id="btn-projects">Voir mes projets →</a>
+      <a href="#contact" class="btn btn-o" id="btn-contact-hero">Contact</a>
+      <a href="CV_Paurtheiv_Krishna_Laxman.pdf" download class="btn btn-o" style="border-color:rgba(34,197,94,.4);color:var(--green);">⬇ CV</a>
     </div>
   </div>
-  <div class="scroll-hint"><div class="scroll-mouse"><div class="scroll-ball"></div></div><span class="scroll-hint-txt">Scroll</span></div>
+
+  <div class="scroll-hint"><div class="scroll-mouse"><div class="scroll-ball"></div></div><span class="scroll-hint-txt" id="scroll-hint-txt">Scroll</span></div>
 </section>
 
 
@@ -2611,68 +2706,107 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   });
 })();
 
+
 // ══════════════════════════════════════════════════════
-//  PARTICLE CANVAS (HERO)
+//  SPACE CANVAS (HERO BACKGROUND)
 // ══════════════════════════════════════════════════════
 (function() {
-  var canvas = document.getElementById('particle-canvas');
+  var canvas = document.getElementById('space-canvas');
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
-  var particles = [];
-  var N = 55;
+  var stars = [], nebulas = [];
+  var W, H;
 
   function resize() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
   resize();
   window.addEventListener('resize', resize);
 
-  for (var i = 0; i < N; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.5 + 0.5,
-      vx: (Math.random() - .5) * .4,
-      vy: (Math.random() - .5) * .4,
-      alpha: Math.random() * .5 + .1
-    });
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = canvas.width;
-      if (p.x > canvas.width) p.x = 0;
-      if (p.y < 0) p.y = canvas.height;
-      if (p.y > canvas.height) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(6,182,212,' + p.alpha + ')';
-      ctx.fill();
-
-      // Connect nearby
-      for (var j = i + 1; j < particles.length; j++) {
-        var q = particles[j];
-        var dx = p.x - q.x, dy = p.y - q.y;
-        var dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.strokeStyle = 'rgba(6,182,212,' + (.12 * (1 - dist/120)) + ')';
-          ctx.lineWidth = .5;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(q.x, q.y);
-          ctx.stroke();
-        }
-      }
+  // Generate stars
+  function initStars() {
+    stars = [];
+    for (var i = 0; i < 280; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.2 + 0.1,
+        a: Math.random() * 0.6 + 0.2,
+        speed: Math.random() * 0.08 + 0.02,
+        twinkle: Math.random() * Math.PI * 2,
+        twinkleSpeed: Math.random() * 0.02 + 0.005
+      });
     }
+    // Brighter star clusters
+    for (var i = 0; i < 40; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 2.2 + 0.8,
+        a: Math.random() * 0.5 + 0.4,
+        speed: Math.random() * 0.04 + 0.01,
+        twinkle: Math.random() * Math.PI * 2,
+        twinkleSpeed: Math.random() * 0.015 + 0.003
+      });
+    }
+    // Nebula blobs
+    nebulas = [
+      { x: W*0.15, y: H*0.35, r: W*0.28, color: 'rgba(6,182,212,0.045)' },
+      { x: W*0.75, y: H*0.65, r: W*0.32, color: 'rgba(107,72,212,0.06)' },
+      { x: W*0.5,  y: H*0.2,  r: W*0.22, color: 'rgba(30,90,200,0.04)' },
+      { x: W*0.85, y: H*0.25, r: W*0.18, color: 'rgba(6,182,212,0.03)' },
+    ];
+  }
+  initStars();
+  window.addEventListener('resize', initStars);
+
+  var frame = 0;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#050508';
+    ctx.fillRect(0, 0, W, H);
+
+    // Nebula blobs
+    nebulas.forEach(function(n) {
+      var g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+      g.addColorStop(0, n.color);
+      g.addColorStop(1, 'transparent');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+      ctx.fillStyle = g;
+      ctx.fill();
+    });
+
+    // Stars
+    stars.forEach(function(s) {
+      s.twinkle += s.twinkleSpeed;
+      var alpha = s.a * (0.7 + 0.3 * Math.sin(s.twinkle));
+      s.y -= s.speed;
+      if (s.y < -5) { s.y = H + 5; s.x = Math.random() * W; }
+
+      // Star glow for bigger ones
+      if (s.r > 1.5) {
+        var g2 = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r*4);
+        g2.addColorStop(0, 'rgba(180,210,255,' + alpha*0.4 + ')');
+        g2.addColorStop(1, 'transparent');
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r*4, 0, Math.PI*2);
+        ctx.fillStyle = g2;
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(220,235,255,' + alpha + ')';
+      ctx.fill();
+    });
+
+    frame++;
     requestAnimationFrame(draw);
   }
   draw();
 })();
-
 
 // ══════════════════════════════════════════════════════
 //  GLOBE 3D (CONTACT)
@@ -3292,6 +3426,19 @@ document.querySelectorAll('.sft').forEach(function(btn) {
     audioCtx.resume().then(runIntro);
   });
 })();
+
+  // Scroll nav visibility
+  (function(){
+    var nav = document.getElementById('scroll-nav');
+    var hero = document.getElementById('hero');
+    if(!nav||!hero) return;
+    function onScroll(){
+      if(window.scrollY > hero.offsetHeight * 0.6) nav.classList.add('visible');
+      else nav.classList.remove('visible');
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+  })();
+
 </script>
 
 </body>
