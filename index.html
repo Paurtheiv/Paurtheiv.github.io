@@ -2686,62 +2686,6 @@ if (contactForm) {
     if (btn) { btn.disabled = true; txt.textContent = 'Envoi...'; }
     var data = new FormData(contactForm);
     fetch('https://formsubmit.co/ajax/paurtheiv.laxman.fr@gmail.com', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: data
-    })
-    .then(function(res) { return res.json(); })
-    .then(function() {
-      if (success) { success.style.display = 'block'; }
-      contactForm.reset();
-      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
-    })
-    .catch(function() {
-      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
-      alert("Erreur lors de l'envoi. Réessayez.");
-    });
-  });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  if (lang === 'en') applyLang('en');
-});
-
-// Live clock
-(function() {
-  var cl = document.getElementById('footer-clock');
-  if (!cl) return;
-  function tick() {
-    var now = new Date();
-    var days = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
-    var d = days[now.getDay()];
-    var h = String(now.getHours()).padStart(2,'0');
-    var m = String(now.getMinutes()).padStart(2,'0');
-    var s = String(now.getSeconds()).padStart(2,'0');
-    cl.textContent = d + ' · ' + now.getDate() + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' + now.getFullYear() + ' · ' + h + ':' + m + ':' + s;
-  }
-  tick();
-  setInterval(tick, 1000);
-})();
-
-document.querySelectorAll('.sft').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.sft').forEach(function(b) { b.classList.remove('active'); });
-    btn.classList.add('active');
-    var f = btn.dataset.filter;
-    document.querySelectorAll('.sp').forEach(function(sp) {
-      if (f === 'all') { sp.classList.remove('hidden'); return; }
-
-var contactForm = document.getElementById('contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var btn = document.getElementById('btn-send');
-    var txt = document.getElementById('btn-send-txt');
-    var success = document.getElementById('form-success');
-    if (btn) { btn.disabled = true; txt.textContent = 'Envoi...'; }
-    var data = new FormData(contactForm);
-    fetch('https://formsubmit.co/ajax/paurtheiv.laxman.fr@gmail.com', {
       method: 'POST', headers: { 'Accept': 'application/json' }, body: data
     })
     .then(function(res) { return res.json(); })
@@ -2752,7 +2696,7 @@ if (contactForm) {
     })
     .catch(function() {
       if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
-      alert("Erreur lors de l'envoi. Réessayez.");
+      alert("Erreur lors de l'envoi. Reessayez.");
     });
   });
 }
@@ -2767,9 +2711,49 @@ document.addEventListener('DOMContentLoaded', function() {
   function tick() {
     var now = new Date();
     var days = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
-    cl.textContent = days[now.getDay()] + ' · ' + String(now.getDate()).padStart(2,'0') + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' + now.getFullYear() + ' · ' + String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
+    var dd = String(now.getDate()).padStart(2,'0');
+    var mm = String(now.getMonth()+1).padStart(2,'0');
+    var yy = now.getFullYear();
+    var hh = String(now.getHours()).padStart(2,'0');
+    var mi = String(now.getMinutes()).padStart(2,'0');
+    var ss = String(now.getSeconds()).padStart(2,'0');
+    cl.textContent = days[now.getDay()] + ' - ' + dd + '/' + mm + '/' + yy + ' - ' + hh + ':' + mi + ':' + ss;
   }
-  tick(); setInterval(tick, 1000);
+  tick();
+  setInterval(tick, 1000);
+})();
+
+(function() {
+  var counters = document.querySelectorAll('.hstat-val');
+  var started = false;
+  function animateCounters() {
+    if (started) return;
+    started = true;
+    counters.forEach(function(el) {
+      var raw = el.textContent.trim();
+      var num = parseFloat(raw.replace(/[^0-9.]/g, ''));
+      if (isNaN(num) || num === 0) return;
+      var suffix = raw.replace(/[0-9.]/g, '');
+      var duration = 1200;
+      var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        var current = Math.round(ease * num * 10) / 10;
+        el.textContent = (Number.isInteger(num) ? Math.round(current) : current) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  var strip = document.querySelector('.hero-stats-strip');
+  if (strip) {
+    var obs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) { animateCounters(); obs.disconnect(); }
+    }, { threshold: 0.5 });
+    obs.observe(strip);
+  }
 })();
 
 document.querySelectorAll('.sft').forEach(function(btn) {
@@ -2784,38 +2768,6 @@ document.querySelectorAll('.sft').forEach(function(btn) {
     });
   });
 });
-
-
-// ═══ PREMIUM: ANIMATED COUNTERS ═══
-(function() {
-  var counters = document.querySelectorAll('.hstat-val');
-  var started = false;
-  function animateCounters() {
-    if (started) return; started = true;
-    counters.forEach(function(el) {
-      var target = el.textContent.trim();
-      var num = parseFloat(target.replace(/[^0-9.]/g,''));
-      if (isNaN(num) || num === 0) return;
-      var suffix = target.replace(/[0-9.]/g,'');
-      var start = 0; var duration = 1200; var startTime = null;
-      function step(ts) {
-        if (!startTime) startTime = ts;
-        var progress = Math.min((ts - startTime) / duration, 1);
-        var ease = 1 - Math.pow(1 - progress, 3);
-        var current = Math.round(ease * num * 10) / 10;
-        el.textContent = (Number.isInteger(num) ? Math.round(current) : current) + suffix;
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    });
-  }
-  var heroObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) { if (e.isIntersecting) animateCounters(); });
-  }, { threshold: 0.5 });
-  var strip = document.querySelector('.hero-stats-strip');
-  if (strip) heroObs.observe(strip);
-})();
-
 
 </script>
 </body>
