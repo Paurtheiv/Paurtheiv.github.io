@@ -130,10 +130,11 @@ h2.section-h em { color: var(--accent); font-style: normal; }
 .hero-statement em { color: var(--accent); font-style: normal; }
 
 .hero-greeting {
-  font-size: 13px; color: var(--muted); font-weight: 500;
-  letter-spacing: 1px; margin-bottom: 12px;
+  font-size: 18px; color: var(--muted2); font-weight: 400;
+  margin-bottom: 14px;
   display: flex; align-items: center; gap: 8px;
 }
+.hero-greeting strong { color: var(--text); font-weight: 700; font-size: 20px; }
 .hero-greeting .hg-line { display: inline-block; width: 32px; height: 2px; background: var(--accent); flex-shrink: 0; }
 .hero-greeting .hg-text { display: inline; width: auto; height: auto; background: none; }
 
@@ -744,14 +745,7 @@ section { scroll-margin-top: 70px; }
 /* ═══════════════════════════════════════
    HERO DOT PULSE
 ═══════════════════════════════════════ */
-.hero-dot {
-  width: 12px; height: 12px; border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 12px var(--accent);
-  animation: pdot 2.2s ease-in-out infinite;
-  margin-bottom: 20px;
-  display: inline-block;
-}
+.hero-dot { display: none; }
 @keyframes pdot {
   0%,100% { box-shadow: 0 0 10px var(--accent); }
   50% { box-shadow: 0 0 24px var(--accent), 0 0 48px rgba(6,182,212,.3); }
@@ -1442,6 +1436,33 @@ h1.hero-name {
 </section>
 
 
+
+<!-- ══════════ MARQUEE ══════════ -->
+<div class="marquee-band" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="m-dot"></span> Développeur <span class="m-dot"></span></span>
+    <span class="marquee-item">Python · C++ · PHP · JS <span class="m-dot"></span></span>
+    <span class="marquee-item"><span class="m-dot"></span> Cybersécurité <span class="m-dot"></span></span>
+    <span class="marquee-item">CTF <span class="m-accent">Top 5%</span> · 812 équipes <span class="m-dot"></span></span>
+    <span class="marquee-item"><span class="m-dot"></span> Réseaux & Linux <span class="m-dot"></span></span>
+    <span class="marquee-item">ESEO Paris-Vélizy <span class="m-accent">2026</span> <span class="m-dot"></span></span>
+    <span class="marquee-item"><span class="m-dot"></span> Backend · API · MySQL <span class="m-dot"></span></span>
+    <span class="marquee-item">Alternance <span class="m-accent">Sept. 2026</span> <span class="m-dot"></span></span>
+    <span class="marquee-item"><span class="m-dot"></span> BTS CIEL A · <span class="m-accent">16/20</span> <span class="m-dot"></span></span>
+    <span class="marquee-item">Systèmes embarqués · ESP32 <span class="m-dot"></span></span>
+    <!-- duplicate -->
+    <span class="marquee-item"><span class="m-dot"></span> Développeur <span class="m-dot"></span></span>
+    <span class="marquee-item">Python · C++ · PHP · JS <span class="m-dot"></span></span>
+    <span class="marquee-item"><span class="m-dot"></span> Cybersécurité <span class="m-dot"></span></span>
+    <span class="marquee-item">CTF <span class="m-accent">Top 5%</span> · 812 équipes <span class="m-dot"></span></span>
+    <span class="marquee-item"><span class="m-dot"></span> Réseaux & Linux <span class="m-dot"></span></span>
+    <span class="marquee-item">ESEO Paris-Vélizy <span class="m-accent">2026</span> <span class="m-dot"></span></span>
+    <span class="marquee-item"><span class="m-dot"></span> Backend · API · MySQL <span class="m-dot"></span></span>
+    <span class="marquee-item">Alternance <span class="m-accent">Sept. 2026</span> <span class="m-dot"></span></span>
+    <span class="marquee-item"><span class="m-dot"></span> BTS CIEL A · <span class="m-accent">16/20</span> <span class="m-dot"></span></span>
+    <span class="marquee-item">Systèmes embarqués · ESP32 <span class="m-dot"></span></span>
+  </div>
+</div>
 
 <!-- ══════════ ABOUT ══════════ -->
 <section id="about">
@@ -2531,67 +2552,4 @@ function applyLang(l) {
 
 function toggleLang() { applyLang(lang === 'fr' ? 'en' : 'fr'); }
 
-var contactForm = document.getElementById('contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var btn = document.getElementById('btn-send');
-    var txt = document.getElementById('btn-send-txt');
-    var success = document.getElementById('form-success');
-    if (btn) { btn.disabled = true; txt.textContent = 'Envoi...'; }
-    var data = new FormData(contactForm);
-    fetch('https://formsubmit.co/ajax/paurtheiv.laxman.fr@gmail.com', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: data
-    })
-    .then(function(res) { return res.json(); })
-    .then(function() {
-      if (success) { success.style.display = 'block'; }
-      contactForm.reset();
-      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
-    })
-    .catch(function() {
-      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
-      alert("Erreur lors de l'envoi. Réessayez.");
-    });
-  });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  if (lang === 'en') applyLang('en');
-});
-
-// Live clock
-(function() {
-  var cl = document.getElementById('footer-clock');
-  if (!cl) return;
-  function tick() {
-    var now = new Date();
-    var days = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
-    var d = days[now.getDay()];
-    var h = String(now.getHours()).padStart(2,'0');
-    var m = String(now.getMinutes()).padStart(2,'0');
-    var s = String(now.getSeconds()).padStart(2,'0');
-    cl.textContent = d + ' · ' + now.getDate() + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' + now.getFullYear() + ' · ' + h + ':' + m + ':' + s;
-  }
-  tick();
-  setInterval(tick, 1000);
-})();
-
-document.querySelectorAll('.sft').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.sft').forEach(function(b) { b.classList.remove('active'); });
-    btn.classList.add('active');
-    var f = btn.dataset.filter;
-    document.querySelectorAll('.sp').forEach(function(sp) {
-      if (f === 'all') { sp.classList.remove('hidden'); return; }
-      var has = sp.classList.contains('lvl-' + (f === 'master' ? 'master' : f === 'used' ? 'used' : 'notion'));
-      sp.classList.toggle('hidden', !has);
-    });
-  });
-});
-
-</script>
-</body>
-</html>
+var contactForm = document.getE
