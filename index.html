@@ -1408,7 +1408,7 @@ h1.hero-name {
     <div class="hero-inner">
       <div>
         <div class="hero-dot"></div>
-        <div class="hero-statement hero-anim hero-anim-d1">Je construis des<br>systèmes qui <em>fonctionnent.</em></div>
+        <div class="hero-statement hero-anim hero-anim-d1" id="hero-statement">Je construis des<br>systèmes qui <em>fonctionnent.</em></div>
         <div class="hero-greeting hero-anim hero-anim-d2" id="hero-greeting-div"><span class="hg-text" id="hero-greeting">Bonjour, je suis</span> <strong style="color:var(--text)">Paurtheiv Krishna Laxman</strong></div>
         <div class="hero-role hero-anim hero-anim-d3" id="hero-role">Développeur · Réseaux · Cybersécurité · Systèmes embarqués</div>
 
@@ -2310,6 +2310,7 @@ var T = {
     "nav-contact": "Contact",
     "nav-cta": "Me contacter",
     "lang-btn": "EN",
+    "hero-statement": "Je construis des<br>systèmes qui <em>fonctionnent.</em>",
     "hero-greeting": "Bonjour, je suis",
     "hero-role": "Développeur · Réseaux · Cybersécurité · Systèmes embarqués",
     "hero-desc": "",
@@ -2433,6 +2434,7 @@ var T = {
     "nav-cta": "Contact me",
     "lang-btn": "FR",
     "hero-greeting": "Hello, I'm",
+    "hero-statement": "I build systems<br>that actually <em>work.</em>",
     "hero-role": "Developer · Networks · Cybersecurity · Embedded Systems",
     "hero-desc": "",
     "badge-eseo": "✓ Admitted ESEO Paris 2026",
@@ -2539,7 +2541,7 @@ function applyLang(l) {
   lang = l;
   localStorage.setItem('lang', l);
   var dict = T[l];
-  var htmlKeys = ['hero-desc','pf-desc','footer-l','footer-r','contact-p','about-p1','about-p2','about-p3','contact-h'];
+  var htmlKeys = ['hero-statement','hero-desc','pf-desc','footer-l','footer-r','contact-p','about-p1','about-p2','about-p3','contact-h'];
   Object.keys(dict).forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
@@ -2598,6 +2600,54 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   tick();
   setInterval(tick, 1000);
+})();
+
+document.querySelectorAll('.sft').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.sft').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.dataset.filter;
+    document.querySelectorAll('.sp').forEach(function(sp) {
+      if (f === 'all') { sp.classList.remove('hidden'); return; }
+
+var contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('btn-send');
+    var txt = document.getElementById('btn-send-txt');
+    var success = document.getElementById('form-success');
+    if (btn) { btn.disabled = true; txt.textContent = 'Envoi...'; }
+    var data = new FormData(contactForm);
+    fetch('https://formsubmit.co/ajax/paurtheiv.laxman.fr@gmail.com', {
+      method: 'POST', headers: { 'Accept': 'application/json' }, body: data
+    })
+    .then(function(res) { return res.json(); })
+    .then(function() {
+      if (success) { success.style.display = 'block'; }
+      contactForm.reset();
+      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
+    })
+    .catch(function() {
+      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
+      alert("Erreur lors de l'envoi. Réessayez.");
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (lang === 'en') applyLang('en');
+});
+
+(function() {
+  var cl = document.getElementById('footer-clock');
+  if (!cl) return;
+  function tick() {
+    var now = new Date();
+    var days = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+    cl.textContent = days[now.getDay()] + ' · ' + String(now.getDate()).padStart(2,'0') + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' + now.getFullYear() + ' · ' + String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
 })();
 
 document.querySelectorAll('.sft').forEach(function(btn) {
