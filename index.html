@@ -3043,32 +3043,35 @@ document.querySelectorAll('.sft').forEach(function(btn) {
 
   function playImpact(){
     var ac=audioCtx;var now=ac.currentTime;
-    // Chord already started in tick() — just add sub punch + boost existing swell
-    // Sub warmth punch
+    // Doux et premium — accord C maj qui s'ouvre lentement comme Apple/luxury
+    // Trois notes qui entrent en decale, tres doucement
+    var notes=[196,261,329,392]; // G3 C4 E4 G4
+    notes.forEach(function(freq,i){
+      var o=ac.createOscillator();o.type='sine';
+      o.frequency.setValueAtTime(freq,now+i*0.12);
+      var g=ac.createGain();
+      g.gain.setValueAtTime(0,now+i*0.12);
+      g.gain.linearRampToValueAtTime(0.08-i*0.012,now+i*0.12+0.4);
+      g.gain.linearRampToValueAtTime(0.05-i*0.008,now+i*0.12+1.5);
+      g.gain.linearRampToValueAtTime(0,now+i*0.12+4.0);
+      o.connect(g);g.connect(ac.destination);
+      o.start(now+i*0.12);o.stop(now+i*0.12+4.2);
+    });
+    // Sous-grave tres doux — warmth sans punch
     var sub=ac.createOscillator();sub.type='sine';sub.frequency.value=65;
     var sg=ac.createGain();
-    sg.gain.setValueAtTime(0,now);sg.gain.linearRampToValueAtTime(0.55,now+0.05);
-    sg.gain.linearRampToValueAtTime(0.25,now+0.5);sg.gain.linearRampToValueAtTime(0,now+1.6);
-    sub.connect(sg);sg.connect(ac.destination);sub.start(now);sub.stop(now+1.8);
-    // Reinforce chord with brighter layer — continuity boost
-    [261,329,392].forEach(function(freq,i){
-      var o=ac.createOscillator();o.type='sine';o.frequency.value=freq;
-      var g=ac.createGain();
-      g.gain.setValueAtTime(0,now);
-      g.gain.linearRampToValueAtTime(0.1-i*0.025,now+0.12);
-      g.gain.linearRampToValueAtTime(0.06,now+0.8);
-      g.gain.linearRampToValueAtTime(0,now+3.2);
-      o.connect(g);g.connect(ac.destination);
-      o.start(now);o.stop(now+3.4);
-    });
-    // Soft textured breath — not a sharp hit
-    var len=Math.floor(ac.sampleRate*0.25);
-    var buf=ac.createBuffer(1,len,ac.sampleRate);var d=buf.getChannelData(0);
-    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.exp(-i/(ac.sampleRate*0.12))*0.25;
-    var ns=ac.createBufferSource();ns.buffer=buf;
-    var nf=ac.createBiquadFilter();nf.type='lowpass';nf.frequency.value=400;
-    var ng=ac.createGain();ng.gain.value=0.5;
-    ns.connect(nf);nf.connect(ng);ng.connect(ac.destination);ns.start(now);
+    sg.gain.setValueAtTime(0,now);
+    sg.gain.linearRampToValueAtTime(0.18,now+0.35);
+    sg.gain.linearRampToValueAtTime(0.08,now+1.2);
+    sg.gain.linearRampToValueAtTime(0,now+3.0);
+    sub.connect(sg);sg.connect(ac.destination);sub.start(now);sub.stop(now+3.2);
+    // Shimmer tres haute frequence — comme une cymbale effleuree
+    var sh=ac.createOscillator();sh.type='sine';sh.frequency.value=6800;
+    var shg=ac.createGain();
+    shg.gain.setValueAtTime(0,now);
+    shg.gain.linearRampToValueAtTime(0.022,now+0.08);
+    shg.gain.linearRampToValueAtTime(0,now+1.8);
+    sh.connect(shg);shg.connect(ac.destination);sh.start(now);sh.stop(now+2.0);
   }
   var speeds=[220,210,200,190,175,160,145,130,115,100,85,72,60,50,41,33,26,21,17,13,10,8,6,5,4,4,3,3,3,3];
 
