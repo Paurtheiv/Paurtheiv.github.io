@@ -2234,9 +2234,10 @@ h1.hero-name {
 //  GLOBE 3D (CONTACT)
 // ══════════════════════════════════════════════════════
 (function() {
+  try {
   var canvas = document.getElementById('globe-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
-  function getSize() { var p = canvas.parentElement; return { w: p.offsetWidth||500, h: p.offsetHeight||500 }; }
+  function getSize() { var p = canvas.parentElement; return { w: p.offsetWidth||500, h: Math.max(p.offsetHeight,500) }; }
   var sz = getSize();
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -2271,6 +2272,7 @@ h1.hero-name {
   window.addEventListener('mousemove',function(e){mouseY=(e.clientY/window.innerHeight-.5);},{passive:true});
   window.addEventListener('resize',function(){var s=getSize();cam.aspect=s.w/s.h;cam.updateProjectionMatrix();renderer.setSize(s.w,s.h);},{passive:true});
   (function loop(){requestAnimationFrame(loop);earth.rotation.y+=.002;earth.rotation.x+=(mouseY*.15-earth.rotation.x)*.02;renderer.render(scene,cam);})();
+  } catch(e) { console.warn('Globe 3D error:', e); }
 })();
 
 window.addEventListener('scroll', function() {
@@ -2422,6 +2424,3 @@ var T = {
     "nav-skills": "Skills",
     "nav-projects": "Projects",
     "nav-exp": "Experience",
-    "nav-edu": "Education",
-    "nav-contact": "Contact",
-    "nav-ct
