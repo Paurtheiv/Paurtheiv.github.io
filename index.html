@@ -1805,6 +1805,53 @@ input:focus, textarea:focus {
   .hero-title-wrap { top: 80px; left: 24px; right: 24px; max-width: 100%; }
   .hero-bottom-wrap { bottom: 80px; left: 24px; right: 24px; }
 }
+
+/* Hamburger button */
+.ham-btn {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 6px; z-index: 1001;
+}
+.ham-btn span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--text); border-radius: 2px;
+  transition: all 0.3s;
+}
+.ham-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.ham-btn.open span:nth-child(2) { opacity: 0; }
+.ham-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed; top: 56px; left: 0; right: 0;
+  background: rgba(7,7,8,0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  flex-direction: column; padding: 24px 28px 28px;
+  gap: 20px; z-index: 999;
+  transform: translateY(-10px); opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.mobile-menu.open {
+  transform: translateY(0); opacity: 1;
+}
+.mobile-menu a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px; font-weight: 500;
+  color: var(--text); text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+/* Hero nav hidden on mobile, show hamburger */
+@media(max-width:768px) {
+  .hero-nav { display: none !important; }
+  .ham-btn { display: flex !important; }
+  .mobile-menu { display: flex; }
+  #scroll-nav .nav-links { display: none !important; }
+  #scroll-nav .nav-cta { display: none !important; }
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
@@ -1841,8 +1888,27 @@ input:focus, textarea:focus {
     <li><a href="#experience" id="nav-exp">Expériences</a></li>
     <li><a href="#contact" id="nav-contact">Contact</a></li>
   </ul>
-  <a href="CV_Paurtheiv_Krishna_Laxman.pdf" download class="nav-cta" id="nav-cta">CV</a>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button id="lang-btn" onclick="toggleLang()">EN</button>
+    <a href="CV_Paurtheiv_Krishna_Laxman.pdf" download class="nav-cta" id="nav-cta">CV</a>
+  </div>
+  <!-- Mobile hamburger -->
+  <button class="ham-btn" id="ham-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMobile()">À propos</a>
+  <a href="#skills" onclick="closeMobile()">Compétences</a>
+  <a href="#projects" onclick="closeMobile()">Projets</a>
+  <a href="#experience" onclick="closeMobile()">Expériences</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
+    <button id="lang-btn-mobile" onclick="toggleLang();closeMobile()">EN</button>
+    <a href="CV_Paurtheiv_Krishna_Laxman.pdf" download class="nav-cta">CV</a>
+  </div>
+</div>
 <div id="mobile-menu">
   <a href="#about" onclick="document.getElementById('mobile-menu').classList.remove('open')">À propos</a>
   <a href="#skills" onclick="document.getElementById('mobile-menu').classList.remove('open')">Compétences</a>
@@ -3437,6 +3503,32 @@ document.querySelectorAll('.sft').forEach(function(btn) {
       else nav.classList.remove('visible');
     }
     window.addEventListener('scroll', onScroll, {passive:true});
+  })();
+
+
+  // Hamburger menu
+  (function(){
+    var btn = document.getElementById('ham-btn');
+    var menu = document.getElementById('mobile-menu');
+    if(!btn||!menu) return;
+    btn.addEventListener('click', function(){
+      btn.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+    window.closeMobile = function(){
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+    };
+    // Sync lang button mobile
+    var origToggle = window.toggleLang;
+    if(origToggle) {
+      window.toggleLang = function(){
+        origToggle();
+        var mb = document.getElementById('lang-btn-mobile');
+        var lb = document.getElementById('lang-btn');
+        if(mb && lb) mb.textContent = lb.textContent;
+      };
+    }
   })();
 
 </script>
