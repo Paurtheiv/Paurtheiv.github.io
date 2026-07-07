@@ -2988,111 +2988,91 @@ document.querySelectorAll('.sft').forEach(function(btn) {
 
   function playFlip(progress){
     var ac=audioCtx;var now=ac.currentTime;
-    var len=Math.floor(ac.sampleRate*0.018);
+    var len=Math.floor(ac.sampleRate*0.015);
     var buf=ac.createBuffer(1,len,ac.sampleRate);
     var d=buf.getChannelData(0);
-    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,4)*0.45;
+    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,5)*0.3;
     var src=ac.createBufferSource();src.buffer=buf;
-    var hi=ac.createBiquadFilter();hi.type='highpass';hi.frequency.value=3000+progress*5000;
-    var g=ac.createGain();g.gain.value=0.2+progress*0.55;
+    var hi=ac.createBiquadFilter();hi.type='highpass';hi.frequency.value=4000+progress*6000;
+    var g=ac.createGain();g.gain.value=0.15+progress*0.4;
     src.connect(hi);hi.connect(g);g.connect(ac.destination);src.start(now);
+  }
+
+  function synthNote(ac,freq,start,dur,vol,type){
+    var o=ac.createOscillator();o.type=type||'sine';o.frequency.value=freq;
+    var g=ac.createGain();
+    g.gain.setValueAtTime(0,start);
+    g.gain.linearRampToValueAtTime(vol,start+0.06);
+    g.gain.linearRampToValueAtTime(vol*0.7,start+dur*0.4);
+    g.gain.linearRampToValueAtTime(0,start+dur);
+    o.connect(g);g.connect(ac.destination);
+    o.start(start);o.stop(start+dur+0.05);
   }
 
   function playRumble(t0,dur){
     var ac=audioCtx;
-    // Inception-style rising drone — single long note that builds
-    var drone=ac.createOscillator();drone.type='sine';
-    drone.frequency.setValueAtTime(32,t0);
-    drone.frequency.linearRampToValueAtTime(48,t0+dur*0.6);
-    drone.frequency.linearRampToValueAtTime(42,t0+dur);
-    var dg=ac.createGain();
-    dg.gain.setValueAtTime(0,t0);
-    dg.gain.linearRampToValueAtTime(0.08,t0+0.8);
-    dg.gain.linearRampToValueAtTime(0.25,t0+dur*0.7);
-    dg.gain.linearRampToValueAtTime(0.38,t0+dur*0.92);
-    dg.gain.linearRampToValueAtTime(0,t0+dur);
-    drone.connect(dg);dg.connect(ac.destination);
-    drone.start(t0);drone.stop(t0+dur+0.1);
-
-    // BWAAAAM horn layers — staggered entries, minor intervals
-    var horns=[65,77,98,116]; // C2 Eb2 G2 Bb2 — dark minor chord
-    horns.forEach(function(freq,i){
-      var o=ac.createOscillator();o.type='sawtooth';
-      o.frequency.setValueAtTime(freq,t0+dur*0.15+i*0.18);
-      o.frequency.linearRampToValueAtTime(freq*0.985,t0+dur);
-      var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=400+i*120;f.Q.value=0.8;
+    // Piano-like celesta motif — simple 4-note ascending pattern, repeating and building
+    var motif=[261,329,392,523]; // C4 E4 G4 C5
+    var noteLen=0.22;
+    var repeat=Math.floor(dur/(motif.length*noteLen*1.1));
+    for(var r=0;r<repeat;r++){
+      var rStart=t0+r*(motif.length*noteLen*1.1);
+      var rVol=0.04+r*(0.06/Math.max(repeat-1,1));
+      motif.forEach(function(freq,i){
+        var ns=rStart+i*noteLen;
+        // piano tone: triangle + sine
+        synthNote(ac,freq,ns,noteLen*1.4,rVol,'triangle');
+        synthNote(ac,freq*2,ns,noteLen*0.8,rVol*0.2,'sine');
+      });
+    }
+    // Subtle string pad growing underneath
+    [196,247,294].forEach(function(freq,i){
+      var o=ac.createOscillator();o.type='triangle';
+      o.frequency.setValueAtTime(freq,t0+dur*0.3);
+      o.frequency.linearRampToValueAtTime(freq*1.01,t0+dur);
       var g=ac.createGain();
-      g.gain.setValueAtTime(0,t0+dur*0.15+i*0.18);
-      g.gain.linearRampToValueAtTime(0.07+i*0.01,t0+dur*0.35+i*0.18);
-      g.gain.linearRampToValueAtTime(0.12+i*0.015,t0+dur*0.75);
+      g.gain.setValueAtTime(0,t0+dur*0.25+i*0.2);
+      g.gain.linearRampToValueAtTime(0.03+i*0.01,t0+dur*0.6);
+      g.gain.linearRampToValueAtTime(0.07,t0+dur*0.9);
       g.gain.linearRampToValueAtTime(0,t0+dur);
+      var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=600;
       o.connect(f);f.connect(g);g.connect(ac.destination);
-      o.start(t0+dur*0.15+i*0.18);o.stop(t0+dur+0.1);
+      o.start(t0+dur*0.25+i*0.2);o.stop(t0+dur+0.1);
     });
-
-    // Tension string tremolo
-    var str=ac.createOscillator();str.type='triangle';
-    str.frequency.setValueAtTime(196,t0+dur*0.3);
-    str.frequency.linearRampToValueAtTime(233,t0+dur*0.8);
-    str.frequency.linearRampToValueAtTime(220,t0+dur);
-    var tremoloRate=ac.createOscillator();tremoloRate.type='sine';
-    tremoloRate.frequency.setValueAtTime(6,t0+dur*0.3);
-    tremoloRate.frequency.linearRampToValueAtTime(14,t0+dur);
-    var tremoloGain=ac.createGain();tremoloGain.gain.value=0.04;
-    var strGain=ac.createGain();strGain.gain.setValueAtTime(0,t0+dur*0.3);
-    strGain.gain.linearRampToValueAtTime(0.07,t0+dur*0.55);
-    strGain.gain.linearRampToValueAtTime(0.14,t0+dur*0.9);
-    strGain.gain.linearRampToValueAtTime(0,t0+dur);
-    tremoloRate.connect(tremoloGain);tremoloGain.connect(strGain.gain);
-    str.connect(strGain);strGain.connect(ac.destination);
-    str.start(t0+dur*0.3);str.stop(t0+dur+0.1);
-    tremoloRate.start(t0+dur*0.3);tremoloRate.stop(t0+dur+0.1);
   }
 
   function playImpact(){
     var ac=audioCtx;var now=ac.currentTime;
-    // THE BWAAAAM — full Inception hit
-    var bwFreqs=[55,65,82,98,130]; // deep minor chord stack
-    bwFreqs.forEach(function(freq,i){
-      var o=ac.createOscillator();o.type='sawtooth';
-      o.frequency.setValueAtTime(freq*1.02,now);
-      o.frequency.linearRampToValueAtTime(freq,now+0.08);
-      o.frequency.linearRampToValueAtTime(freq*0.96,now+2.5);
-      var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=300+i*200;f.Q.value=1.2;
+    // Swell resolution — C major chord, hopeful not dark
+    var chordFreqs=[130,164,196,261,329]; // C3 E3 G3 C4 E4
+    chordFreqs.forEach(function(freq,i){
+      var o=ac.createOscillator();o.type='triangle';
+      o.frequency.setValueAtTime(freq,now);
+      o.frequency.linearRampToValueAtTime(freq*0.998,now+3.0);
+      var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=800+i*200;
       var g=ac.createGain();
-      g.gain.setValueAtTime(0,now);
-      g.gain.linearRampToValueAtTime(0.22-i*0.02,now+0.06);
-      g.gain.linearRampToValueAtTime(0.15-i*0.015,now+0.5);
-      g.gain.linearRampToValueAtTime(0,now+2.8);
+      g.gain.setValueAtTime(0,now+i*0.04);
+      g.gain.linearRampToValueAtTime(0.15-i*0.015,now+0.25+i*0.04);
+      g.gain.linearRampToValueAtTime(0.1-i*0.01,now+1.2);
+      g.gain.linearRampToValueAtTime(0,now+3.5);
       o.connect(f);f.connect(g);g.connect(ac.destination);
-      o.start(now);o.stop(now+3.0);
+      o.start(now+i*0.04);o.stop(now+3.6);
     });
-    // Sub boom
-    var sub=ac.createOscillator();sub.type='sine';
-    sub.frequency.setValueAtTime(42,now);
-    sub.frequency.linearRampToValueAtTime(22,now+1.2);
+    // Sub warmth
+    var sub=ac.createOscillator();sub.type='sine';sub.frequency.value=65;
     var sg=ac.createGain();
-    sg.gain.setValueAtTime(0,now);
-    sg.gain.linearRampToValueAtTime(1.0,now+0.04);
-    sg.gain.linearRampToValueAtTime(0.6,now+0.3);
-    sg.gain.linearRampToValueAtTime(0,now+1.4);
-    sub.connect(sg);sg.connect(ac.destination);sub.start(now);sub.stop(now+1.5);
-    // Impact noise
-    var len=Math.floor(ac.sampleRate*0.3);
+    sg.gain.setValueAtTime(0,now);sg.gain.linearRampToValueAtTime(0.5,now+0.08);
+    sg.gain.linearRampToValueAtTime(0.3,now+0.6);sg.gain.linearRampToValueAtTime(0,now+1.8);
+    sub.connect(sg);sg.connect(ac.destination);sub.start(now);sub.stop(now+2.0);
+    // Soft noise breath
+    var len=Math.floor(ac.sampleRate*0.2);
     var buf=ac.createBuffer(1,len,ac.sampleRate);var d=buf.getChannelData(0);
-    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.exp(-i/(ac.sampleRate*0.06));
+    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.exp(-i/(ac.sampleRate*0.08))*0.3;
     var ns=ac.createBufferSource();ns.buffer=buf;
-    var nf=ac.createBiquadFilter();nf.type='bandpass';nf.frequency.value=300;nf.Q.value=0.4;
-    var ng=ac.createGain();ng.gain.value=1.0;
+    var nf=ac.createBiquadFilter();nf.type='bandpass';nf.frequency.value=500;nf.Q.value=0.6;
+    var ng=ac.createGain();ng.gain.value=0.6;
     ns.connect(nf);nf.connect(ng);ng.connect(ac.destination);ns.start(now);
-    // Reverb tail shimmer
-    var sh=ac.createOscillator();sh.type='sine';
-    sh.frequency.setValueAtTime(3500,now+0.03);
-    sh.frequency.linearRampToValueAtTime(800,now+1.5);
-    var shg=ac.createGain();shg.gain.setValueAtTime(0.06,now+0.03);shg.gain.linearRampToValueAtTime(0,now+2.0);
-    sh.connect(shg);shg.connect(ac.destination);sh.start(now+0.03);sh.stop(now+2.1);
   }
-
   var speeds=[220,210,200,190,175,160,145,130,115,100,85,72,60,50,41,33,26,21,17,13,10,8,6,5,4,4,3,3,3,3];
 
   function runIntro(){
