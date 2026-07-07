@@ -1528,10 +1528,39 @@ nav {
   .closing-svg { width: 200px; height: 200px; }
 }
 
+
+/* ===== MARVEL INTRO OVERLAY ===== */
+#intro-overlay{position:fixed;inset:0;z-index:99999;background:#000;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity 0.8s ease}
+#intro-overlay.fade-out{opacity:0;pointer-events:none}
+#intro-canvas{position:absolute;inset:0;width:100%;height:100%}
+#intro-logo{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity 0.7s ease;pointer-events:none}
+#intro-logo-name{font-family:'DM Serif Display',serif;font-size:clamp(40px,9vw,96px);font-weight:400;font-style:italic;color:#fff;letter-spacing:4px;text-align:center;line-height:1}
+#intro-logo-sub{font-family:'Space Grotesk',sans-serif;font-size:clamp(11px,1.8vw,15px);color:#555;letter-spacing:10px;text-align:center;margin-top:14px;text-transform:uppercase}
+#intro-start{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+#intro-start-icon{width:72px;height:72px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;transition:border-color 0.3s}
+#intro-overlay:hover #intro-start-icon{border-color:rgba(255,255,255,0.6)}
+#intro-start-txt{font-family:'Space Grotesk',sans-serif;font-size:12px;color:#444;letter-spacing:4px;text-transform:uppercase}
+/* ============================= */
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
 <body>
+<!-- MARVEL INTRO OVERLAY -->
+<div id="intro-overlay">
+  <canvas id="intro-canvas"></canvas>
+  <div id="intro-logo">
+    <div id="intro-logo-name">Paurtheiv</div>
+    <div id="intro-logo-sub">Developer · Networks · Security</div>
+  </div>
+  <div id="intro-start">
+    <div id="intro-start-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="7,3 21,12 7,21"/></svg>
+    </div>
+    <div id="intro-start-txt">Cliquez pour entrer</div>
+  </div>
+</div>
+<!-- END INTRO OVERLAY -->
+
 
 <div id="cur"></div>
 <div id="cur-ring"></div>
@@ -2890,5 +2919,155 @@ document.querySelectorAll('.sft').forEach(function(btn) {
 });
 
 </script>
+
+<script>
+(function(){
+  var overlay=document.getElementById('intro-overlay');
+  var canvas=document.getElementById('intro-canvas');
+  var ctx=canvas.getContext('2d');
+  var logoEl=document.getElementById('intro-logo');
+  var startEl=document.getElementById('intro-start');
+  var audioCtx=null;
+  var running=false;
+
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+
+  var frames=[
+    {type:'code',lines:['const gate = new SmartGate();','gate.scan(rfid).then(user => {','  if(user.clearance >= ZONE_1) {','    door.unlock(); led.green();','  }','});'],color:'#00ff88'},
+    {type:'grid',label:'RFID · BIOMETRIC · ESP32',color:'#06b6d4'},
+    {type:'code',lines:['SELECT users.name, access_log.*','FROM access_log','JOIN users ON uid = users.id','WHERE zone = 1 AND ts > NOW()-3600'],color:'#f59e0b'},
+    {type:'noise',label:'SMART GATE JAURÈS',color:'#fff'},
+    {type:'code',lines:['<Router>','  <Dashboard path="/admin"/>','  <Access path="/zone/:id"/>','  <Logs path="/history"/>','</Router>'],color:'#a78bfa'},
+    {type:'grid',label:'PHP · MySQL · JavaScript',color:'#06b6d4'},
+    {type:'code',lines:['nmap -sV 192.168.1.0/24','[+] 192.168.1.10 open','[+] 80/tcp  http','[+] 22/tcp  ssh','[+] 3306/tcp mysql'],color:'#00ff88'},
+    {type:'noise',label:'BTS CIEL · ARGENTEUIL',color:'#fff'},
+    {type:'code',lines:['interface FastEthernet0/0','  ip address 10.0.1.1','  no shutdown','router ospf 1','  network 10.0.0.0'],color:'#f59e0b'},
+    {type:'grid',label:'CISCO · RÉSEAUX · SÉCURITÉ',color:'#06b6d4'},
+  ];
+
+  function drawFrame(f){
+    var w=canvas.width,h=canvas.height;
+    ctx.fillStyle='#000';ctx.fillRect(0,0,w,h);
+    if(f.type==='code'){
+      ctx.fillStyle='#060606';ctx.fillRect(0,0,w,h);
+      for(var y=0;y<h;y+=4){ctx.fillStyle='rgba(0,0,0,0.2)';ctx.fillRect(0,y,w,1);}
+      var sz=Math.min(w*0.022,15);
+      ctx.font=sz+'px "Courier New",monospace';
+      var sy=h/2-(f.lines.length*sz*1.7)/2;
+      for(var i=0;i<f.lines.length;i++){
+        ctx.globalAlpha=i===0?1:i===f.lines.length-1?0.3:0.7;
+        ctx.fillStyle=f.color;
+        ctx.fillText(f.lines[i],w*0.08,sy+i*sz*1.7);
+      }
+      ctx.globalAlpha=1;
+    } else if(f.type==='grid'){
+      ctx.fillStyle='#030303';ctx.fillRect(0,0,w,h);
+      var step=Math.min(w,h)/12;
+      ctx.strokeStyle=f.color+'15';ctx.lineWidth=0.5;
+      for(var x=0;x<w;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+      for(var yy=0;yy<h;yy+=step){ctx.beginPath();ctx.moveTo(0,yy);ctx.lineTo(w,yy);ctx.stroke();}
+      for(var i=0;i<50;i++){
+        var gx=Math.floor(Math.random()*(w/step))*step;
+        var gy=Math.floor(Math.random()*(h/step))*step;
+        ctx.fillStyle=f.color+(Math.random()>0.7?'bb':'33');
+        ctx.fillRect(gx-2,gy-2,4,4);
+      }
+      ctx.fillStyle=f.color;ctx.font='bold '+Math.min(w*0.032,20)+'px Arial';
+      ctx.textAlign='center';ctx.fillText(f.label,w/2,h/2+6);ctx.textAlign='left';
+    } else {
+      var id=ctx.createImageData(w,h);var d=id.data;
+      for(var i=0;i<d.length;i+=4){var v=Math.random()*90;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255;}
+      ctx.putImageData(id,0,0);
+      ctx.fillStyle='rgba(0,0,0,0.58)';ctx.fillRect(0,0,w,h);
+      ctx.fillStyle='#fff';ctx.font='bold '+Math.min(w*0.055,38)+'px Arial Black,Arial';
+      ctx.textAlign='center';ctx.fillText(f.label,w/2,h/2+8);ctx.textAlign='left';
+    }
+  }
+
+  function playFlip(progress){
+    var ac=audioCtx;var now=ac.currentTime;
+    var buf=ac.createBuffer(1,Math.floor(ac.sampleRate*0.04),ac.sampleRate);
+    var d=buf.getChannelData(0);
+    for(var i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,1.5)*0.3;
+    var src=ac.createBufferSource();src.buffer=buf;
+    var filt=ac.createBiquadFilter();filt.type='bandpass';filt.frequency.value=800+progress*3200;filt.Q.value=1.5;
+    var g=ac.createGain();g.gain.value=0.35+progress*0.5;
+    src.connect(filt);filt.connect(g);g.connect(ac.destination);src.start(now);
+  }
+
+  function playRumble(t0,dur){
+    var ac=audioCtx;
+    var o=ac.createOscillator();o.type='sawtooth';
+    o.frequency.setValueAtTime(40,t0);o.frequency.linearRampToValueAtTime(85,t0+dur*0.7);o.frequency.linearRampToValueAtTime(55,t0+dur);
+    var g=ac.createGain();g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(0.13,t0+0.4);g.gain.linearRampToValueAtTime(0.25,t0+dur*0.75);g.gain.linearRampToValueAtTime(0,t0+dur);
+    var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=280;
+    o.connect(f);f.connect(g);g.connect(ac.destination);o.start(t0);o.stop(t0+dur+0.1);
+    var o2=ac.createOscillator();o2.type='triangle';
+    o2.frequency.setValueAtTime(110,t0+dur*0.25);o2.frequency.linearRampToValueAtTime(300,t0+dur);
+    var g2=ac.createGain();g2.gain.setValueAtTime(0,t0+dur*0.2);g2.gain.linearRampToValueAtTime(0.07,t0+dur*0.5);g2.gain.linearRampToValueAtTime(0.2,t0+dur);g2.gain.linearRampToValueAtTime(0,t0+dur+0.05);
+    o2.connect(g2);g2.connect(ac.destination);o2.start(t0+dur*0.2);o2.stop(t0+dur+0.15);
+  }
+
+  function playImpact(){
+    var ac=audioCtx;var now=ac.currentTime;
+    var buf=ac.createBuffer(1,Math.floor(ac.sampleRate*1.2),ac.sampleRate);
+    var d=buf.getChannelData(0);
+    for(var i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.exp(-i/ac.sampleRate*3)*0.85;
+    var src=ac.createBufferSource();src.buffer=buf;
+    var g=ac.createGain();g.gain.value=1.1;
+    var filt=ac.createBiquadFilter();filt.type='lowpass';filt.frequency.value=600;
+    src.connect(filt);filt.connect(g);g.connect(ac.destination);src.start(now);
+    var sub=ac.createOscillator();sub.type='sine';
+    sub.frequency.setValueAtTime(55,now);sub.frequency.linearRampToValueAtTime(28,now+0.8);
+    var sg=ac.createGain();sg.gain.setValueAtTime(0.75,now);sg.gain.linearRampToValueAtTime(0,now+1.0);
+    sub.connect(sg);sg.connect(ac.destination);sub.start(now);sub.stop(now+1.1);
+    var sh=ac.createOscillator();sh.type='sine';
+    sh.frequency.setValueAtTime(3000,now);sh.frequency.linearRampToValueAtTime(1200,now+0.5);
+    var shg=ac.createGain();shg.gain.setValueAtTime(0.12,now);shg.gain.linearRampToValueAtTime(0,now+0.6);
+    sh.connect(shg);shg.connect(ac.destination);sh.start(now);sh.stop(now+0.7);
+  }
+
+  var speeds=[220,210,200,190,175,160,145,130,115,100,85,72,60,50,41,33,26,21,17,13,10,8,6,5,4,4,3,3,3,3];
+
+  function runIntro(){
+    if(running)return;running=true;
+    startEl.style.display='none';
+    logoEl.style.opacity='0';logoEl.style.transition='none';
+    var totalDur=speeds.reduce(function(a,b){return a+b;},0)/1000;
+    playRumble(audioCtx.currentTime,totalDur);
+    var fi=0,si=0;
+    function tick(){
+      if(si>=speeds.length){
+        ctx.fillStyle='#000';ctx.fillRect(0,0,canvas.width,canvas.height);
+        setTimeout(function(){
+          playImpact();
+          logoEl.style.transition='opacity 0.75s ease';
+          logoEl.style.opacity='1';
+          setTimeout(function(){
+            overlay.classList.add('fade-out');
+            setTimeout(function(){overlay.style.display='none';},900);
+          },1800);
+        },80);
+        return;
+      }
+      var progress=si/speeds.length;
+      drawFrame(frames[fi%frames.length]);fi++;
+      var flipEvery=progress>0.6?1:progress>0.3?2:3;
+      if(si%flipEvery===0) playFlip(progress);
+      setTimeout(tick,speeds[si++]);
+    }
+    tick();
+  }
+
+  overlay.addEventListener('click',function(){
+    if(running)return;
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    audioCtx.resume().then(runIntro);
+  });
+})();
+</script>
+
 </body>
 </html>
