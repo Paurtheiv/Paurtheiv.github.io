@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paurtheiv Krishna Laxman — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 /* ═══════════════════════════════════════
    RESET & VARIABLES
@@ -79,15 +80,15 @@ section:nth-child(even) { background: var(--bg2); }
 
 .section-eyebrow {
   font-size: 11px; letter-spacing: 3px; font-weight: 600;
-  text-transform: uppercase; color: var(--muted2);
-  margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 10px;
   font-family: 'JetBrains Mono', monospace;
 }
-.section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
 h2.section-h {
-  font-size: clamp(26px, 4vw, 38px); font-weight: 800;
-  margin-bottom: 48px; letter-spacing: -.5px;
+  font-size: clamp(32px, 5vw, 52px); font-weight: 900;
+  margin-bottom: 48px; letter-spacing: -1.5px;
   font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.05;
 }
 h2.section-h em { color: var(--accent); font-style: normal; }
 
@@ -113,8 +114,9 @@ h2.section-h em { color: var(--accent); font-style: normal; }
 }
 
 .hero-inner {
-  display: grid; grid-template-columns: 1fr 340px;
-  gap: 60px; align-items: center; width: 100%; position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: flex-start; width: 100%; max-width: 760px;
+  position: relative; z-index: 1;
 }
 
 .hero-greeting {
@@ -1149,6 +1151,67 @@ section { scroll-margin-top: 70px; }
 }
 
 /* ═══════════════════════════════════════
+   ACHIEVEMENTS
+═══════════════════════════════════════ */
+.ach-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px; margin-top: 0;
+}
+.ach-card {
+  background: var(--card);
+  border-radius: var(--radius); padding: 24px 22px;
+  border-left: 3px solid var(--accent);
+  transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s;
+}
+.ach-card:hover { transform: translateY(-4px); box-shadow: 0 13px 30px rgba(0,0,0,.4); }
+.ach-card.sv { border-left-color: #94a3b8; }
+.ach-card.gr { border-left-color: var(--green); }
+.ach-card.pu { border-left-color: #a78bfa; }
+.ach-badge {
+  display: inline-block; padding: 3px 10px;
+  border-radius: 5px; font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; margin-bottom: 10px;
+  background: rgba(6,182,212,.12); color: var(--accent);
+}
+.ach-badge.bg-g { background: rgba(6,182,212,.12); color: var(--accent); }
+.ach-badge.bg-s { background: rgba(148,163,184,.12); color: #94a3b8; }
+.ach-badge.bg-gr { background: rgba(34,197,94,.12); color: var(--green); }
+.ach-badge.bg-pu { background: rgba(167,139,250,.12); color: #a78bfa; }
+.ach-title { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 15px; color: var(--text); margin-bottom: 4px; }
+.ach-org { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+.ach-desc { font-size: 12px; color: var(--muted2); line-height: 1.6; }
+
+/* ═══════════════════════════════════════
+   TECH BAR
+═══════════════════════════════════════ */
+.tech-bar {
+  background: var(--bg2);
+  padding: 32px 48px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.tech-bar-inner {
+  max-width: var(--max); margin: 0 auto;
+  display: flex; gap: 32px;
+  justify-content: center; flex-wrap: wrap; align-items: center;
+}
+.tb-logo {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  transition: transform .22s;
+}
+.tb-logo:hover { transform: translateY(-5px); }
+.tb-logo img {
+  width: 40px; height: 40px; object-fit: contain;
+  filter: saturate(.5) brightness(.75);
+  transition: filter .22s;
+}
+.tb-logo:hover img { filter: saturate(1) brightness(1); }
+.tb-logo span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted); letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════════
    PAGE LOADER
 ═══════════════════════════════════════ */
 #page-loader {
@@ -1408,7 +1471,7 @@ h1.hero-name {
 <section id="about">
   <div class="container">
     <div class="section-eyebrow" id="about-eyebrow">Présentation</div>
-    <h2 class="section-h" id="about-h">À propos de moi</h2>
+    <h2 class="section-h" id="about-h">À propos<em>.</em></h2>
     <div class="about-grid">
       <div class="about-text">
         <p id="about-p1">
@@ -1475,7 +1538,7 @@ h1.hero-name {
 <section id="skills">
   <div class="container">
     <div class="section-eyebrow" id="skills-eyebrow">Expertise</div>
-    <h2 class="section-h" id="skills-h">Compétences techniques</h2>
+    <h2 class="section-h" id="skills-h">Compétences<em>.</em></h2>
     <div class="skill-filter-tabs">
       <button class="sft active" data-filter="all" id="sft-all">Tous</button>
       <button class="sft" data-filter="master" id="sft-master">Maîtrisé</button>
@@ -1603,7 +1666,7 @@ h1.hero-name {
 <section id="projects">
   <div class="container">
     <div class="section-eyebrow" id="proj-eyebrow">Réalisations</div>
-    <h2 class="section-h" id="proj-h">Mes projets</h2>
+    <h2 class="section-h" id="proj-h">Projets<em>.</em></h2>
 
     <!-- PROJET PRINCIPAL -->
     <div class="project-featured">
@@ -1763,7 +1826,7 @@ h1.hero-name {
 <section id="competitions" style="padding:80px 0 60px;">
   <div class="container">
     <div class="section-eyebrow" id="ctf-eyebrow">Compétitions</div>
-    <h2 class="section-h" id="ctf-h">Challenges & CTF</h2>
+    <h2 class="section-h" id="ctf-h">Challenges<em>.</em></h2>
 
     <div class="ctf-card fade-up">
       <div class="ctf-badge">
@@ -1802,12 +1865,66 @@ h1.hero-name {
 </section>
 
 
+<!-- ══════════ RÉCOMPENSES ══════════ -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-eyebrow">Reconnaissance</div>
+    <h2 class="section-h">Récompenses<em>.</em></h2>
+    <div class="ach-grid">
+
+      <div class="ach-card fade-up">
+        <div class="ach-badge bg-g">🏅 TOP 5% NATIONAL</div>
+        <div class="ach-title">CTF — Passe ton Hack 2026</div>
+        <div class="ach-org">Compétition nationale · 2026</div>
+        <div class="ach-desc">37e sur 812 équipes, 940 points, 22 challenges résolus — catégories forensics, réseau, cryptographie.</div>
+      </div>
+
+      <div class="ach-card gr fade-up">
+        <div class="ach-badge bg-gr">🎓 DIPLÔMÉ · 16/20</div>
+        <div class="ach-title">BTS CIEL A — Session 2026</div>
+        <div class="ach-org">Lycée Jean Jaurès · Argenteuil</div>
+        <div class="ach-desc">Cybersécurité, Informatique et Électronique des Réseaux. Mention bien, projet E6 Smart Gate présenté.</div>
+      </div>
+
+      <div class="ach-card pu fade-up">
+        <div class="ach-badge bg-pu">🏫 ADMIS CYCLE INGÉNIEUR</div>
+        <div class="ach-title">ESEO Paris-Vélizy</div>
+        <div class="ach-org">Rentrée septembre 2026</div>
+        <div class="ach-desc">Spécialité Informatique, Systèmes, Réseaux & Cybersécurité — programme en apprentissage 3 ans.</div>
+      </div>
+
+      <div class="ach-card sv fade-up">
+        <div class="ach-badge bg-s">💼 STAGE VALIDÉ</div>
+        <div class="ach-title">Support IT N1/N2 — Bilfinger</div>
+        <div class="ach-org">Bilfinger Peters Engineering · Montrouge · 2024-2025</div>
+        <div class="ach-desc">Assistance utilisateurs, ticketing, déploiement postes, Active Directory, diagnostic réseau en environnement industriel.</div>
+      </div>
+
+      <div class="ach-card fade-up">
+        <div class="ach-badge bg-g">⬛ PROJET DÉPLOYÉ</div>
+        <div class="ach-title">Smart Gate Jaurès — IoT réel</div>
+        <div class="ach-org">Lycée Jean Jaurès · 5 zones · 2026</div>
+        <div class="ach-desc">Système IoT biométrique déployé sur un vrai lycée. ESP32, RFID, empreintes AES-256, dashboard PHP, 10/10 tests validés.</div>
+      </div>
+
+      <div class="ach-card gr fade-up">
+        <div class="ach-badge bg-gr">🎮 JPO LYCÉE</div>
+        <div class="ach-title">Jeu de Visite & Escape Game</div>
+        <div class="ach-org">JPO Lycée Jean Jaurès · Janvier 2026</div>
+        <div class="ach-desc">Deux expériences interactives créées pour la journée portes ouvertes — voix IA, QCM adaptatif, caméra IP en temps réel.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 <!-- ══════════ EXPÉRIENCES ══════════ -->
 <section id="experience">
   <div class="container">
     <div style="text-align:center;margin-bottom:8px;">
       <div class="section-eyebrow" style="justify-content:center;" id="exp-eyebrow">Parcours Pro</div>
-      <h2 class="section-h" style="margin-bottom:0;" id="exp-h">Expériences <em class="sh-accent">professionnelles</em></h2>
+      <h2 class="section-h" style="margin-bottom:0;" id="exp-h">Expériences<em>.</em></h2>
     </div>
     <div class="tl-wrap">
       <div class="tl-line-v"></div>
@@ -1886,7 +2003,7 @@ h1.hero-name {
 <section id="formation">
   <div class="container">
     <div class="section-eyebrow" id="edu-eyebrow">Éducation</div>
-    <h2 class="section-h" id="edu-h">Parcours académique</h2>
+    <h2 class="section-h" id="edu-h">Formation<em>.</em></h2>
     <div class="edu-grid">
 
       <div class="edu-card current fade-up">
@@ -1960,7 +2077,7 @@ h1.hero-name {
       <!-- LEFT: Form -->
       <div class="contact-left">
         <div class="section-eyebrow" id="contact-eyebrow">Disponible dès sept. 2026</div>
-        <h2 class="section-h" style="margin-bottom:8px;" id="contact-h">Travaillons ensemble 🤝</h2>
+        <h2 class="section-h" style="margin-bottom:8px;" id="contact-h">Contact<em>.</em></h2>
         <p id="contact-p" style="color:var(--muted2);font-size:15px;line-height:1.7;margin-bottom:24px;max-width:420px;">
           Étudiant ingénieur en alternance à l'ESEO Paris-Vélizy dès septembre 2026, je recherche
           une entreprise dans les domaines des systèmes embarqués, réseaux ou cybersécurité.
@@ -1987,21 +2104,10 @@ h1.hero-name {
         </form>
       </div>
 
-      <!-- RIGHT: Info cards -->
+      <!-- RIGHT: Globe 3D -->
       <div class="contact-right">
-        <div class="contact-right-visual">
-
-          <!-- PLANET -->
-          <div class="planet-scene">
-            <div class="planet-wrap">
-              <div class="planet"></div>
-              <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
-              <div class="orbit orbit-2"><div class="orbit-dot"></div></div>
-              <div class="orbit orbit-3"><div class="orbit-dot"></div></div>
-              <div class="planet-label">ARGENTEUIL · 95</div>
-            </div>
-          </div>
-
+        <div class="contact-right-visual" style="background:transparent;border:none;padding:0;">
+          <canvas id="globe-canvas" style="width:100%;height:500px;display:block;"></canvas>
         </div>
       </div>
 
@@ -2009,6 +2115,23 @@ h1.hero-name {
   </div>
 </section>
 
+
+<!-- ══════════ TECH BAR ══════════ -->
+<div class="tech-bar">
+  <div class="tech-bar-inner">
+    <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><span>Python</span></div>
+    <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"><span>C / C++</span></div>
+    <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"><span>PHP</span></div>
+    <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"><span>JavaScript</span></div>
+    <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask" style="filter:invert(1) saturate(.5) brightness(.75)"><span>Flask</span></div>
+    <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"><span>MySQL</span></div>
+    <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" alt="Raspberry Pi"><span>Raspberry Pi</span></div>
+    <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux"><span>Linux</span></div>
+    <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><span>Git</span></div>
+    <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1) saturate(.5) brightness(.75)"><span>GitHub</span></div>
+    <div class="tb-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"><span>VS Code</span></div>
+  </div>
+</div>
 
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
@@ -2125,6 +2248,165 @@ h1.hero-name {
   draw();
 })();
 
+// ══════════════════════════════════════════════════════
+//  GLOBE 3D (CONTACT)
+// ══════════════════════════════════════════════════════
+(function() {
+  var canvas = document.getElementById('globe-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  function getSize() {
+    var p = canvas.parentElement;
+    return { w: p.offsetWidth || 500, h: p.offsetHeight || 500 };
+  }
+  var sz = getSize();
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(sz.w, sz.h);
+
+  var scene = new THREE.Scene();
+  var cam = new THREE.PerspectiveCamera(50, sz.w / sz.h, 0.1, 100);
+  cam.position.z = 4.2;
+
+  // Lights
+  scene.add(new THREE.AmbientLight(0x0d2233, 0.8));
+  var sun = new THREE.DirectionalLight(0x06b6d4, 3.0);
+  sun.position.set(5, 2, 4); scene.add(sun);
+  var fill = new THREE.DirectionalLight(0x7c3aed, 0.6);
+  fill.position.set(-4, -2, -3); scene.add(fill);
+
+  // Globe texture — procedural cyan tech globe
+  var dayC = document.createElement('canvas');
+  dayC.width = 2048; dayC.height = 1024;
+  var dc = dayC.getContext('2d');
+
+  // Deep ocean (dark cyan-navy)
+  dc.fillStyle = '#020d1a'; dc.fillRect(0, 0, 2048, 1024);
+  var og = dc.createRadialGradient(1024, 512, 50, 1024, 512, 900);
+  og.addColorStop(0, 'rgba(6,40,70,.7)'); og.addColorStop(1, 'rgba(2,8,20,.9)');
+  dc.fillStyle = og; dc.fillRect(0, 0, 2048, 1024);
+
+  // Continents (cyan-teal)
+  dc.fillStyle = '#0a4a5a';
+  var continents = [
+    [420,320,80,130,.1],[480,260,55,70,-.1],[350,290,40,60,.15],[470,440,40,50,.1],
+    [500,560,55,100,.05],[520,640,40,60,-.05],[960,270,60,65,.05],[1010,230,40,50,.1],
+    [1020,400,65,110,0],[1000,340,45,55,.1],[1280,220,200,95,.05],[1380,300,120,80,-.05],
+    [1450,350,90,70,0],[1300,390,45,65,.05],[1500,380,55,50,.1],[1600,530,70,50,-.1]
+  ];
+  continents.forEach(function(c) {
+    dc.beginPath(); dc.ellipse(c[0],c[1],c[2],c[3],c[4],0,Math.PI*2); dc.fill();
+  });
+  // Continent highlight (lighter cyan)
+  dc.fillStyle = '#0e6b80';
+  continents.forEach(function(c) {
+    dc.beginPath(); dc.ellipse(c[0]-4,c[1]-4,c[2]*.6,c[3]*.6,c[4],0,Math.PI*2); dc.fill();
+  });
+
+  // Grid lines (tech look)
+  dc.strokeStyle = 'rgba(6,182,212,.08)'; dc.lineWidth = 1;
+  for (var lat = -80; lat <= 80; lat += 20) {
+    var y = (lat + 90) / 180 * 1024;
+    dc.beginPath(); dc.moveTo(0, y); dc.lineTo(2048, y); dc.stroke();
+  }
+  for (var lon = 0; lon < 360; lon += 20) {
+    var x = lon / 360 * 2048;
+    dc.beginPath(); dc.moveTo(x, 0); dc.lineTo(x, 1024); dc.stroke();
+  }
+
+  // Glow dots (cities as cyan points)
+  dc.fillStyle = 'rgba(6,182,212,.6)';
+  [[520,310],[380,310],[960,255],[1290,380],[1430,300],[1020,400],[500,560]].forEach(function(p) {
+    dc.beginPath(); dc.arc(p[0],p[1],3,0,Math.PI*2); dc.fill();
+    dc.beginPath(); dc.arc(p[0],p[1],6,0,Math.PI*2);
+    dc.fillStyle = 'rgba(6,182,212,.15)'; dc.fill();
+    dc.fillStyle = 'rgba(6,182,212,.6)';
+  });
+
+  var dayTex = new THREE.CanvasTexture(dayC);
+
+  // Globe material
+  var earthMat = new THREE.MeshPhongMaterial({
+    map: dayTex,
+    specular: new THREE.Color(0x06b6d4),
+    shininess: 18,
+    emissive: new THREE.Color(0x001a22),
+    emissiveIntensity: 0.3
+  });
+  var earth = new THREE.Mesh(new THREE.SphereGeometry(1, 64, 64), earthMat);
+  scene.add(earth);
+
+  // Atmosphere glow (cyan)
+  var atmMat = new THREE.ShaderMaterial({
+    uniforms: { sunDir: { value: new THREE.Vector3(5,2,4).normalize() } },
+    vertexShader: 'varying vec3 vNormal;void main(){vNormal=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+    fragmentShader: 'varying vec3 vNormal;void main(){float r=1.0-abs(dot(vNormal,vec3(0,0,1)));r=pow(r,2.2);gl_FragColor=vec4(0.02,0.71,0.83,r*.65);}',
+    transparent: true, side: THREE.FrontSide, depthWrite: false
+  });
+  scene.add(new THREE.Mesh(new THREE.SphereGeometry(1.04, 64, 64), atmMat));
+
+  // Outer glow (purple)
+  scene.add(new THREE.Mesh(new THREE.SphereGeometry(1.1, 32, 32), new THREE.ShaderMaterial({
+    vertexShader: 'varying vec3 vNormal;void main(){vNormal=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+    fragmentShader: 'varying vec3 vNormal;void main(){float r=1.-abs(dot(vNormal,vec3(0,0,1)));r=pow(r,3.);gl_FragColor=vec4(0.49,0.23,0.93,r*.35);}',
+    transparent: true, side: THREE.BackSide, depthWrite: false
+  })));
+
+  // Stars
+  var STARS = 4000;
+  var stP = new Float32Array(STARS * 3), stC = new Float32Array(STARS * 3);
+  for (var i = 0; i < STARS; i++) {
+    var r = 15 + Math.random()*30, theta = Math.random()*Math.PI*2, phi = Math.acos(2*Math.random()-1);
+    stP[i*3]=r*Math.sin(phi)*Math.cos(theta); stP[i*3+1]=r*Math.sin(phi)*Math.sin(theta); stP[i*3+2]=r*Math.cos(phi);
+    var bt=0.4+Math.random()*0.6; stC[i*3]=0.7*bt; stC[i*3+1]=0.85*bt; stC[i*3+2]=bt;
+  }
+  var stG = new THREE.BufferGeometry();
+  stG.setAttribute('position', new THREE.BufferAttribute(stP, 3));
+  stG.setAttribute('color', new THREE.BufferAttribute(stC, 3));
+  scene.add(new THREE.Points(stG, new THREE.PointsMaterial({
+    size: 0.07, vertexColors: true, transparent: true, opacity: 0.9,
+    sizeAttenuation: true, blending: THREE.AdditiveBlending
+  })));
+
+  // Orbit rings (cyan)
+  [[1.35, 1.5, 800],[1.55, 1.7, 500]].forEach(function(ring) {
+    var inner=ring[0], outer=ring[1], count=ring[2];
+    var rPos=new Float32Array(count*3), rCol=new Float32Array(count*3);
+    for (var i=0;i<count;i++) {
+      var a=Math.random()*Math.PI*2, rad=inner+Math.random()*(outer-inner);
+      rPos[i*3]=rad*Math.cos(a); rPos[i*3+1]=(Math.random()-.5)*0.01; rPos[i*3+2]=rad*Math.sin(a);
+      rCol[i*3]=0.02; rCol[i*3+1]=0.71; rCol[i*3+2]=0.83;
+    }
+    var rG=new THREE.BufferGeometry();
+    rG.setAttribute('position',new THREE.BufferAttribute(rPos,3));
+    rG.setAttribute('color',new THREE.BufferAttribute(rCol,3));
+    var rings=new THREE.Points(rG, new THREE.PointsMaterial({
+      size:0.02, vertexColors:true, transparent:true, opacity:0.4,
+      sizeAttenuation:true, blending:THREE.AdditiveBlending, depthWrite:false
+    }));
+    rings.rotation.x = Math.PI * 0.28;
+    scene.add(rings);
+  });
+
+  var mouseY = 0;
+  window.addEventListener('mousemove', function(e) {
+    mouseY = (e.clientY / window.innerHeight - 0.5);
+  }, { passive: true });
+  window.addEventListener('resize', function() {
+    var s = getSize();
+    cam.aspect = s.w / s.h;
+    cam.updateProjectionMatrix();
+    renderer.setSize(s.w, s.h);
+  }, { passive: true });
+
+  (function loop() {
+    requestAnimationFrame(loop);
+    earth.rotation.y += 0.002;
+    earth.rotation.x += (mouseY * 0.15 - earth.rotation.x) * 0.02;
+    renderer.render(scene, cam);
+  })();
+})();
+
 window.addEventListener('scroll', function() {
   var el = document.getElementById('scroll-bar');
   var pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
@@ -2166,24 +2448,24 @@ var T = {
     "hc-sub": "BTS CIEL A · Diplômé · Session 2026",
     "hc-location": "Argenteuil, 95 — Île-de-France",
     "about-eyebrow": "Présentation",
-    "about-h": "À propos de moi",
+    "about-h": "À propos.",
     "skills-eyebrow": "Expertise",
-    "skills-h": "Compétences techniques",
+    "skills-h": "Compétences.",
     "proj-eyebrow": "Réalisations",
-    "proj-h": "Mes projets",
+    "proj-h": "Projets.",
     "pf-badge": "🏆 PROJET PRINCIPAL — E6 BTS CIEL",
     "pf-desc": "Système IoT complet de contrôle d&#39;accès biométrique déployé pour le Lycée Jean Jaurès d&#39;Argenteuil. Identification des élèves par badge RFID (MFRC522) ou empreinte digitale, validation/refus en temps réel avec feedback LED WS2812B + buzzer, chiffrement AES-256 des empreintes, gestion RGPD, dashboard PHP temps réel et base MySQL pour 5 zones du lycée.<br><br><strong>Mon rôle :</strong> Zone 1 (entrée principale) — conception des deux firmware ESP32 (CPE + Porte), API REST Flask, interface PHP, schéma MySQL.",
     "exp-eyebrow": "Parcours Pro",
-    "exp-h": "Expériences professionnelles",
+    "exp-h": "Expériences.",
     "edu-eyebrow": "Éducation",
-    "edu-h": "Parcours académique",
+    "edu-h": "Formation.",
     "edu1-year": "2026 – 2029 (à venir)",
     "edu1-badge": "✓ Admis · Session 2026",
     "edu2-year": "2024 – 2026",
     "edu3-year": "2022 – 2024",
     "mini-eyebrow": "TPs & Livrables techniques",
     "contact-eyebrow": "Disponible dès sept. 2026",
-    "contact-h": "Travaillons ensemble 🤝",
+    "contact-h": "Contact.",
     "fl-name": "Votre nom",
     "fl-email": "Votre email",
     "fl-msg": "Votre message",
@@ -2223,244 +2505,4 @@ var T = {
 
     "proj-jpo-year": "JPO Lycée Jean Jaurès · Janvier 2026",
     "proj-jpo-title": "Jeu de Visite JPO — Lycée Jean Jaurès",
-    "proj-jpo-desc": "Jeu de visite guidée web pour la JPO du lycée. Choix du guide étudiant, QCM adaptatif (collégien / lycéen / étudiant), visite virtuelle des labos BTS CIEL. Voix clonées par IA (TopMedia), synchronisées scène par scène. HTML/JS vanilla — machine à états, Web Audio API.",
-
-    "proj-escape-year": "Atelier JPO · BTS CIEL A · Janvier 2026",
-    "proj-escape-title": "Escape Game — Coffre Caméra",
-    "proj-escape-desc": "Jeu d'évasion web créé pour la JPO du lycée. Déchiffrement César, accès à une vraie caméra IP HIKVISION sur le réseau interne, système de jetons-récompenses. Faux documents leurres inclus.",
-
-    "proj-queue-year": "Projet personnel · 2026",
-    "proj-queue-title": "File d'attente — Salon de Coiffure",
-    "proj-queue-desc": "Système de file d'attente temps réel. Écran réception (saisie client + choix coiffeur) et écran salle d'attente avec compte à rebours par coiffeur. Communication via localStorage, refresh toutes les 5 secondes.",
-
-    "ctf-eyebrow": "Compétitions",
-    "ctf-h": "Challenges & CTF",
-    "ctf-title": "CTF — Passe ton Hack 2026",
-    "ctf-meta": "Équipe : Les Chipies · Compétition nationale · 2026",
-    "ctf-desc": "Challenges en analyse, investigation et résolution de problèmes cybersécurité. Compétition nationale CTF — catégories forensics, réseau, cryptographie et investigation numérique.",
-
-    "exp1-role": "Stagiaire Support Informatique — IT Support N1/N2",
-    "exp1-co": "Bilfinger Peters Engineering · Montrouge",
-    "exp1-li1": "Support utilisateur N1/N2 : diagnostics, pannes matérielles et logicielles",
-    "exp1-li2": "Gestion et suivi des tickets via outil de support interne",
-    "exp1-li3": "Déploiement de postes, configuration réseau, Active Directory",
-    "exp1-li4": "Diagnostic réseau : connectivité, IP, pare-feu",
-
-    "exp2-role": "Stagiaire — Fabrication industrielle",
-    "exp2-co": "Néon France",
-    "exp2-li1": "Fabrication de LEDs et lampes — processus techniques",
-    "exp2-li2": "Amélioration des procédés de production et contrôle qualité",
-
-    "exp3-role": "Job d'été — Production",
-    "exp3-co": "Hypsiyple · Argenteuil",
-    "exp3-li1": "Production de bougies selon normes qualité et cadences",
-    "exp3-li2": "Gestion des flux de production",
-
-    "edu1-title": "Cycle Ingénieur",
-    "edu1-school": "ESEO Paris-Vélizy",
-    "edu1-desc": "Spécialité Informatique, Systèmes, Réseaux & Cybersécurité. Programme en apprentissage (alternance 2 sem. entreprise / 2 sem. école).",
-
-    "edu2-title": "BTS CIEL A",
-    "edu2-school": "Lycée Jean Jaurès · Argenteuil",
-    "edu2-desc": "Cybersécurité, Informatique et Électronique des Réseaux. Option IR (Informatique et Réseaux). Projet E6 : Smart Gate Jaurès. Moyenne générale 16/20.",
-    "edu2-badge": "✓ Diplômé · Session 2026 · Moy. 16/20",
-
-    "edu3-title": "Baccalauréat Microtechniques",
-    "edu3-school": "Lycée Jean Jaurès · Argenteuil",
-    "edu3-desc": "Formation en fabrication, assemblage et maintenance de systèmes de précision — bases en électronique et systèmes automatisés."
-  },
-  en: {
-    "nav-about": "About",
-    "nav-skills": "Skills",
-    "nav-projects": "Projects",
-    "nav-exp": "Experience",
-    "nav-edu": "Education",
-    "nav-contact": "Contact",
-    "nav-cta": "Contact me",
-    "lang-btn": "FR",
-    "hero-greeting": "Hello, I am",
-    "hero-role": "IoT Developer · Systems & Networks",
-    "hero-desc": "Student in <strong>BTS CIEL A</strong> (Cybersecurity, IT & Electronics) at Lycée Jean Jaurès, Argenteuil, admitted to the <strong>ESEO Paris-Vélizy</strong> engineering cycle (Sept. 2026). Passionate about embedded systems, networks & cybersecurity — I designed and deployed <strong>Smart Gate Jaurès</strong>, a full IoT biometric access control system for a real high school.",
-    "badge-eseo": "✓ Admitted ESEO Paris 2026",
-    "badge-bts": "BTS CIEL A · Graduate 2026 · 16/20",
-    "badge-iot": "IoT · Embedded · Networks",
-    "badge-alt": "Apprenticeship from Sept. 2026",
-    "btn-projects": "View my projects →",
-    "hc-sub": "BTS CIEL A · Graduate · Class of 2026",
-    "hc-location": "Argenteuil, 95 — Île-de-France",
-    "about-eyebrow": "Introduction",
-    "about-h": "About me",
-    "skills-eyebrow": "Expertise",
-    "skills-h": "Technical skills",
-    "proj-eyebrow": "Projects",
-    "proj-h": "My projects",
-    "pf-badge": "🏆 MAIN PROJECT — E6 BTS CIEL",
-    "pf-desc": "Complete IoT biometric access control system deployed at Lycée Jean Jaurès in Argenteuil. Students identified by RFID badge (MFRC522) or fingerprint, real-time feedback via WS2812B LEDs + buzzer, AES-256 encryption, GDPR compliance, PHP dashboard and centralized MySQL database for 5 school zones.<br><br><strong>My role:</strong> Zone 1 (main entrance) — both ESP32 firmwares (CPE + Door), Flask REST API, PHP web interface, MySQL schema.",
-    "exp-eyebrow": "Career",
-    "exp-h": "Professional experience",
-    "edu-eyebrow": "Education",
-    "edu-h": "Academic background",
-    "edu1-year": "2026 – 2029 (upcoming)",
-    "edu1-badge": "✓ Admitted · Class of 2026",
-    "edu2-year": "2024 – 2026",
-    "edu3-year": "2022 – 2024",
-    "mini-eyebrow": "Notable school projects",
-    "contact-eyebrow": "Available from Sept. 2026",
-    "contact-h": "Let's work together 🤝",
-    "fl-name": "Your name",
-    "fl-email": "Your email",
-    "fl-msg": "Your message",
-    "btn-send-txt": "Send message",
-    "crv-avail": "Available for apprenticeship — Sept. 2026",
-    "contact-p": "BTS CIEL A graduate (GPA 16/20, class of 2026), future apprentice engineer at ESEO Paris-Vélizy (starting Sept. 2026), looking for a company in systems, networks or cybersecurity. Feel free to reach out!",
-    "footer-l": "© 2026 <strong>Paurtheiv Krishna Laxman</strong> · BTS CIEL A · Lycée Jean Jaurès · Argenteuil",
-    "footer-r": "",
-
-    "about-p1": "I am <strong>Paurtheiv Krishna Laxman</strong>, holder of a <strong>BTS CIEL A</strong> (Cybersecurity, IT & Electronics) obtained in 2026 with a GPA of 16/20 at Lycée Jean Jaurès in Argenteuil, admitted to the <strong>engineering cycle at ESEO Paris-Vélizy</strong> starting September 2026. I am looking for a 3-year apprenticeship in systems, networks or cybersecurity (2 weeks company / 2 weeks school).",
-    "about-p2": "What defines me: broad technical curiosity. I program in <strong>Python, C++, PHP and JavaScript</strong>, configure networks (TCP/IP, VLAN, DNS/DHCP), work on <strong>ESP32 and Raspberry Pi</strong> microcontrollers, and build REST APIs. I enjoy understanding how systems work end-to-end — from the electronic component to the web interface.",
-    "about-p3": "My <strong>internship at Bilfinger Peters Engineering</strong> (N1/N2 IT support, ticketing, workstation deployment, Active Directory) gave me concrete professional experience. Autonomous, rigorous and comfortable in a team, I adapt quickly to new technical environments.",
-    "about-lang-lbl": "Languages",
-    "about-lang-val": "French (fluent) · English (fluent) · Tamil (native)",
-
-    "eb1-title": "Embedded Systems",
-    "eb1-desc": "ESP32, RFID, deployed biometrics",
-    "eb2-title": "Cybersecurity",
-    "eb2-desc": "AES-256, CTF Top 5%, forensics",
-    "eb3-title": "Backend & API",
-    "eb3-desc": "Flask, PHP, REST API, real-time MySQL",
-    "eb4-title": "Networks & Linux",
-    "eb4-desc": "VLAN, SSH, TCP/IP, Linux hands-on",
-
-    "sft-all": "All",
-    "sft-master": "Proficient",
-    "sft-used": "Used",
-    "sft-notion": "Basics",
-
-    "proj-softball-year": "BTS CIEL A · 2nd year · 2026",
-    "proj-softball-title": "Softball Scoreboard",
-    "proj-softball-desc": "Built for the softball team at Lycée Jean Jaurès. Real-time web interface for referees. PHP backend with session authentication, JSON API to save matches in MySQL. Spectator display synchronized in real time via JS polling.",
-
-    "proj-pdf-year": "Internship Bilfinger · 2025",
-    "proj-pdf-title": "PDF Comparator",
-    "proj-pdf-desc": "Python/Streamlit tool built independently during my internship at Bilfinger Peters Engineering. Pixel-by-pixel comparison of technical PDFs, page-by-page text diff, automatic generation of an annotated PDF report with highlighted zones.",
-
-    "proj-jpo-year": "Open House Lycée Jean Jaurès · January 2026",
-    "proj-jpo-title": "Open House Guided Tour Game",
-    "proj-jpo-desc": "Web guided tour game for the school open house. Student guide selection, adaptive quiz (middle school / high school / student), virtual tour of BTS CIEL labs. AI-cloned voices (TopMedia), synchronized scene by scene. Vanilla HTML/JS — state machine, Web Audio API.",
-
-    "proj-escape-year": "Open House Workshop · BTS CIEL A · January 2026",
-    "proj-escape-title": "Escape Game — Camera Safe",
-    "proj-escape-desc": "Web escape game created for the school open house. Caesar cipher decryption, access to a real HIKVISION IP camera on the internal network, token-reward system. Decoy fake documents included.",
-
-    "proj-queue-year": "Personal project · 2026",
-    "proj-queue-title": "Queue System — Hair Salon",
-    "proj-queue-desc": "Real-time queue management system. Reception screen (client entry + stylist selection) and waiting room screen with countdown per stylist. Communication via localStorage, refresh every 5 seconds.",
-
-    "ctf-eyebrow": "Competitions",
-    "ctf-h": "Challenges & CTF",
-    "ctf-title": "CTF — Passe ton Hack 2026",
-    "ctf-meta": "Team: Les Chipies · National competition · 2026",
-    "ctf-desc": "Challenges in analysis, investigation and cybersecurity problem-solving. National CTF competition — forensics, network, cryptography and digital investigation categories.",
-
-    "exp1-role": "IT Support Intern — N1/N2",
-    "exp1-co": "Bilfinger Peters Engineering · Montrouge",
-    "exp1-li1": "N1/N2 user support: diagnostics, hardware and software issues",
-    "exp1-li2": "Ticket management and tracking via internal support tool",
-    "exp1-li3": "Workstation deployment, network configuration, Active Directory",
-    "exp1-li4": "Network diagnostics: connectivity, IP, firewall",
-
-    "exp2-role": "Intern — Industrial Manufacturing",
-    "exp2-co": "Néon France",
-    "exp2-li1": "Manufacturing of LEDs and lamps — technical processes",
-    "exp2-li2": "Production process improvement and quality control",
-
-    "exp3-role": "Summer Job — Production",
-    "exp3-co": "Hypsiyple · Argenteuil",
-    "exp3-li1": "Candle production to quality standards and production rates",
-    "exp3-li2": "Production flow management",
-
-    "edu1-title": "Engineering Cycle",
-    "edu1-school": "ESEO Paris-Vélizy",
-    "edu1-desc": "Specialization: Computer Science, Systems, Networks & Cybersecurity. Apprenticeship program (2 weeks company / 2 weeks school).",
-
-    "edu2-title": "BTS CIEL A",
-    "edu2-school": "Lycée Jean Jaurès · Argenteuil",
-    "edu2-desc": "Cybersecurity, IT & Electronics of Networks. IR track (IT & Networks). E6 project: Smart Gate Jaurès. GPA 16/20.",
-    "edu2-badge": "✓ Graduate · Class of 2026 · GPA 16/20",
-
-    "edu3-title": "Baccalauréat Microtechnics",
-    "edu3-school": "Lycée Jean Jaurès · Argenteuil",
-    "edu3-desc": "Training in manufacturing, assembly and maintenance of precision systems — fundamentals in electronics and automated systems."
-  }
-};
-
-var lang = localStorage.getItem('lang') || 'fr';
-
-function applyLang(l) {
-  lang = l;
-  localStorage.setItem('lang', l);
-  var dict = T[l];
-  var htmlKeys = ['hero-desc','pf-desc','footer-l','footer-r','contact-p','about-p1','about-p2','about-p3','contact-h'];
-  Object.keys(dict).forEach(function(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    if (htmlKeys.indexOf(id) !== -1) el.innerHTML = dict[id];
-    else el.textContent = dict[id];
-  });
-  document.getElementById('lang-btn').textContent = T[l]['lang-btn'];
-  document.documentElement.lang = l;
-}
-
-function toggleLang() { applyLang(lang === 'fr' ? 'en' : 'fr'); }
-
-
-// Form submit (AJAX — pas de redirection)
-var contactForm = document.getElementById('contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var btn = document.getElementById('btn-send');
-    var txt = document.getElementById('btn-send-txt');
-    var success = document.getElementById('form-success');
-    if (btn) { btn.disabled = true; txt.textContent = 'Envoi...'; }
-
-    var data = new FormData(contactForm);
-    fetch('https://formsubmit.co/ajax/paurtheiv.laxman.fr@gmail.com', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: data
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(res) {
-      if (success) { success.style.display = 'block'; }
-      contactForm.reset();
-      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
-    })
-    .catch(function() {
-      if (btn) { btn.disabled = false; txt.textContent = lang === 'en' ? 'Send message' : 'Envoyer le message'; }
-      alert('Erreur lors de l\'envoi. Réessayez.');
-    });
-  });
-}
-document.addEventListener('DOMContentLoaded', function() {
-  if (lang === 'en') applyLang('en');
-});
-
-  // ── Skill level filter ──
-  document.querySelectorAll('.sft').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.sft').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const f = btn.dataset.filter;
-      document.querySelectorAll('.sp').forEach(sp => {
-        if (f === 'all') { sp.classList.remove('hidden'); return; }
-        const has = sp.classList.contains('lvl-' + (f === 'master' ? 'master' : f === 'used' ? 'used' : 'notion'));
-        sp.classList.toggle('hidden', !has);
-      });
-    });
-  });
-
-</script>
-
-</body>
-</html>
+    "proj-jpo-desc": "Jeu de visite guidée web pour la JPO du lycée. Choix du guide étudiant, QCM adaptatif (collégien / lycéen / étudiant), vi
