@@ -1852,6 +1852,163 @@ input:focus, textarea:focus {
   #scroll-nav .nav-links { display: none !important; }
   #scroll-nav .nav-cta { display: none !important; }
 }
+
+/* ── ABOUT TIMELINE ── */
+.about-intro {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--muted2);
+  line-height: 1.7;
+  max-width: 680px;
+  margin-bottom: 80px;
+  letter-spacing: -0.01em;
+}
+.about-intro strong { color: var(--text); }
+
+.about-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-left: 80px;
+}
+@media(max-width:600px) { .about-timeline { padding-left: 0; } }
+
+.abt-item {
+  display: grid;
+  grid-template-columns: 64px 32px 1fr;
+  gap: 0 20px;
+  padding-bottom: 52px;
+  align-items: start;
+}
+@media(max-width:600px) {
+  .abt-item { grid-template-columns: 48px 24px 1fr; gap: 0 12px; padding-bottom: 40px; }
+}
+
+.abt-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  padding-top: 4px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.abt-line {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.abt-line::after {
+  content: '';
+  position: absolute;
+  top: 20px; left: 50%;
+  transform: translateX(-50%);
+  width: 0.5px;
+  height: calc(100% + 52px);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+}
+.abt-item:last-child .abt-line::after { display: none; }
+
+.abt-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border2);
+  border: 1.5px solid var(--muted);
+  margin-top: 4px;
+  position: relative; z-index: 1;
+  transition: background 0.3s;
+}
+.abt-dot-accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(6,182,212,0.4);
+}
+.abt-dot-future {
+  background: transparent;
+  border-color: var(--accent);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(6,182,212,0); }
+}
+
+.abt-content { padding-top: 0; }
+
+.abt-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px; font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.abt-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  color: var(--muted2);
+  line-height: 1.75;
+  margin-bottom: 10px;
+  max-width: 540px;
+}
+
+.abt-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  border: 0.5px solid var(--border2);
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+.abt-tag-gold {
+  color: var(--accent2);
+  border-color: rgba(245,158,11,0.3);
+}
+.abt-tag-live {
+  color: var(--green);
+  border-color: rgba(34,197,94,0.3);
+}
+
+.about-langs {
+  margin-top: 16px;
+  padding-left: 80px;
+}
+@media(max-width:600px) { .about-langs { padding-left: 0; } }
+.lang-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ── VIDEO HERO (activer quand hero.mp4 est dans /assets/) ──
+   Remplacer #space-canvas par :
+   <video id="hero-video" autoplay muted loop playsinline>
+     <source src="assets/hero.mp4" type="video/mp4">
+   </video>
+   Et ajouter ce CSS :
+   #hero-video {
+     position: absolute; inset: 0; width: 100%; height: 100%;
+     object-fit: cover; z-index: 0;
+   }
+── */
+
+/* ── HERO VIDEO ── */
+#hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+}
+/* Remove space canvas fallback */
+#space-canvas { display: none !important; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
@@ -1922,7 +2079,9 @@ input:focus, textarea:focus {
 
 <!-- ══════════ HERO ══════════ -->
 <section id="hero">
-  <canvas id="space-canvas"></canvas>
+  <video id="hero-video" autoplay muted loop playsinline>
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
   <div class="hero-overlay"></div>
 
   <!-- Right side nav — Anmol style -->
@@ -1992,64 +2151,80 @@ input:focus, textarea:focus {
   <div class="container">
     <div class="section-eyebrow" id="about-eyebrow">Présentation</div>
     <h2 class="section-h" id="about-h">À propos<em>.</em></h2>
-    <div class="about-grid">
-      <div class="about-text">
-        <p id="about-p1">
-          Je suis <strong>Paurtheiv Krishna Laxman</strong>, titulaire du <strong>BTS CIEL A</strong>
-          (Cybersécurité, Informatique et Électronique des Réseaux) obtenu en 2026 avec une moyenne de
-          <strong>16/20</strong> au Lycée Jean Jaurès d'Argenteuil, et admis en
-          <strong>cycle ingénieur à l'ESEO Paris-Vélizy</strong> pour la rentrée 2026.
-          Je recherche une alternance de 3 ans en systèmes, réseaux ou cybersécurité
-          (2 semaines entreprise / 2 semaines école).
-        </p>
-        <p id="about-p2">
-          Ce qui me définit : une curiosité technique large. Je programme en
-          <strong>Python, C++, PHP et JavaScript</strong>, je configure des réseaux
-          (TCP/IP, VLAN, DNS/DHCP), je travaille sur des microcontrôleurs
-          <strong>ESP32 et Raspberry Pi</strong>, et je construis des APIs REST.
-          J'aime comprendre comment les systèmes fonctionnent de bout en bout —
-          du composant électronique à l'interface web.
-        </p>
-        <p id="about-p3">
-          Mon <strong>stage chez Bilfinger Peters Engineering</strong> (support IT N1/N2,
-          ticketing, déploiement de postes, Active Directory) m'a apporté une première
-          expérience professionnelle concrète. Autonome, rigoureux et à l'aise en équipe,
-          je m'adapte rapidement à de nouveaux environnements techniques.
-        </p>
-      </div>
-      <div>
-        <div class="ai" style="margin-bottom:16px;">
-          
-          <div>
-            <div class="ai-lbl" id="about-lang-lbl">Langues</div>
-            <div class="ai-val" id="about-lang-val">Français (courant) · Anglais (courant) · Tamoul (maternelle)</div>
-          </div>
-        </div>
-        <div class="expertise-grid">
-          <div class="exp-block">
-            <div class="exp-block-icon">01</div>
-            <div class="exp-block-title" id="eb1-title">Systèmes Embarqués</div>
-            <div class="exp-block-desc" id="eb1-desc">ESP32, RFID, biométrie déployée</div>
-          </div>
-          <div class="exp-block">
-            <div class="exp-block-icon">02</div>
-            <div class="exp-block-title" id="eb2-title">Cybersécurité</div>
-            <div class="exp-block-desc" id="eb2-desc">AES-256, CTF Top 5%, forensics</div>
-          </div>
-          <div class="exp-block">
-            <div class="exp-block-icon">03</div>
-            <div class="exp-block-title" id="eb3-title">Backend & API</div>
-            <div class="exp-block-desc" id="eb3-desc">Flask, PHP, REST API, MySQL temps réel</div>
-          </div>
-          <div class="exp-block">
-            <div class="exp-block-icon">04</div>
-            <div class="exp-block-title" id="eb4-title">Réseaux & Linux</div>
-            <div class="exp-block-desc" id="eb4-desc">VLAN, SSH, TCP/IP, Linux terrain</div>
-          </div>
+
+    <div class="about-intro fade-up" id="about-p1">
+      Je suis <strong>Paurtheiv Krishna Laxman</strong> — développeur, réseaux, cybersécurité.
+      Diplômé BTS CIEL A avec <strong>16/20</strong>, admis à l'<strong>ESEO Paris-Vélizy</strong>.
+      Je construis des systèmes de bout en bout, du composant au dashboard.
+    </div>
+
+    <div class="about-timeline">
+
+      <div class="abt-item fade-up">
+        <div class="abt-year">2023</div>
+        <div class="abt-line"><div class="abt-dot"></div></div>
+        <div class="abt-content">
+          <div class="abt-title" id="abt-t1">Lycée Jean Jaurès — BTS CIEL A</div>
+          <div class="abt-text" id="abt-d1">J'entre en formation spécialisée cybersécurité, réseaux et systèmes embarqués. C'est ici que tout commence — TCP/IP, Linux, C++, et ma première ligne de code sérieuse.</div>
         </div>
       </div>
-  
-  </div>
+
+      <div class="abt-item fade-up">
+        <div class="abt-year">2025</div>
+        <div class="abt-line"><div class="abt-dot"></div></div>
+        <div class="abt-content">
+          <div class="abt-title" id="abt-t2">Stage — Bilfinger Peters Engineering</div>
+          <div class="abt-text" id="abt-d2">Premier terrain : support IT N1/N2, déploiement de postes Windows, ticketing, Active Directory. J'apprends que la technique sans rigueur opérationnelle ne vaut rien.</div>
+        </div>
+      </div>
+
+      <div class="abt-item fade-up">
+        <div class="abt-year">2025</div>
+        <div class="abt-line"><div class="abt-dot abt-dot-accent"></div></div>
+        <div class="abt-content">
+          <div class="abt-title" id="abt-t3">Smart Gate Jaurès — Projet E6 BTS</div>
+          <div class="abt-text" id="abt-d3">Contrôle d'accès complet : ESP32, RFID, biométrie, dashboard PHP temps réel, base MySQL, API REST. Un système que je construis seul de A à Z — déployé au lycée.</div>
+          <span class="abt-tag">Projet déployé en production</span>
+        </div>
+      </div>
+
+      <div class="abt-item fade-up">
+        <div class="abt-year">2025</div>
+        <div class="abt-line"><div class="abt-dot"></div></div>
+        <div class="abt-content">
+          <div class="abt-title" id="abt-t4">CTF National — Top 5%</div>
+          <div class="abt-text" id="abt-d4">812 équipes en compétition. Forensics, reverse engineering, cryptographie. Je finis dans les 5% meilleurs. La cybersécurité n'est plus seulement une matière — c'est un terrain de jeu.</div>
+          <span class="abt-tag abt-tag-gold">Top 5% · 812 équipes</span>
+        </div>
+      </div>
+
+      <div class="abt-item fade-up">
+        <div class="abt-year">2026</div>
+        <div class="abt-line"><div class="abt-dot abt-dot-accent"></div></div>
+        <div class="abt-content">
+          <div class="abt-title" id="abt-t5">BTS CIEL A — Diplômé 16/20</div>
+          <div class="abt-text" id="abt-d5">Deux ans de travail condensés dans une note. Ce qui compte vraiment : les projets construits, les nuits de débogage, et la capacité à livrer quelque chose qui fonctionne vraiment.</div>
+          <span class="abt-tag">Mention Bien</span>
+        </div>
+      </div>
+
+      <div class="abt-item fade-up">
+        <div class="abt-year">2026 →</div>
+        <div class="abt-line"><div class="abt-dot abt-dot-future"></div></div>
+        <div class="abt-content">
+          <div class="abt-title" id="abt-t6">ESEO Paris-Vélizy — Cycle Ingénieur</div>
+          <div class="abt-text" id="abt-d6">Admis. Alternance 3 ans dès septembre 2026. Je cherche une entreprise où construire des systèmes qui comptent — réseaux, cybersécurité, systèmes embarqués.</div>
+          <span class="abt-tag abt-tag-live">Disponible septembre 2026</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Langues -->
+    <div class="about-langs fade-up">
+      <span class="lang-pill" id="about-lang-val">Français · Anglais · Tamoul</span>
+    </div>
+
   </div>
 </section>
 
