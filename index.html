@@ -2161,8 +2161,10 @@ input:focus, textarea:focus {
   gap: 28px;
 }
 .contact-globe-canvas {
-  width: 540px !important;
-  height: 540px !important;
+  width: clamp(300px, 42vw, 560px) !important;
+  height: clamp(300px, 42vw, 560px) !important;
+  aspect-ratio: 1 / 1 !important;
+  display: block !important;
 }
 .contact-globe-citation {
   text-align: center !important;
@@ -3158,7 +3160,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   try {
   var canvas = document.getElementById('globe-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
-  function getSize() { var p = canvas.parentElement; return { w: p.offsetWidth||500, h: Math.max(p.offsetHeight,500) }; }
+  function getSize() { var s = Math.min(canvas.parentElement.offsetWidth||540, window.innerHeight*0.75, 580); s = Math.max(s,300); return { w: s, h: s }; }
   var sz = getSize();
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
