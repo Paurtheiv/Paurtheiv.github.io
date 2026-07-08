@@ -2009,6 +2009,18 @@ input:focus, textarea:focus {
 }
 /* Remove space canvas fallback */
 #space-canvas { display: none !important; }
+
+/* ── CLOSING CENTERED ── */
+.closing-wrap {
+  padding: 140px 0 100px !important;
+  display: flex; justify-content: center; align-items: center;
+  background: var(--bg);
+  text-align: center;
+}
+.closing-centered {
+  max-width: 700px; margin: 0 auto; padding: 0 40px;
+}
+.closing-art { display: none !important; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
@@ -2047,7 +2059,7 @@ input:focus, textarea:focus {
   </ul>
   <div style="display:flex;align-items:center;gap:10px;">
     <button id="lang-btn" onclick="toggleLang()">EN</button>
-    <a href="CV_Paurtheiv_Krishna_Laxman.pdf" download class="nav-cta" id="nav-cta">CV</a>
+    <a href="CV_Paurtheiv_Krishna_Laxman.pdf" download class="nav-cta" id="nav-cv">CV</a>
   </div>
   <!-- Mobile hamburger -->
   <button class="ham-btn" id="ham-btn" aria-label="Menu">
@@ -2151,80 +2163,62 @@ input:focus, textarea:focus {
   <div class="container">
     <div class="section-eyebrow" id="about-eyebrow">Présentation</div>
     <h2 class="section-h" id="about-h">À propos<em>.</em></h2>
-
-    <div class="about-intro fade-up" id="about-p1">
-      Je suis <strong>Paurtheiv Krishna Laxman</strong> — développeur, réseaux, cybersécurité.
-      Diplômé BTS CIEL A avec <strong>16/20</strong>, admis à l'<strong>ESEO Paris-Vélizy</strong>.
-      Je construis des systèmes de bout en bout, du composant au dashboard.
+    <div class="about-grid">
+      <div class="about-text">
+        <p id="about-p1">
+          Je suis <strong>Paurtheiv Krishna Laxman</strong>, titulaire du <strong>BTS CIEL A</strong>
+          (Cybersécurité, Informatique et Électronique des Réseaux) obtenu en 2026 avec une moyenne de
+          <strong>16/20</strong> au Lycée Jean Jaurès d'Argenteuil, et admis en
+          <strong>cycle ingénieur à l'ESEO Paris-Vélizy</strong> pour la rentrée 2026.
+          Je recherche une alternance de 3 ans en systèmes, réseaux ou cybersécurité
+          (2 semaines entreprise / 2 semaines école).
+        </p>
+        <p id="about-p2">
+          Ce qui me définit : une curiosité technique large. Je programme en
+          <strong>Python, C++, PHP et JavaScript</strong>, je configure des réseaux
+          (TCP/IP, VLAN, DNS/DHCP), je travaille sur des microcontrôleurs
+          <strong>ESP32 et Raspberry Pi</strong>, et je construis des APIs REST.
+          J'aime comprendre comment les systèmes fonctionnent de bout en bout —
+          du composant électronique à l'interface web.
+        </p>
+        <p id="about-p3">
+          Mon <strong>stage chez Bilfinger Peters Engineering</strong> (support IT N1/N2,
+          ticketing, déploiement de postes, Active Directory) m'a apporté une première
+          expérience professionnelle concrète. Autonome, rigoureux et à l'aise en équipe,
+          je m'adapte rapidement à de nouveaux environnements techniques.
+        </p>
+      </div>
+      <div>
+        <div class="ai" style="margin-bottom:16px;">
+          <div>
+            <div class="ai-lbl" id="about-lang-lbl">Langues</div>
+            <div class="ai-val" id="about-lang-val">Français (courant) · Anglais (courant) · Tamoul (maternelle)</div>
+          </div>
+        </div>
+        <div class="expertise-grid">
+          <div class="exp-block">
+            <div class="exp-block-icon">01</div>
+            <div class="exp-block-title" id="eb1-title">Systèmes Embarqués</div>
+            <div class="exp-block-desc" id="eb1-desc">ESP32, RFID, biométrie déployée</div>
+          </div>
+          <div class="exp-block">
+            <div class="exp-block-icon">02</div>
+            <div class="exp-block-title" id="eb2-title">Cybersécurité</div>
+            <div class="exp-block-desc" id="eb2-desc">AES-256, CTF Top 5%, forensics</div>
+          </div>
+          <div class="exp-block">
+            <div class="exp-block-icon">03</div>
+            <div class="exp-block-title" id="eb3-title">Backend & API</div>
+            <div class="exp-block-desc" id="eb3-desc">Flask, PHP, REST API, MySQL temps réel</div>
+          </div>
+          <div class="exp-block">
+            <div class="exp-block-icon">04</div>
+            <div class="exp-block-title" id="eb4-title">Réseaux & Linux</div>
+            <div class="exp-block-desc" id="eb4-desc">VLAN, SSH, TCP/IP, Linux terrain</div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="about-timeline">
-
-      <div class="abt-item fade-up">
-        <div class="abt-year">2023</div>
-        <div class="abt-line"><div class="abt-dot"></div></div>
-        <div class="abt-content">
-          <div class="abt-title" id="abt-t1">Lycée Jean Jaurès — BTS CIEL A</div>
-          <div class="abt-text" id="abt-d1">J'entre en formation spécialisée cybersécurité, réseaux et systèmes embarqués. C'est ici que tout commence — TCP/IP, Linux, C++, et ma première ligne de code sérieuse.</div>
-        </div>
-      </div>
-
-      <div class="abt-item fade-up">
-        <div class="abt-year">2025</div>
-        <div class="abt-line"><div class="abt-dot"></div></div>
-        <div class="abt-content">
-          <div class="abt-title" id="abt-t2">Stage — Bilfinger Peters Engineering</div>
-          <div class="abt-text" id="abt-d2">Premier terrain : support IT N1/N2, déploiement de postes Windows, ticketing, Active Directory. J'apprends que la technique sans rigueur opérationnelle ne vaut rien.</div>
-        </div>
-      </div>
-
-      <div class="abt-item fade-up">
-        <div class="abt-year">2025</div>
-        <div class="abt-line"><div class="abt-dot abt-dot-accent"></div></div>
-        <div class="abt-content">
-          <div class="abt-title" id="abt-t3">Smart Gate Jaurès — Projet E6 BTS</div>
-          <div class="abt-text" id="abt-d3">Contrôle d'accès complet : ESP32, RFID, biométrie, dashboard PHP temps réel, base MySQL, API REST. Un système que je construis seul de A à Z — déployé au lycée.</div>
-          <span class="abt-tag">Projet déployé en production</span>
-        </div>
-      </div>
-
-      <div class="abt-item fade-up">
-        <div class="abt-year">2025</div>
-        <div class="abt-line"><div class="abt-dot"></div></div>
-        <div class="abt-content">
-          <div class="abt-title" id="abt-t4">CTF National — Top 5%</div>
-          <div class="abt-text" id="abt-d4">812 équipes en compétition. Forensics, reverse engineering, cryptographie. Je finis dans les 5% meilleurs. La cybersécurité n'est plus seulement une matière — c'est un terrain de jeu.</div>
-          <span class="abt-tag abt-tag-gold">Top 5% · 812 équipes</span>
-        </div>
-      </div>
-
-      <div class="abt-item fade-up">
-        <div class="abt-year">2026</div>
-        <div class="abt-line"><div class="abt-dot abt-dot-accent"></div></div>
-        <div class="abt-content">
-          <div class="abt-title" id="abt-t5">BTS CIEL A — Diplômé 16/20</div>
-          <div class="abt-text" id="abt-d5">Deux ans de travail condensés dans une note. Ce qui compte vraiment : les projets construits, les nuits de débogage, et la capacité à livrer quelque chose qui fonctionne vraiment.</div>
-          <span class="abt-tag">Mention Bien</span>
-        </div>
-      </div>
-
-      <div class="abt-item fade-up">
-        <div class="abt-year">2026 →</div>
-        <div class="abt-line"><div class="abt-dot abt-dot-future"></div></div>
-        <div class="abt-content">
-          <div class="abt-title" id="abt-t6">ESEO Paris-Vélizy — Cycle Ingénieur</div>
-          <div class="abt-text" id="abt-d6">Admis. Alternance 3 ans dès septembre 2026. Je cherche une entreprise où construire des systèmes qui comptent — réseaux, cybersécurité, systèmes embarqués.</div>
-          <span class="abt-tag abt-tag-live">Disponible septembre 2026</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Langues -->
-    <div class="about-langs fade-up">
-      <span class="lang-pill" id="about-lang-val">Français · Anglais · Tamoul</span>
-    </div>
-
   </div>
 </section>
 
@@ -2830,53 +2824,10 @@ input:focus, textarea:focus {
 
 <!-- ══════════ CLOSING STATEMENT ══════════ -->
 <div class="closing-wrap">
-  <div class="closing-inner">
-    <div class="closing-art">
-      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="closing-svg">
-        <defs>
-          <radialGradient id="cg1" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.15"/>
-            <stop offset="100%" stop-color="#080809" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="cg2" cx="30%" cy="70%" r="40%">
-            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.08"/>
-            <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <circle cx="200" cy="200" r="200" fill="url(#cg1)"/>
-        <circle cx="200" cy="200" r="200" fill="url(#cg2)"/>
-        <!-- Outer ring -->
-        <circle cx="200" cy="200" r="155" fill="none" stroke="rgba(6,182,212,0.12)" stroke-width="1"/>
-        <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(6,182,212,0.08)" stroke-width="1"/>
-        <!-- Orbital dots -->
-        <circle cx="200" cy="45" r="3" fill="#06b6d4" opacity="0.6"/>
-        <circle cx="355" cy="200" r="2" fill="#f59e0b" opacity="0.5"/>
-        <circle cx="200" cy="355" r="2.5" fill="#06b6d4" opacity="0.4"/>
-        <circle cx="45" cy="200" r="2" fill="#f59e0b" opacity="0.4"/>
-        <!-- Inner lines -->
-        <line x1="200" y1="80" x2="200" y2="320" stroke="rgba(6,182,212,0.06)" stroke-width="1"/>
-        <line x1="80" y1="200" x2="320" y2="200" stroke="rgba(6,182,212,0.06)" stroke-width="1"/>
-        <line x1="109" y1="109" x2="291" y2="291" stroke="rgba(6,182,212,0.04)" stroke-width="1"/>
-        <line x1="291" y1="109" x2="109" y2="291" stroke="rgba(6,182,212,0.04)" stroke-width="1"/>
-        <!-- Center -->
-        <circle cx="200" cy="200" r="6" fill="#06b6d4" opacity="0.8"/>
-        <circle cx="200" cy="200" r="18" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.3"/>
-        <!-- Constellation dots -->
-        <circle cx="140" cy="130" r="1.5" fill="white" opacity="0.4"/>
-        <circle cx="170" cy="155" r="1" fill="white" opacity="0.3"/>
-        <circle cx="260" cy="140" r="1.5" fill="white" opacity="0.35"/>
-        <circle cx="240" cy="170" r="1" fill="white" opacity="0.25"/>
-        <circle cx="150" cy="260" r="1.5" fill="white" opacity="0.3"/>
-        <circle cx="265" cy="250" r="1" fill="white" opacity="0.3"/>
-        <line x1="140" y1="130" x2="170" y2="155" stroke="white" stroke-width="0.5" opacity="0.15"/>
-        <line x1="260" y1="140" x2="240" y2="170" stroke="white" stroke-width="0.5" opacity="0.12"/>
-      </svg>
-    </div>
-    <div class="closing-text">
-      <p class="closing-quote">"Du composant<br>à l'interface —<br><em>je maîtrise la chaîne.</em>"</p>
-      <p class="closing-sub" id="closing-sub">Paurtheiv Krishna Laxman · BTS CIEL A · Argenteuil</p>
-      <div class="closing-ichigo">一期一会</div>
-    </div>
+  <div class="closing-centered">
+    <p class="closing-quote" id="closing-quote">"Du composant<br>à l'interface —<br><em>je maîtrise la chaîne.</em>"</p>
+    <p class="closing-sub" id="closing-sub">Paurtheiv Krishna Laxman · BTS CIEL A · Argenteuil</p>
+    <div class="closing-ichigo">一期一会</div>
   </div>
 </div>
 
