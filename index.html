@@ -2020,7 +2020,31 @@ input:focus, textarea:focus {
 .closing-centered {
   max-width: 700px; margin: 0 auto; padding: 0 40px;
 }
-.closing-art { display: none !important; }
+
+/* ── CLOSING — SVG background + quote centered ── */
+.closing-wrap {
+  position: relative;
+  padding: 140px 0 100px !important;
+  display: flex; justify-content: center; align-items: center;
+  background: var(--bg);
+  text-align: center;
+  overflow: hidden;
+  min-height: 420px;
+}
+.closing-bg-spin {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 520px; height: 520px;
+  animation: closingSpin 30s linear infinite;
+  pointer-events: none;
+  opacity: 0.9;
+}
+.closing-svg-bg { width: 100%; height: 100%; }
+.closing-centered {
+  position: relative; z-index: 2;
+  max-width: 700px; margin: 0 auto; padding: 0 40px;
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
@@ -2824,6 +2848,28 @@ input:focus, textarea:focus {
 
 <!-- ══════════ CLOSING STATEMENT ══════════ -->
 <div class="closing-wrap">
+  <!-- SVG tournant en background -->
+  <div class="closing-bg-spin">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="closing-svg-bg">
+      <circle cx="200" cy="200" r="160" fill="none" stroke="rgba(6,182,212,0.08)" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(6,182,212,0.06)" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="80" fill="none" stroke="rgba(6,182,212,0.1)" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="4" fill="rgba(6,182,212,0.4)"/>
+      <!-- Orbit dots -->
+      <circle cx="360" cy="200" r="3" fill="rgba(6,182,212,0.5)"/>
+      <circle cx="200" cy="40"  r="2" fill="rgba(6,182,212,0.3)"/>
+      <circle cx="80"  cy="200" r="2.5" fill="rgba(245,158,11,0.4)"/>
+      <circle cx="200" cy="320" r="2" fill="rgba(6,182,212,0.25)"/>
+      <!-- Orbit lines -->
+      <ellipse cx="200" cy="200" rx="160" ry="50" fill="none" stroke="rgba(6,182,212,0.04)" stroke-width="0.5" transform="rotate(-20,200,200)"/>
+      <ellipse cx="200" cy="200" rx="120" ry="40" fill="none" stroke="rgba(6,182,212,0.05)" stroke-width="0.5" transform="rotate(40,200,200)"/>
+      <!-- Small nodes -->
+      <circle cx="340" cy="130" r="1.5" fill="rgba(6,182,212,0.3)"/>
+      <circle cx="60"  cy="270" r="1.5" fill="rgba(6,182,212,0.2)"/>
+      <circle cx="280" cy="50"  r="1.5" fill="rgba(245,158,11,0.3)"/>
+    </svg>
+  </div>
+  <!-- Quote par-dessus -->
   <div class="closing-centered">
     <p class="closing-quote" id="closing-quote">"Du composant<br>à l'interface —<br><em>je maîtrise la chaîne.</em>"</p>
     <p class="closing-sub" id="closing-sub">Paurtheiv Krishna Laxman · BTS CIEL A · Argenteuil</p>
