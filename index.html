@@ -95,8 +95,7 @@ h2.section-h em { color: var(--accent); font-style: normal; }
    HERO
 ═══════════════════════════════════════ */
 #hero {
-  min-height: 100vh; display: flex; align-items: center;
-  padding-top: 60px; position: relative; overflow: hidden;
+  min-height: 100vh; position: relative; overflow: hidden;
 }
 #hero::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -475,10 +474,11 @@ h1.hero-name {
 }
 .contact-inner {
   display: flex;
-  align-items: center;
-  gap: 60px;
+  align-items: flex-start;
+  gap: 0;
   position: relative;
   z-index: 2;
+  justify-content: space-between;
 }
 .contact-left { flex: 1; }
 .contact-right {
@@ -1992,7 +1992,7 @@ input:focus, textarea:focus {
 /* ── VIDEO HERO (activer quand hero.mp4 est dans /assets/) ──
    Remplacer #space-canvas par :
    <video id="hero-video" autoplay muted loop playsinline>
-     <source src="assets/hero.mp4" type="video/mp4">
+     <source src="assets/hero2.mp4" type="video/mp4">
    </video>
    Et ajouter ce CSS :
    #hero-video {
@@ -2005,7 +2005,8 @@ input:focus, textarea:focus {
 #hero-video {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: cover; z-index: 0;
+  object-fit: cover; object-position: center center;
+  z-index: 0;
 }
 /* Remove space canvas fallback */
 #space-canvas { display: none !important; }
@@ -2116,6 +2117,38 @@ input:focus, textarea:focus {
 /* Hide old orbit CSS */
 .cc-orbit { display: none !important; }
 .contact-citation { display: none !important; }
+
+/* Contact form — compact left */
+.contact-left {
+  flex: 0 0 38% !important;
+  padding-right: 0 !important;
+}
+/* Globe+citation — fill right 60% */
+.contact-right {
+  flex: 0 0 58% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-globe-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.contact-globe-canvas {
+  width: 520px !important;
+  height: 520px !important;
+}
+.contact-globe-citation {
+  text-align: center !important;
+  padding: 0 !important;
+  width: 100%;
+}
+.contact-globe-citation .closing-quote {
+  font-size: clamp(22px, 2.5vw, 36px) !important;
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
@@ -2187,7 +2220,7 @@ input:focus, textarea:focus {
 <!-- ══════════ HERO ══════════ -->
 <section id="hero">
   <video id="hero-video" autoplay muted loop playsinline>
-    <source src="assets/hero.mp4" type="video/mp4">
+    <source src="assets/hero2.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
 
@@ -3526,13 +3559,13 @@ document.querySelectorAll('.sft').forEach(function(btn) {
     {type:'code',lines:['const gate = new SmartGate();','gate.scan(rfid).then(user => {','  if(user.clearance >= ZONE_1) {','    door.unlock(); led.green();','  }','});'],color:'#00ff88'},
     {type:'grid',label:'RFID · BIOMETRIC · ESP32',color:'#06b6d4'},
     {type:'code',lines:['SELECT users.name, access_log.*','FROM access_log','JOIN users ON uid = users.id','WHERE zone = 1 AND ts > NOW()-3600'],color:'#f59e0b'},
-    {type:'noise',label:'INGÉNIEUR ESEO',color:'#fff'},
+    {type:'noise',label:'INGÉNIEUR · ESEO VÉLIZY',color:'#fff'},
     {type:'code',lines:['<Router>','  <Dashboard path="/admin"/>','  <Access path="/zone/:id"/>','  <Logs path="/history"/>','</Router>'],color:'#a78bfa'},
     {type:'grid',label:'PHP · MySQL · JavaScript',color:'#06b6d4'},
     {type:'code',lines:['nmap -sV 192.168.1.0/24','[+] 192.168.1.10 open','[+] 80/tcp  http','[+] 22/tcp  ssh','[+] 3306/tcp mysql'],color:'#00ff88'},
-    {type:'noise',label:'ESEO · CYCLE INGÉNIEUR',color:'#fff'},
+    {type:'noise',label:'BTS CIEL A · DIPLÔMÉ 2026',color:'#fff'},
     {type:'code',lines:['interface FastEthernet0/0','  ip address 10.0.1.1','  no shutdown','router ospf 1','  network 10.0.0.0'],color:'#f59e0b'},
-    {type:'grid',label:'CISCO · RÉSEAUX · SÉCURITÉ',color:'#06b6d4'},
+    {type:'grid',label:'CISCO · RÉSEAU · SÉCURITÉ',color:'#06b6d4'},
   ];
 
   function drawFrame(f){
