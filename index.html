@@ -2175,10 +2175,175 @@ input:focus, textarea:focus {
 .contact-globe-citation .closing-quote {
   font-size: clamp(22px, 2.4vw, 34px) !important;
 }
+
+/* ═══════════════════════════════════════════════════════
+   THEME TOGGLE BUTTON
+═══════════════════════════════════════════════════════ */
+#theme-toggle {
+  position: fixed;
+  top: 20px; right: 20px;
+  z-index: 500;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(8,8,12,0.75);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.2s ease, background 0.3s ease, border-color 0.3s ease;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+#theme-toggle:hover { transform: scale(1.1) rotate(15deg); }
+body.day-mode #theme-toggle {
+  background: rgba(255,255,255,0.85);
+  border-color: rgba(0,0,0,0.1);
+  color: #1a3a6b;
+}
+
+/* ═══════════════════════════════════════════════════════
+   DAY MODE — PAGE GLOBALE
+═══════════════════════════════════════════════════════ */
+body.day-mode {
+  background: #e8f4ff !important;
+}
+
+/* ── HERO DAY ── */
+body.day-mode #hero {
+  background: linear-gradient(160deg,
+    #0a2a5e 0%, #0d47a1 20%,
+    #1976d2 45%, #42a5f5 65%,
+    #90caf9 82%, #e3f2fd 100%) !important;
+}
+body.day-mode #hero-video { opacity: 0 !important; transition: opacity 0.8s ease; }
+body.day-mode .hero-overlay {
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 15%, rgba(255,255,200,0.25) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 10% 80%, rgba(255,255,255,0.15) 0%, transparent 60%),
+    linear-gradient(to bottom, rgba(255,255,255,0.0) 0%, rgba(232,244,255,0.6) 100%) !important;
+}
+body.day-mode .hero-statement { color: #fff !important; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+body.day-mode .hero-statement em { color: #7dd3fc !important; }
+body.day-mode .hero-bottom-name { color: rgba(255,255,255,0.95) !important; }
+body.day-mode .hero-bottom-role { color: rgba(255,255,255,0.7) !important; }
+body.day-mode .hero-nav a { color: rgba(255,255,255,0.8) !important; }
+body.day-mode .scroll-hint { color: rgba(255,255,255,0.5) !important; border-color: rgba(255,255,255,0.3) !important; }
+
+/* Sun glow */
+body.day-mode #hero::after {
+  content: '';
+  position: absolute;
+  top: -60px; right: 8%;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,200,0.55) 0%, rgba(255,236,100,0.2) 40%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── FLOATING CLOUDS (day mode only) ── */
+.day-cloud {
+  display: none;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  pointer-events: none;
+  z-index: 1;
+  animation: cloud-drift 18s ease-in-out infinite;
+}
+body.day-mode .day-cloud { display: block; }
+.day-cloud.dc1 {
+  top: 20%; left: 10%;
+  width: 180px; height: 55px;
+  background:
+    radial-gradient(circle at 30% 40%, #fff 0%, #fff 35%, transparent 65%),
+    radial-gradient(circle at 65% 25%, #f0f8ff 0%, rgba(240,248,255,0) 60%),
+    radial-gradient(circle at 55% 65%, #dbeafe 0%, transparent 50%);
+  opacity: 0.7;
+  animation-delay: 0s; animation-duration: 20s;
+}
+.day-cloud.dc2 {
+  top: 12%; right: 15%;
+  width: 140px; height: 42px;
+  background:
+    radial-gradient(circle at 35% 35%, #fff 0%, #fff 40%, transparent 68%),
+    radial-gradient(circle at 60% 30%, #e0f2fe 0%, transparent 55%);
+  opacity: 0.6;
+  animation-delay: 3s; animation-duration: 24s;
+}
+.day-cloud.dc3 {
+  top: 38%; left: 55%;
+  width: 100px; height: 30px;
+  background: radial-gradient(circle at 40% 40%, #fff 0%, rgba(255,255,255,0) 65%);
+  opacity: 0.5;
+  animation-delay: 7s; animation-duration: 16s;
+}
+@keyframes cloud-drift {
+  0%,100% { transform: translateX(0) translateY(0); }
+  33%      { transform: translateX(14px) translateY(-5px); }
+  66%      { transform: translateX(-8px) translateY(4px); }
+}
+
+/* ── BIRDS (day mode) ── */
+.day-bird {
+  display: none;
+  position: absolute;
+  width: 22px; height: auto;
+  opacity: 0.35;
+  animation: bird-bob 5s ease-in-out infinite;
+  z-index: 2; pointer-events: none;
+}
+body.day-mode .day-bird { display: block; }
+.day-bird path { fill: none; stroke: #1a3a6b; stroke-width: 1.5; stroke-linecap: round; }
+.db1 { top: 18%; left: 38%; animation-delay: 0s; }
+.db2 { top: 28%; left: 72%; width: 16px; animation-delay: 1.5s; opacity: 0.25; }
+.db3 { top: 10%; left: 60%; width: 18px; animation-delay: 0.8s; }
+@keyframes bird-bob {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
+}
+
+/* ── SECTIONS DAY ── */
+body.day-mode section:not(#hero) {
+  background: #e8f4ff !important;
+}
+body.day-mode .section-h,
+body.day-mode .section-eyebrow + h2 { color: #0a2240 !important; }
+body.day-mode .section-eyebrow { color: #0284c7 !important; }
+body.day-mode .muted,
+body.day-mode p { color: #2a4a70; }
+body.day-mode .card, body.day-mode .proj-card,
+body.day-mode .skill-cat, body.day-mode .edu-card,
+body.day-mode .tl-card, body.day-mode .exp-card,
+body.day-mode .cert-card {
+  background: #ffffff !important;
+  border-color: #c0d8f0 !important;
+  color: #0a2240;
+  box-shadow: 0 4px 24px rgba(10,42,94,0.08) !important;
+}
+body.day-mode .contact-inner { color: #0a2240; }
+body.day-mode #scroll-nav {
+  background: rgba(232,244,255,0.9) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+}
+body.day-mode .nav-logo,
+body.day-mode .nav-links a { color: #0a2240 !important; }
+body.day-mode .contact-form input,
+body.day-mode .contact-form textarea,
+body.day-mode .contact-field {
+  background: #fff !important;
+  border-color: #c0d8f0 !important;
+  color: #0a2240 !important;
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
 <body>
+<button id="theme-toggle" onclick="toggleTheme()" title="Changer le thème">☀</button>
 <!-- MARVEL INTRO OVERLAY -->
 <div id="intro-overlay">
   <canvas id="intro-canvas"></canvas>
@@ -2281,6 +2446,14 @@ input:focus, textarea:focus {
   </div>
 
   <div class="scroll-hint"><div class="scroll-mouse"><div class="scroll-ball"></div></div><span class="scroll-hint-txt" id="scroll-hint-txt">Scroll</span></div>
+  <!-- Day mode clouds -->
+  <div class="day-cloud dc1"></div>
+  <div class="day-cloud dc2"></div>
+  <div class="day-cloud dc3"></div>
+  <!-- Day mode birds -->
+  <svg class="day-bird db1" viewBox="0 0 40 20"><path d="M2 10 Q10 2 20 8 Q30 2 38 10"/></svg>
+  <svg class="day-bird db2" viewBox="0 0 40 20"><path d="M2 10 Q10 2 20 8 Q30 2 38 10"/></svg>
+  <svg class="day-bird db3" viewBox="0 0 40 20"><path d="M2 10 Q10 2 20 8 Q30 2 38 10"/></svg>
 </section>
 
 
@@ -3807,6 +3980,32 @@ document.querySelectorAll('.sft').forEach(function(btn) {
       };
     }
   })();
+
+
+// ═══════════════════════════════════════════════════
+//  THEME TOGGLE — jour / nuit
+// ═══════════════════════════════════════════════════
+(function() {
+  var btn = document.getElementById('theme-toggle');
+  var saved = localStorage.getItem('pk-theme');
+  if (saved === 'day') activate('day');
+
+  function activate(mode) {
+    if (mode === 'day') {
+      document.body.classList.add('day-mode');
+      if (btn) btn.textContent = '☾';
+    } else {
+      document.body.classList.remove('day-mode');
+      if (btn) btn.textContent = '☀';
+    }
+  }
+
+  window.toggleTheme = function() {
+    var isDay = document.body.classList.contains('day-mode');
+    activate(isDay ? 'night' : 'day');
+    localStorage.setItem('pk-theme', isDay ? 'night' : 'day');
+  };
+})();
 
 </script>
 
